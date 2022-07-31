@@ -1,0 +1,159 @@
+
+*{
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+.register{
+    padding: 100px 50px 100px 50px;
+    min-height: 70vh;
+}
+
+main{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    border-radius: 10px;
+    background-color: rgb(197, 197, 197);
+    margin: 30px auto;
+    padding: 40px 20px;
+    width: fit-content;
+    max-width: 800px;
+}
+
+main .register-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    margin-top: 60px;
+}
+
+main .register-content h3{
+    font-size: 38px;
+    font-weight: 700;
+    text-align: left;
+}
+
+main .register-content h3 span{
+    color: rgb(104, 104, 19);
+}
+
+main .register-content p{
+    font-size: 14px;
+}
+
+
+.form-title{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.form-title h2{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.register-signup-form{
+    padding: 0 20px;
+}
+
+.form{
+    width:100%;
+}
+
+input{
+    margin: 0;
+    font-size: 16px;
+}
+
+.form input, .login-form input,
+select{
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(0,0,0,0.12);
+    padding: 8px 15px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    width: 100%;
+    font-size: 17px;
+    color: #383838;
+    font-weight: 600;
+}
+
+
+input::placeholder
+{
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.form label{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+
+.form-btn{
+   margin-top: 20px;
+   width: 100%;
+   text-align: center;
+}
+
+.form-btn input{
+    width: 100%;
+    border-style: none;
+    cursor: pointer;
+}
+
+#access-login{
+    text-align: center;
+    margin-top: 10px;
+}
+
+#access-login a{
+    color: rgb(60, 61, 78);
+    font-size: 13px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.register-btn, .login-btn{
+    background-color: #000080;
+    color: #fff;
+    padding: 8px 20px;
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+
+.login-section .form-btn{
+    margin-top: 10px;
+    width: 100%;
+}
+
+
+@media (max-width: 850px){
+    .register{
+        padding: 100px 10px;
+    }
+}
+
+@media (max-width: 690px){
+    main{
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    main .register-content{
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .register-signup-form{
+        margin-top: 30px;
+    }
+    
+}
+

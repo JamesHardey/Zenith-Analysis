@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/contact.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+</head>
+
+<body>
+    <header class="nav">
+        <div class="max-width">
+            <nav class="navbar">
+                <a class="logo" href="#">Zenith <span>Analysis</span></a>
+                <div class="nav-right">
+                    <div>
+                        <ul>
+                            <li><a href="home.html">Home</a></li>
+                            <li><a href="course.html">Course Portfolio</a></li>
+                            <li><a href="home.html#assignments">Assignments</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="event.html">Event</a></li>
+                        </ul>
+                        <div>
+                            <form th:action="@{/logout}" method="post">
+                                <input type="submit" class="btn" value="Logout">
+                            </form>
+                        </div>
+                        <div class="menu-btn">
+                            <i class="fas fa-bars btn-menu open-menu"></i>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="contact-section">
+        <div class="max-width">
+            <div class="contact-section-content">
+                <div class="text-side">
+                    <div class="">
+                        <div class="">
+                            <h1>GET IN TOUCH</h1>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="divider"></div>
+                    </div>
+                    <div class="sub-title">
+                        <div class="sub-title-text"> Excepteur sint occaecat cupidatat no. </div>
+                    </div>
+                    <div class="">
+                        <div class="inner-text">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                                nisi ut aliquip. Nemo enim ipsam voluptatem quia voluptas sit
+                                aspernatur aut odit aut fugit.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-side">
+                    <div id="et_pb_contact_form_0"
+                        class="et_pb_with_border et_pb_module et_pb_contact_form_0 et_animated et_pb_contact_form_container clearfix"
+                        data-form_unique_num="0" data-form_unique_id="">
+                        <div class="et-pb-contact-message"></div>
+                        <div class="et_pb_contact">
+                            <form class="et_pb_contact_form clearfix" method="post"
+                                action="https://www.elegantthemes.com/layouts/business/travel-agency-contact-page/live-demo">
+                                <p class="et_pb_contact_field et_pb_contact_field_0 et_pb_contact_field_last"
+                                    data-id="name" data-type="input">
+
+                                    <input type="text" id="sender-name" class="input" value=""
+                                        name="et_pb_contact_name_0" data-required_mark="required"
+                                        data-field_type="input" data-original_id="name" placeholder="Name">
+                                </p>
+                                <p class="et_pb_contact_field et_pb_contact_field_1 et_pb_contact_field_last"
+                                    data-id="email" data-type="email">
+
+                                    <input type="text" id="et_pb_contact_email_0" class="input" value=""
+                                        name="et_pb_contact_email_0" data-required_mark="required"
+                                        data-field_type="email" data-original_id="email" placeholder="Email Address">
+                                </p>
+                                <p class="et_pb_contact_field et_pb_contact_field_2 et_pb_contact_field_last"
+                                    data-id="phone" data-type="input">
+
+                                    <input type="text" id="et_pb_contact_phone_0" class="input" value=""
+                                        name="et_pb_contact_phone_0" data-required_mark="required"
+                                        data-field_type="input" data-original_id="phone" placeholder="Phone"
+                                        pattern="[0-9\s-]*" title="Only numbers allowed.">
+                                </p>
+                                <p class="et_pb_contact_field et_pb_contact_field_3 et_pb_contact_field_last"
+                                    data-id="message" data-type="text">
+
+                                    <textarea name="et_pb_contact_message_0" id="et_pb_contact_message_0"
+                                        class="et_pb_contact_message input" data-required_mark="required"
+                                        data-field_type="text" data-original_id="message"
+                                        placeholder="Message"></textarea>
+                                </p>
+                                <input type="hidden" value="et_contact_proccess" name="et_pb_contactform_submit_0" />
+                                <div class="et_contact_bottom_container">
+                                    <button type="submit" name="et_builder_submit_button" class="submit-button"
+                                        data-icon="&#x24;">Send
+                                        Message</button>
+                                </div>
+                                <input type="hidden" id="" name="_wpnonce-et-pb-contact-form-submitted-0"
+                                    value="715f1b1d68" />
+                                <input type="hidden" name="_wp_http_referer" value="" />
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="address-section">
+        <div class="max-width">
+            <div class="title">
+                <h2>How to get in touch</h2>
+            </div>
+            <div class="divider"></div>
+            <div class="address-content">
+                <div class="box">
+                    <div class="image-circle">
+                        <i class="fas fa-map-marker-alt fa-2x"></i>
+                    </div>
+                    <h4>Visit Us</h4>
+                    <p>1290 Stiven Street Raleigh, New York City</p>
+                </div>
+                <div class="box">
+                    <div class="image-circle">
+                        <i class="fas fa-phone-alt fa-2x"></i>
+                    </div>
+                    <h4>Call Us</h4>
+                    <p>(+45)24361823</p>
+                </div>
+                <div class="box">
+                    <div class="image-circle">
+                        <i class="fas fa-envelope fa-2x"></i>
+                    </div>
+                    <h4>Email Us</h4>
+                    <p>example@gmail.com</p>
+                </div>
+                <div class="box">
+                    <div class="image-circle">
+                        <i class="fas fa-clock fa-2x"></i>
+                    </div>
+                    <h4>Our Time</h4>
+                    <p>Mon-Fri: 8:00 - 16:00 <br></p>
+                </div>
+            </div>
+        </div>
+        <!-- <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore facere reiciendis placeat vel ipsa maxime
+            sapiente ad porro beatae aliquid. Qui ad, sunt expedita possimus nihil architecto placeat nam voluptatibus
+            minima ab quam esse. Vel corporis vitae dolorum. Officiis ipsum ut perspiciatis nulla accusantium inventore
+            quam, obcaecati illo asperiores laborum, sed nam, officia praesentium animi! Exercitationem quidem culpa
+            voluptas illo quaerat at nam delectus sequi laborum cumque, aliquam consequuntur vitae libero aspernatur
+            deleniti asperiores qui harum molestiae incidunt saepe velit consequatur labore illum? Dolore nisi culpa
+            quibusdam repellendus molestias et error temporibus. Laboriosam culpa dicta magni dolores laborum,
+            praesentium quos. Porro iure dolor deserunt minima ducimus similique, ullam odio voluptatum aliquam at sint!
+            Expedita laborum magni provident reiciendis tempore repellat similique quis libero quaerat molestiae
+            accusamus, facilis nulla voluptatum ullam doloribus nihil obcaecati quia ad. Adipisci corporis beatae
+            delectus dolorum totam cumque eaque consectetur facere veniam? Corrupti unde, cumque dicta ipsum officia
+            iusto sit. Quidem corrupti aliquid in dignissimos accusantium laborum consectetur, optio maxime ex quibusdam
+            magnam amet, nulla quaerat tempore aperiam! Velit, fugit ratione non iure necessitatibus odio dolor quia
+            modi iste natus commodi sint recusandae amet quasi? Cumque fugiat dignissimos eius suscipit quibusdam minus
+            aspernatur. Architecto, nulla harum!</p> -->
+    </section>
+
+    <footer class="footer-section">
+        <div class="max-width">
+            <div class="footer-content">
+
+                <div class="footer-left">
+                    <div class="footer-contact-us">
+                        <div class="image-circle">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <p>1290 Stiven Street Raleigh,
+                            <br><strong> New York City</strong>
+                        </p>
+                    </div>
+                    <div class="footer-contact-us">
+                        <div class="image-circle">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <p>(+45)24361823</p>
+                    </div>
+                    <div class="footer-contact-us">
+                        <div class="image-circle">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <p>example@gmail.com</p>
+                    </div>
+                </div>
+                <div class="footer-right">
+                    <h4>About the company</h4>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione provident maiores numquam,
+                        cupiditate voluptatem dolores! Provident in laboriosam quod numquam corporis autem rerum,
+                        inventore, voluptatum doloremque illum, dicta repellendus vitae!</p>
+                    <div class="footer-social-media">
+                        <div><i class="fab fa-facebook-f"></i></div>
+                        <div><i class="fab fa-twitter"></i></div>
+                        <div><i class="fab fa-youtube"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

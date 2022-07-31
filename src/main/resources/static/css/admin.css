@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+    text-decoration: none;
+    text-transform: none;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background-color: #e4e4e4;
+}
+
+.side-bar{
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 250px;
+    height: 100%;
+    background-color: #030303;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.side-bar-logo{
+    height: 90px;
+    padding: 1.2rem 0rem 1rem 2rem;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.side-menu {
+    margin-top: 1rem;
+    z-index: 100;
+}
+
+.side-bar.active{
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.side-menu li{
+    margin-bottom: 1.7rem;
+    padding: 5px;
+    padding-left: 1rem;
+    width: 100%;
+}
+
+.side-menu li:hover{
+    background-color: #e4e4e4;
+}
+
+.side-menu a{
+    padding-left: 1rem;
+    color: #fff;
+    font-size: 1.1rem;
+    width: 100%;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+
+.side-menu a.active{
+    background: #fff;
+    color: #030303;
+    border-radius: 30px 0 0 30px;
+}
+
+
+.side-menu li a span{
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding-right: 1rem;
+    width: 100%;
+}
+
+i {
+    font-size: 26px;
+}
+
+.btn-menu{
+    display: inline-block;
+    margin-right: 1rem;
+    text-align: center;
+    align-items: center;
+    width: 40px;
+}
+
+
+header{
+    display: flex;
+    background-color: #fff;
+    justify-content: space-between;
+    padding: 1rem;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    position: fixed;
+    left: 0;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+header.active{
+    left: 250px;
+    width: calc(100% - 250px);
+    transition: all 0.3s ease;
+}
+
+.user-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+}
+
+.user-wrapper small{
+    margin-top: 100px;
+}
+
+.main-content{
+    margin-left: 0;
+    margin-top: 70px;
+    min-height: calc(100vh - 80px);
+    padding: 2rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.main-content.active{
+    margin-left: 250px;
+    transition: all 0.3s ease;
+}
+
+.cards{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.card{
+    display: flex;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.bottom-card{
+    background-color: #fff;
+    margin-top: 1.2rem;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.users-table{
+    background-color: #fffeee;
+    border:1px solid rgb(187, 185, 185);
+    border-width: 0 1px 0 0;
+}
+
+.courses-table{
+    background-color: #fffeee;
+}
+
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+th,td{
+    text-align: center;
+}
+
+th{
+    padding: 10px 0;
+}
+
+thead tr{
+    border-top: 1px solid #f0f0f0;
+    background-color: #030303;
+    color: #fff;
+}
+
+tbody tr:nth-child(odd){
+    background-color: #fff;
+}
+
+tbody tr:nth-child(even){
+    background-color: rgb(217, 220, 221);
+}
+
+thead td{
+    font-weight: 700;
+}
+
+td{
+    padding: .5rem 1rem;
+    font-size: .8rem;
+    font-weight: 600;
+    color: #222;
+}
+
+.card-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px 5px 5px;
+    margin-bottom: 10px;
+}
+
+.btn{
+    padding: 5px 15px;
+    background-color: blue;
+    color: #fff;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    align-self: center;
+}
+
+.tables{
+    margin-bottom: 40px;
+}
+
+.upload-section{
+    padding-top: 60px;
+}
+
+.upload-section h2{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.upload-section .upload-form{
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    max-width: 500px;
+    margin: auto;
+    gap: 10px;
+}
+
+.upload-form select, 
+.upload-form textarea,
+.upload-form input{
+    padding: 5px 5px;
+    border-style: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+.upload-form input{
+    padding: 5px 10px;
+}
+
+
+.upload-form input[type=submit]{
+    background-color: #000080;
+    color: #fff;
+    padding: 10px;
+}
+
+

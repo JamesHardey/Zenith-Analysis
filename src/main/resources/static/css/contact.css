@@ -1,0 +1,213 @@
+
+/* contact us section */
+
+:root{
+    --primary-color:#000080;
+    --secondary-color:#b3ae38;
+    --fade-primary-color: #6f53fa;
+}
+
+*{
+    font-family:'Poppins', sans-serif;
+}
+
+.contact-section {
+    display: flex;
+    justify-content: center;
+    background-color: #fffffe;
+    color: #030303;
+    min-height: 100vh;
+    padding-top: 150px;
+    background-size: cover;
+}
+
+
+.contact-section .contact-section-content{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.contact-section .contact-section-content .text-side,
+.contact-section .contact-section-content .form-side
+{
+    padding: 0 30px;
+    padding-bottom: 40px;
+}
+
+.contact-section .contact-section-content .text-side h1{
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.divider{
+    height: 5px;
+    width: 200px;
+    background-color: var(--primary-color);
+    margin: 50px 0;
+}
+
+.contact-section .contact-section-content .text-side .sub-title{
+    margin: 20px 0;
+}
+
+.contact-section .contact-section-content .text-side .sub-title-text{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.contact-section .contact-section-content .form-side label{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.contact-section .contact-section-content .form-side input,
+.contact-section .contact-section-content .form-side textarea
+{
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(0,0,0,0.12);
+    padding: 14px 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 17px;
+    color: #383838;
+}
+
+.contact-section .contact-section-content .form-side textarea{
+    height: 200px;
+}
+
+
+
+.contact-section .contact-section-content .form-side input::placeholder,
+.contact-section .contact-section-content .form-side textarea::placeholder
+{
+    font-size: 17px;
+    font-weight: 600;
+}
+
+
+.contact-section .contact-section-content .form-side .submit-button{
+    padding: 15px 30px;
+    cursor: pointer;
+    color: #fffffe;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 10px;
+}
+
+.contact-section .contact-section-content .form-side .submit-button:hover{
+    transform: scale(1.05);
+}
+/* End of Contact Section */
+
+
+/* Address section styling */
+
+
+.address-section .title{
+    margin: 30px auto 0 auto;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.address-section .divider{
+    justify-self: center;
+    height: 5px;
+    width: 250px;
+    margin: 10px auto;
+    background-color: var(--primary-color);
+}
+
+.address-section .address-content{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 20px;
+}
+
+.address-section .address-content .box{
+    min-height: 350px;
+    background-color: #fffffe;
+    padding: 50px 40px;
+    margin: 20px 10px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(7, 51, 84, 0.17);
+}
+
+.address-section .address-content .box .image-circle{
+    border: 2px solid var(--primary-color);
+    height: 80px;
+    width: 80px;
+    margin: 0px auto 50px auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: auto;
+}
+
+.address-section .address-content .box i{
+    color: var(--primary-color);
+}
+
+
+.address-section .address-content .box h4
+{
+    text-transform: uppercase;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 15px 0;
+}
+
+.address-section h2{
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.address-section .address-content .box p{
+    font-size: 14px;
+    font-weight: 400;
+    color: rgb(110, 110, 110);
+}
+
+/* End of address */
+
+@media (max-width: 890px){
+    .contact-section .max-width{
+        padding: 0;
+    }
+
+    .address-section .address-content{
+        padding: 20px 10px;
+    }
+
+    .address-section .address-content{
+        grid-template-columns: 1fr 1fr;
+    }
+    
+}
+
+@media (max-width: 786px){
+    .contact-section .contact-section-content{
+        grid-template-columns: 1fr;
+    }
+
+    .contact-section .contact-section-content .form-side{
+        margin-top: 20px;
+        margin-bottom: 20px;
+    } 
+
+}
+
+@media (max-width: 550px){
+    .address-section .address-content{
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+}

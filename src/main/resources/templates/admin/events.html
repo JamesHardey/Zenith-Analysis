@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
+     crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body>
+    <aside class="side-bar">
+        <div class="side-bar-logo">
+            <h1>Zenith-Analysis</h1>
+        </div>
+        <div class="side-menu">
+            <ul>
+                <li><a th:href="@{/admin}"><span>Dashboard</span></a></li>
+                <li><a th:href="@{/admin/users}"><span>Users</span></a></li>
+                <li><a th:href="@{/admin/assignments}"><span>Assignment</span></a></li>
+                <li><a th:href="@{/admin/courses}"><span>Courses</span></a></li>
+                <li><a th:href="@{/admin/uploads}"><span>Upload</span></a></li>
+                <li><a th:href="@{/admin/events}"><span>Events</span></a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header>
+            <h1>
+                <div class="btn-menu">
+                    <i class="fas fa-bars open-menu"></i>
+                </div>
+                Administrator
+            </h1>
+            <div class="user-wrapper">
+                <div>
+                    <h4>Admin 101</h4>
+                    <small>Admin</small>
+                </div>
+                <div>
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" class="btn" value="Logout">
+                    </form>
+                </div>
+            </div>
+
+        </header>
+
+        <div>
+            <table class="tables">
+                <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>Event Title</th>
+                        <th>Event Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <div>
+                <a th:href="@{/admin/add-event}" class="btn add-course-btn">Add Event</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/admin.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,295 @@
+
+*{
+    font-family:'Poppins', sans-serif;
+}
+
+.main-section-content{
+    padding: 80px 20px 100px 0;
+    min-height: 70vh;
+}
+
+.main-width{
+    padding: 0;
+    display: flex;
+    gap: 0;
+    position: relative;
+}
+
+.side-menu{
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    padding: 15px;
+    background-color: #a6a6a755;
+    border-radius: 50%;
+}
+
+aside{
+    width: 350px;
+    padding: 40px 20px 20px 20px;
+    top: 50px;
+    background-color: #e4e4e4;
+    max-height: fit-content;
+}
+
+.res-cl-sample .image-display{
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.cv-sample, .cover-letter-sample{
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+img{
+    width: 200px;
+    height: 300px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.main-content{
+    padding: 30px;
+    width: 70%;
+}
+
+.on-going-courses{
+    margin: 5px 0;
+    background-color: #fff;
+    padding: 20px 25px;
+    border-radius: 15px;
+}
+
+.on-going-courses .btn{
+    background-color: blue;
+    color: #fff;
+    padding: 7px 15px;
+    border-radius: 5px;
+    margin-left: 50px;
+}
+
+.group-course{
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.group-course .card{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 15px;
+    gap: 20px;
+    border: 1px solid #030303;
+    border-width: 0 0 1px 0;
+}
+
+.card img{
+    width: 100%;
+    object-fit: cover;
+}
+
+.card-details h4{
+    font-size: 20px;
+}
+
+.card-details p{
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.btn-container{
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.download-btn{
+    width: 100%;
+    color: #fff;
+    padding: 7px 20px;
+    background-color: blue;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5%;
+    
+}
+
+.cover-letter-sample{
+    margin: 40px 0 30px 0;
+}
+
+.cv-sample h3, .cover-letter-sample h3{
+    margin-bottom: 15px;
+}
+
+.cv-sample, .cover-letter-sample{
+    background-color: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.assignment-section{
+    padding: 25px 30px;
+    border: 2px solid #a6a6a7;
+    border-radius: 20px;
+    border-width: 2px 0 2px 2px;
+    margin-top: 40px;
+    background-color: #fff;
+}
+
+.assignment-section h3{
+    font-size: 24px;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.assignment-section .assignment{
+    margin: 30px 0;
+    border: 1px solid #a6a6a7;
+    border-width: 0 0 1px 0;
+    padding-bottom: 10px;
+}
+
+.assignment h4{
+    
+}
+
+.assignment h6{
+    margin-top: 10px;
+}
+
+.assignment p{
+    
+}
+
+.date{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.date h6{
+
+}
+
+.date span{
+
+}
+
+
+
+@media (max-width: 967px){
+    .main-section-content{
+        padding-top: 20px;
+        padding-right: 0;
+    }
+
+    aside{
+        position: absolute;
+        top: 0;
+        left: -100%;
+        transition: all 0.5s ease;
+    }
+
+    aside.open{
+        left: 0;
+        width: 350px;
+        transition: all 0.5s ease;
+    }
+
+    .side-menu{
+        display: block;
+    }
+
+    .side-menu i.open::before{
+        content: "\f053";
+    }
+
+    .main-content{
+        width: 90%;
+        margin: auto;
+    }
+}
+
+@media (max-width: 870px){
+
+    aside{
+        width: 250px;
+    }
+}
+
+@media (max-width: 770px){
+    
+
+    .main-content{
+        width: 100%;
+        margin: auto;
+    }
+}
+
+@media (max-width: 690px){
+    .group-course .card{
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 15px;
+        gap: 20px;
+    }
+}
+
+
+@media (max-width: 550px){
+
+}
+
+
+@media (max-width: 450px){
+
+}
+
+@media (max-width: 320px){
+    .main-content{
+        padding: 10px;
+    }
+    aside.open{
+        width: 100vw;
+    }
+
+    .on-going-courses{
+        padding: 25px 8px;
+    }
+
+    .group-course .card{
+        padding: 8px;
+    }
+
+    .card-details h4{
+        font-size: 16px;
+    }
+
+    .card-details p{
+        font-size: 13px;
+    }
+
+    .on-going-courses btn{
+        font-size: 12px;
+    }
+
+
+    .assignment-section{
+        padding: 25px 10px;
+    }
+
+    .assignment-section h3{
+        font-size: 18px;
+    }
+
+    .assignment-section p{
+        font-size: 12px;
+    }
+}

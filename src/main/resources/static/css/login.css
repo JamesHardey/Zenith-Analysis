@@ -1,0 +1,103 @@
+*{
+    font-family: 'Poppins',sans-serif;
+    outline: none;
+    border-style: none;
+}
+
+.main-section-login{
+    padding: 100px 50px 100px 50px;
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 350px;
+    margin-top: 30px;
+}
+
+.login-section{
+    width: 100%;
+    border: 1px solid gray;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.login-section form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-section form p{
+    font-size: 13px;
+    color: rgb(145, 145, 145);
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+input{
+    width: 100%;
+    margin-top: 10px;
+    padding: 7px 15px;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+input::placeholder{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.login-btn{
+    background-color: blue;
+    color: #fff;
+    margin-top: 40px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.login-section .login-form .forget-pass{
+    text-decoration: underline;
+    color: #030303;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.register-btn{
+    font-size: 13px;
+    background-color: blue;
+    color: #fff;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+    padding: 7px 15px;
+}
+
+
+@media (max-width: 350px){
+
+    .main-section-login{
+        padding: 100px 0 100px 0;
+    }
+    .main-section-login .max-width{
+        padding: 0;
+    }
+
+    main{
+        min-width: 250px;
+    }
+
+    .login-section{
+        padding: 20px 10px;
+    }
+}
+
+
+

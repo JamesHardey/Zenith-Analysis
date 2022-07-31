@@ -1,0 +1,81 @@
+/* About HomePage */
+
+*{
+    font-family:'Poppins', sans-serif;
+}
+
+
+
+.section-divider{
+    height: 1px;
+}
+
+.about-home-page{
+    display: flex;
+    height: 60vh;
+    background: url(../assets/bg4.jpg) no-repeat center;
+    color: #fffffe;
+    min-height: 500px;
+    background-size: cover;
+    max-width: 1400px;
+    margin: auto;
+}
+
+
+
+.about-home-page .stretch-width{
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    background-color: #00000077;
+}
+
+
+
+.about-home-page .about-top-section h2{
+    color: #fff;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.about-home-page .about-top-section .button-container{
+    margin-top: 20px;
+}
+
+
+.about-home-page .about-top-section .button-container .btn{
+    background-color: #000089;
+    color: #fffffe;
+    margin-top: 3 0px;
+    padding: 10px 20px;
+    border-radius: 40px 5px 40px 5px ;
+}
+
+.about-home-page .about-page-content{
+    width: 55%;
+}
+
+.about-home-page .about-page-content h2{
+    font-size: 38px;
+}
+
+.about .about-content .divider{
+    margin: 20px 0 30px;
+}
+
+.about-home-page .about-page-content .sub-title{
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.about-home-page .about-page-content .about-text{
+    font-size: 15px;
+    font-weight: 400;
+}
+
+/* End of About  */
