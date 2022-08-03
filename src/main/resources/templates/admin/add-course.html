@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin | Zenith-Analysis</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
      crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
 </head>
 
 <body>
@@ -39,7 +39,7 @@
             </h1>
             <div class="user-wrapper">
                 <div>
-                    <h4>Admin 101</h4>
+                    <h4 th:text="${name}"></h4>
                     <small>Admin</small>
                 </div>
                 <div>
@@ -53,12 +53,15 @@
 
         <div class="upload-section">
             <h2>Add Course</h2>
-            <form action="" class="upload-form">
-                <input type="text" name="title" id="title" placeholder="Title" required>
+            <form th:action="@{/admin/add-course}" class="upload-form" method="post" th:object="${course}">
+                <input type="text" name="title" id="title" th:field="*{title}" placeholder="Title" required>
+                <input type="number" name="price" id="price" th:field="*{price}" placeholder="Price" required>
+                <textarea name="message" id="message" th:field="*{details}" cols="30" rows="10" placeholder="Message" required></textarea>
+                <input type="file" name="file" id="file" >
                 <input type="submit" value="SEND">
             </form>
             <div>
-                <p style="text-align: center; margin-top: 10px; color:gray; font-size: 13px;">You have successfully add a course</p>
+                <p style="text-align: center; margin-top: 10px; color:gray; font-size: 13px;" th:if="${param.success}">You have successfully add a course</p>
             </div>
         </div>
     </div>

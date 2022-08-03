@@ -17,7 +17,7 @@
     <header class="nav">
         <div class="max-width">
             <nav class="navbar">
-                <a class="logo" href="#">Zenith <span>Analysis</span></a>
+                <a class="logo" th:href="@{/}">Zenith <span>Analysis</span></a>
                 <div class="nav-right">
                     <div>
                         <ul>
@@ -49,7 +49,7 @@
                 <div class="all-courses">
                     <ul class="list-item">
                         <li>
-                            <a href="">
+                            <a th:href="@{/contact-us}">
                                 <div class="course-card">
                                     <img src="assets/bus1.jpg" alt="">
                                     <div class="course-right-side">
@@ -61,14 +61,14 @@
                                         </div>
                                         <div class="course-card-bottom">
                                             <div class="price-tag">Price: $110</div>
-                                            <a href="" class="enroll-btn">Click to Enroll</a>
+                                            <a th:href="@{/contact-us}" class="enroll-btn">Click to Enroll</a>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a th:href="@{/contact-us}">
                                 <div class="course-card">
                                     <img src="assets/bus2.jpg" alt="">
                                     <div class="course-right-side">
@@ -79,7 +79,7 @@
             
                                         <div class="course-card-bottom">
                                             <div class="price-tag">Price: $110</div>
-                                            <a href="" class="enroll-btn">Click to Enroll</a>
+                                            <a th:href="@{/contact-us}" class="enroll-btn">Click to Enroll</a>
                                         </div>
 
                                     </div>
@@ -89,7 +89,7 @@
                         </li>
 
                         <li>
-                            <a href="">
+                            <a th:href="@{/contact-us}">
                                 <div class="course-card">
                                     <img src="assets/bus1.jpg" alt="">
                                     <div class="course-right-side">
@@ -101,14 +101,14 @@
                                         </div>
                                         <div class="course-card-bottom">
                                             <div class="price-tag">Price: $110</div>
-                                            <a href="" class="enroll-btn">Click to Enroll</a>
+                                            <a th:href="@{/contact-us}" class="enroll-btn">Click to Enroll</a>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a th:href="@{/contact-us}">
                                 <div class="course-card">
                                     <img src="assets/bus2.jpg" alt="">
                                     <div class="course-right-side">
@@ -119,7 +119,7 @@
             
                                         <div class="course-card-bottom">
                                             <div class="price-tag">Price: $110</div>
-                                            <a href="" class="enroll-btn">Click to Enroll</a>
+                                            <a th:href="@{/contact-us}" class="enroll-btn">Click to Enroll</a>
                                         </div>
 
                                     </div>
@@ -129,7 +129,7 @@
                         </li>
 
                         <li>
-                            <a href="">
+                            <a th:href="@{/contact-us}">
                                 <div class="course-card">
                                     <img src="assets/bus1.jpg" alt="">
                                     <div class="course-right-side">
@@ -141,14 +141,14 @@
                                         </div>
                                         <div class="course-card-bottom">
                                             <div class="price-tag">Price: $110</div>
-                                            <a href="" class="enroll-btn">Click to Enroll</a>
+                                            <a th:href="@{/contact-us}" class="enroll-btn">Click to Enroll</a>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a th:href="@{/contact-us}">
                                 <div class="course-card">
                                     <img src="assets/bus2.jpg" alt="">
                                     <div class="course-right-side">
@@ -159,7 +159,7 @@
             
                                         <div class="course-card-bottom">
                                             <div class="price-tag">Price: $110</div>
-                                            <a href="" class="enroll-btn">Click to Enroll</a>
+                                            <a th:href="@{/contact-us}" class="enroll-btn">Click to Enroll</a>
                                         </div>
 
                                     </div>
@@ -169,7 +169,7 @@
                         </li>
 
                         <li>
-                            <a href="">
+                            <a th:href="@{/contact-us}">
                                 <div class="course-card">
                                     <img src="assets/bus1.jpg" alt="">
                                     <div class="course-right-side">
@@ -181,14 +181,14 @@
                                         </div>
                                         <div class="course-card-bottom">
                                             <div class="price-tag">Price: $110</div>
-                                            <a href="" class="enroll-btn">Click to Enroll</a>
+                                            <a th:href="@{/contact-us}" class="enroll-btn">Click to Enroll</a>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a th:href="@{/contact-us}">
                                 <div class="course-card">
                                     <img src="assets/bus2.jpg" alt="">
                                     <div class="course-right-side">
@@ -199,7 +199,7 @@
             
                                         <div class="course-card-bottom">
                                             <div class="price-tag">Price: $110</div>
-                                            <a href="" class="enroll-btn">Click to Enroll</a>
+                                            <a th:href="@{/contact-us}" class="enroll-btn">Click to Enroll</a>
                                         </div>
 
                                     </div>
@@ -211,6 +211,7 @@
                     </ul>
                 </div>
             </div>
+        </div>
     </section>
 
     <footer class="footer-section">
@@ -254,7 +255,7 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script th:src="@{js/script.js}"></script>
 </body>
 
 </html>

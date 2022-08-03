@@ -8,7 +8,7 @@
     <title>Admin | Zenith-Analysis</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
-     crossorigin="anonymous">
+          crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/admin.css}">
 </head>
 
@@ -51,41 +51,42 @@
 
         </header>
 
-        <div>
-            <table class="tables">
-                <thead>
-                    <tr>
-                        <th>S/N</th>
-                        <th>Event Title</th>
-                        <th>Event Date</th>
-                        <th>Event Time</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <tr th:each="event,iterator: ${events}">
-                    <td th:text="${iterator.count}"></td>
-                    <td th:text="${event.title}">Event Title</td>
-                    <td th:text="${event.time}">Event Title</td>
-                    <td th:text="${event.date}">Event Date</td>
-                    <td class="actions">
-                        <div>
-                            <a th:href="@{/admin/event/delete/{id} (id=${event.id})}"
-                               class="delete-btn action-btn">Delete</a>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="upload-section">
+            <h2>COURSE PERMISSION</h2>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Course title</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="course,iterator : ${courses}">
+                            <td th:text="${iterator.count}"></td>
+                            <td th:text="${course.title}"></td>
+                            <td th:text="${course.status} ? 'Allowed' : 'DisAllowed'"></td>
+                            <td class="actions">
+                                <div>
+                                    <a th:href="@{/admin/allow-course/{courseId}/{id} (courseId=${course.id}, id=${id})}"
+                                       class="allow-btn" th:text="${course.status} ? 'DisAllow' : 'Allow'"></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
 
             <div>
-                <a th:href="@{/admin/add-event}" class="btn add-course-btn">Add Event</a>
+                <p style="text-align: center; margin-top: 10px; color:gray; font-size: 13px;"></p>
             </div>
         </div>
-
     </div>
 
-    <script src="../js/admin.js"></script>
+    <script th:src="@{/js/admin.js}"></script>
 </body>
 
 </html>

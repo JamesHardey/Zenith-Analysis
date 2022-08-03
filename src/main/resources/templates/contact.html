@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Contact Us | Zenith-Analysis</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/contact.css">
@@ -16,7 +16,7 @@
     <header class="nav">
         <div class="max-width">
             <nav class="navbar">
-                <a class="logo" href="#">Zenith <span>Analysis</span></a>
+                <a class="logo" th:href="@{/}">Zenith <span>Analysis</span></a>
                 <div class="nav-right">
                     <div>
                         <ul>
@@ -213,7 +213,7 @@
             </div>
         </div>
     </footer>
-    <script src="js/script.js"></script>
+    <script th:src="@{js/script.js}"></script>
 </body>
 
 </html>

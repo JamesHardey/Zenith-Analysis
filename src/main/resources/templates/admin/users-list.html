@@ -5,11 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin | Zenith-Analysis</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
      crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <scrip>
+        var myModal = document.getElementById('myModal')
+        var myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+        })
+    </scrip>
 </head>
 
 <body>
@@ -39,7 +47,7 @@
             </h1>
             <div class="user-wrapper">
                 <div>
-                    <h4>Admin 101</h4>
+                    <h4 th:text="${name}"></h4>
                     <small>Admin</small>
                 </div>
                 <div>
@@ -63,18 +71,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Bola Tief</td>
-                        <td>bola@hmail.com</td>
-                        <td>Approved</td>
-                        <td></td>
-                    </tr>
+                <tr th:each="user,iterator : ${users}">
+                    <td th:text="${iterator.count}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.approved}? 'Approved' : 'UnApproved'">
+                    </td>
+                    <td class="actions">
+                        <div>
+                            <a th:href="@{/admin/approve-user/{id} (id=${user.id})}" class="approved action-btn"
+                            th:text="${user.approved} ? 'UnApprove' : 'Approve' "></a>
+                        </div>
+                        <div>
+                            <a th:href="@{/admin/delete/{id} (id=${user.id})}" class="delete-btn action-btn">Delete</a>
+                        </div>
+                        <div>
+                            <a th:href="@{/admin/course-allow/{id} (id=${user.id})}" class="allow-btn action-btn">Allow</a>
+                        </div>
+                    </td>
+                </tr>
+
                 </tbody>
             </table>
 
-            <div>
-                <a th:href="@{/admin/add-course}" class="btn add-course-btn">Add Course</a>
+            <div style="margin-top: 30px;">
+                <a th:href="@{/admin/add-admin}" class="btn add-course-btn">Add Admin</a>
             </div>
         </div>
 

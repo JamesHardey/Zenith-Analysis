@@ -50,42 +50,24 @@
             </div>
 
         </header>
-
-        <div>
-            <table class="tables">
-                <thead>
-                    <tr>
-                        <th>S/N</th>
-                        <th>Event Title</th>
-                        <th>Event Date</th>
-                        <th>Event Time</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <tr th:each="event,iterator: ${events}">
-                    <td th:text="${iterator.count}"></td>
-                    <td th:text="${event.title}">Event Title</td>
-                    <td th:text="${event.time}">Event Title</td>
-                    <td th:text="${event.date}">Event Date</td>
-                    <td class="actions">
-                        <div>
-                            <a th:href="@{/admin/event/delete/{id} (id=${event.id})}"
-                               class="delete-btn action-btn">Delete</a>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
+        <div class="upload-section">
+            <h2>ADD NEW ADMIN</h2>
+            <form th:action="@{/admin/add-admin}" class="upload-form" method="post" th:object="${adminDto}">
+                <input type="password" name="password" id="password" th:field="*{adminPassword}" placeholder="Admin Password" required>
+                <input type="text" name="name" id="name" th:field="*{name}" placeholder="Admin Name" required>
+                <input type="email" name="email" id="email" th:field="*{email}" placeholder="New Admin Email" required>
+                <input type="password" name="newAdminPassword" id="newAdminPassword" th:field="*{password}" placeholder="New Admin Password" required>
+                <input type="submit" value="Add">
+            </form>
             <div>
-                <a th:href="@{/admin/add-event}" class="btn add-course-btn">Add Event</a>
+                <p th:if="${param.success}" style="text-align: center; margin-top: 10px; color:green; font-size: 13px;">The new Admin password has been sent to this email</p>
+                <p th:if="${param.invalid}" style="text-align: center; margin-top: 10px; color:red; font-size: 13px;">This email is already registered</p>
+                <p th:if="${param.error}" style="text-align: center; margin-top: 10px; color:red; font-size: 13px;">Incorrect Admin password</p>
             </div>
         </div>
-
     </div>
 
-    <script src="../js/admin.js"></script>
+    <script th:src="@{/js/admin.js}"></script>
 </body>
 
 </html>

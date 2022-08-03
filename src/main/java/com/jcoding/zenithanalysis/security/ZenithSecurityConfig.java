@@ -32,7 +32,7 @@ public class ZenithSecurityConfig extends WebSecurityConfigurerAdapter{
                .antMatchers("/login", "/register",
                        "/", "/contact-us", "/about", "/events",
                        "/courses", "/verify", "/verify/**",
-                       "/resend/**", "/h2-console/**",
+                       "/resend/**", "/h2-console/**","/sendMessage",
                        "/change-pass/**","/forget-pass"
                ).permitAll()
                .antMatchers("/home/**")
@@ -54,13 +54,13 @@ public class ZenithSecurityConfig extends WebSecurityConfigurerAdapter{
                .logout().logoutUrl("/logout")
                .logoutSuccessUrl("/login?logout")
                .permitAll();
-
+       http.csrf().disable();
        http.headers().frameOptions().sameOrigin();
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/assets/**", "/css/**", "/js/**", "/webjars/**");
+        web.ignoring().antMatchers("/assets/**", "/css/**", "/js/**", "/webjars/**", "/h2-console/**");
     }
 
 

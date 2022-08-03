@@ -1,6 +1,7 @@
 package com.jcoding.zenithanalysis.services;
 
 import com.jcoding.zenithanalysis.dto.*;
+import com.jcoding.zenithanalysis.dto.event.EventCard;
 import com.jcoding.zenithanalysis.entity.AppUser;
 import com.jcoding.zenithanalysis.entity.Assignment;
 import com.jcoding.zenithanalysis.entity.Course;
@@ -15,11 +16,13 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -33,6 +36,9 @@ public class AppUserServices{
 
     @Autowired
     private CourseRepository courseRepository;
+
+    @Autowired
+    private EventsRepo eventsRepo;
 
     @Autowired
     private AssignmentRepo assignmentRepo;
@@ -74,6 +80,8 @@ public class AppUserServices{
         }
     }
 
+
+
     public Long createUser(RegisterUser registerUser){
         AppUser newStudent = new AppUser();
         if(!registerUser.getPassword().equals(registerUser.getConfirmPassword())){
@@ -85,7 +93,7 @@ public class AppUserServices{
         }
         newStudent.setName(registerUser.getName());
         newStudent.setEmail(registerUser.getEmail().toLowerCase());
-        newStudent.setRole(repo.findByName("ADMIN"));
+        newStudent.setRole(repo.findByName("USER"));
         newStudent.setPassword(passwordEncoder.encode(registerUser.getPassword()));
 
         newStudent.setVerification(generateCode());
@@ -97,8 +105,11 @@ public class AppUserServices{
         } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        System.out.println("Message Sent ");
         return newStudent.getId();
     }
+
+
 
     private String generateCode(){
         return RandomString.make(6);
@@ -168,7 +179,6 @@ public class AppUserServices{
         Optional<AppUser> user = appUserRepo.findById(appUser.getId());
         if(user.isEmpty()) return false;
         if(user.get().getVerification().equalsIgnoreCase(appUser.getCode())){
-            user.get().setRole(repo.findByName("ADMIN"));
             user.get().setVerification(null);
             user.get().setEnabled(true);
             return true;
@@ -190,7 +200,6 @@ public class AppUserServices{
 
         return courses;
     }
-
 
 
 
@@ -217,13 +226,15 @@ public class AppUserServices{
         return assignmentList;
     }
 
+
     public void contactAdmin(ContactUsDto contactUsDto){
         String subject = "Contact Zenith-Analysis";
         String body = contactUsDto.getMessage()+"\n\n\n"
                 +"Message from: \n"
                 +"Name: "+contactUsDto.getName()+"\n"
                 +"Phone: "+contactUsDto.getPhone()+"\n"
-                +"Email: "+contactUsDto.getEmail()+"\n";
+                +"Email: "+contactUsDto.getEmail()+"\n"
+                +"Time sent: "+contactUsDto.getDateSent()+"\n";
 
         try {
             zenithEmailSenderServices.sendEmail(subject,body,adminEmail);
@@ -257,7 +268,6 @@ public class AppUserServices{
         return false;
     }
 
-
     public void sendRecoveryPassword(String email){
         Optional<AppUser> student = appUserRepo.findByEmail(email.toLowerCase());
         String code = generateCode();
@@ -278,6 +288,23 @@ public class AppUserServices{
         } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<EventCard> getEventsCard(){
+        return eventsRepo.findAll()
+                .stream()
+                .map((event)-> {
+                    EventCard event1 = new EventCard();
+                    event1.setTitle(event.getTitle());
+                    event1.setDetails(event.getDetails());
+                    LocalDate date = LocalDate.parse(event.getDate());
+                    event1.setMonth(date.getMonth().toString().substring(0,3));
+                    event1.setDay(Integer.toString(date.getDayOfMonth()));
+                    event1.setYear(Integer.toString(date.getYear()));
+                    event1.setTime(event.getTime());
+                    return event1;
+                })
+                .collect(Collectors.toList());
     }
 
 }

@@ -1,28 +1,27 @@
-package com.jcoding.zenithanalysis.dto;
+package com.jcoding.zenithanalysis.entity;
 
-import com.jcoding.zenithanalysis.entity.Course;
+import javax.persistence.*;
 
-public class EventsDto {
+@Entity
+public class Events {
 
-    private int index;
+    @Id
+    @GeneratedValue
     private Long id;
     private String title;
     private String details;
     private String date;
     private String time;
-    private String course;
 
-    public EventsDto() {
+
+    public Events() {
     }
 
-    public EventsDto(int index,Long id, String title, String details, String date, String time, String course) {
-        this.index = index;
-        this.id = id;
+    public Events(String title, String details, String date, String time) {
         this.title = title;
         this.details = details;
         this.date = date;
         this.time = time;
-        this.course = course;
     }
 
     public Long getId() {
@@ -31,14 +30,6 @@ public class EventsDto {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
     }
 
     public String getTitle() {
@@ -73,11 +64,5 @@ public class EventsDto {
         this.time = time;
     }
 
-    public String getCourse() {
-        return course;
-    }
 
-    public void setCourse(String course) {
-        this.course = course;
-    }
 }

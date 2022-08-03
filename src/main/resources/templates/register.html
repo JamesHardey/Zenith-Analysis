@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register | Zenith-Analysis</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
           crossorigin="anonymous">
@@ -76,7 +76,7 @@
                         <a href="@{/login}">Already have an Account? Click here to login</a>
                     </div>
                     <div>
-                        <p th:if="${param.error}" style="color:red;">This email is already registered</p>
+                        <p th:if="${param.error}" style="color:red; text-align: center; font-size: 14px;">This email is already registered</p>
                     </div>
                 </form>
             </main>
@@ -125,7 +125,7 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script th:src="@{js/script.js}"></script>
 </body>
 
 </html>

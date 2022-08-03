@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin | Zenith-Analysis</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
      crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
 </head>
 
 <body>
@@ -39,7 +39,7 @@
             </h1>
             <div class="user-wrapper">
                 <div>
-                    <h4>Admin 101</h4>
+                    <h4 th:text="${name}"></h4>
                     <small>Admin</small>
                 </div>
                 <div>
@@ -53,21 +53,18 @@
 
         <div class="upload-section">
             <h2>UPLOAD CLASS VIDEO LINK</h2>
-            <form action="" class="upload-form">
-                <input type="text" name="title" id="title" placeholder="Title" required>
-                <input type="url" name="link" id="link" placeholder="Drive URL" required>
-                <select name="course" id="course">
-                    <option value="Business Administration">Business Administration</option>
-                    <option value="Business Administration">Business Administration</option>
-                    <option value="Business Administration">Business Administration</option>
-                    <option value="Business Administration">Business Administration</option>
-                    <option value="Business Administration">Business Administration</option>
+            <form th:action="@{/admin/add-upload}" class="upload-form" th:object="${uploadDto}" method="post">
+                <input type="text" name="title" id="title" placeholder="Title" th:field="*{title}" required>
+                <input type="url" name="link" id="link" placeholder="Drive URL" th:field="*{url}" required>
+                <select name="course" id="course" th:each="course: ${courses}" th:field="*{course}">
+                    <option th:value="${course.courseTitle}" th:text="${course.courseTitle}"></option>
                 </select>
-                <textarea name="" id="" cols="30" rows="10" placeholder="Message"></textarea>
+                <textarea name="" id="" cols="30" rows="10" th:field="*{messageh}" placeholder="Message"></textarea>
                 <input type="submit" value="Send">
             </form>
             <div>
-                <p style="text-align: center; margin-top: 10px; color:gray; font-size: 13px;">You have successfully uploaded a link</p>
+                <p style="text-align: center; margin-top: 10px; color:gray; font-size: 13px;" th:if="${param.success}">You have successfully uploaded a link</p>
+                <p style="text-align: center; margin-top: 10px; color:gray; font-size: 13px;" th:if="${param.failed}">You have successfully uploaded a link</p>
             </div>
         </div>
     </div>

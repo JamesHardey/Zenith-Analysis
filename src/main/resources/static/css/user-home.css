@@ -143,10 +143,14 @@ img{
     background-color: #fff;
 }
 
-.assignment-section h3{
-    font-size: 24px;
+.assignment-section h2{
+    font-size: 32px;
     font-weight: 600;
     margin: 20px 0;
+    text-align: center;
+    border: 1px solid #030303;
+    border-width: 0 0 1px 0;
+    padding-bottom: 5px;
 }
 
 .assignment-section .assignment{
@@ -157,15 +161,19 @@ img{
 }
 
 .assignment h4{
-    
+    font-size: 22px;
+    margin-bottom: 30px;
 }
 
 .assignment h6{
     margin-top: 10px;
+    color: rgb(126, 126, 126);
+    font-size: 14px;
 }
 
 .assignment p{
-    
+    font-size: 13px;
+    margin: 10px 0;
 }
 
 .date{
@@ -175,7 +183,7 @@ img{
 }
 
 .date h6{
-
+    font-size: 11px;
 }
 
 .date span{

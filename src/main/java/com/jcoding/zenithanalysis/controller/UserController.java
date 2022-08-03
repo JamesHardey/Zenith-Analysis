@@ -1,6 +1,10 @@
 package com.jcoding.zenithanalysis.controller;
 
+import com.jcoding.zenithanalysis.dto.ContactUsDto;
+import com.jcoding.zenithanalysis.dto.CustomAppUser;
+import com.jcoding.zenithanalysis.dto.Message;
 import com.jcoding.zenithanalysis.dto.UserAssignmentDto;
+import com.jcoding.zenithanalysis.entity.AppUser;
 import com.jcoding.zenithanalysis.entity.Course;
 import com.jcoding.zenithanalysis.services.AppUserServices;
 import com.jcoding.zenithanalysis.utils.ConstantPages;
@@ -10,9 +14,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import java.time.LocalDateTime;
 import java.util.List;
+
 
 @Controller
 @RequestMapping("/home")
@@ -24,33 +31,76 @@ public class UserController {
     @GetMapping
     public String getHome(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        List<Course> courses = appUserServices.getCourses(authentication);
-        model.addAttribute("courses", courses);
-        return ConstantPages.USER_HOME_PAGE;
+        CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
+        if(checkIfApproved(user.getUser())) {
+            List<Course> courses = appUserServices.getCourses(authentication);
+            model.addAttribute("courses", courses);
+            model.addAttribute("assignments", appUserServices.getAssignments(authentication));
+            return ConstantPages.USER_HOME_PAGE;
+        }
+        return "redirect:/home/approval";
     }
+
+    @GetMapping("/approval")
+    public String getApproval(Model model){
+        String msg = "You have not been approved for any course, please contact the Admin for that";
+        Message message = new Message();
+        message.setMessage(msg);
+        model.addAttribute("message", message);
+        return ConstantPages.APPROVAL_SUPPORT_PAGE;
+    }
+    
 
     @GetMapping("/assignment")
     public String getAssignmentPage(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
+        if(!checkIfApproved(user.getUser())) {
+            return "redirect:/home/approval";
+        }
         List<UserAssignmentDto> assignmentDtos = appUserServices.getAssignments(authentication);
         boolean isEmpty = assignmentDtos.isEmpty();
         model.addAttribute("isEmpty", isEmpty);
         model.addAttribute("assignments",assignmentDtos);
-        return ConstantPages.USER_ASSIGNMENT_PAGE;
+        return "redirect:/home";
     }
+
 
     @GetMapping("/events")
     public String getUserEvents(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
         return ConstantPages.USER_EVENT_PAGE;
     }
 
+
     @GetMapping("/courses")
     public String getCourses(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
         return ConstantPages.USER_COURSE_PAGE;
     }
 
+
     @GetMapping("/contact-us")
-    public String contactUsPage(){
+    public String contactUsPage(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
+        ContactUsDto contactUsDto = new ContactUsDto();
+        model.addAttribute("contactDetail",contactUsDto);
         return ConstantPages.USER_CONTACT_PAGE;
+    }
+
+
+    @PostMapping("/contact-us")
+    public String sendMessage(
+            @ModelAttribute("contactDetail") ContactUsDto contactUsDto){
+        contactUsDto.setDateSent(LocalDateTime.now().toString());
+        appUserServices.contactAdmin(contactUsDto);
+        return "redirect:/home/contact-us";
+    }
+
+    private boolean checkIfApproved(AppUser appUser){
+        return appUser.isApproved();
     }
 }

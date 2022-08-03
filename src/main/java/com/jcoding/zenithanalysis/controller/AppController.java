@@ -3,6 +3,9 @@ package com.jcoding.zenithanalysis.controller;
 
 import com.jcoding.zenithanalysis.dto.*;
 import com.jcoding.zenithanalysis.entity.AppUser;
+import com.jcoding.zenithanalysis.entity.Assignment;
+import com.jcoding.zenithanalysis.entity.Course;
+import com.jcoding.zenithanalysis.services.AdminServices;
 import com.jcoding.zenithanalysis.services.AppUserServices;
 import com.jcoding.zenithanalysis.utils.ConstantPages;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +27,13 @@ public class AppController {
     @Autowired
     private AppUserServices  appUserServices;
 
+    @Autowired
+    private AdminServices adminServices;
+
     @GetMapping
     public String home(Authentication authentication){
         if(authentication != null && authentication.isAuthenticated()){
-            return ConstantPages.USER_HOME_PAGE;
+            return "redirect:/home";
         }
         return ConstantPages.HOME_PAGE;
     }
@@ -39,8 +45,6 @@ public class AppController {
     public String getAbout(Authentication authentication){
         return ConstantPages.ABOUT_PAGE;
     }
-
-
 
 
     @GetMapping("/contact-us")
@@ -57,7 +61,6 @@ public class AppController {
     @PostMapping("/contact-us")
     public String sendMessage(
             @ModelAttribute("contactDetail") ContactUsDto contactUsDto){
-
         contactUsDto.setDateSent(LocalDateTime.now().toString());
         appUserServices.contactAdmin(contactUsDto);
         return "redirect:/contact-us";
@@ -67,11 +70,24 @@ public class AppController {
 
 
     @GetMapping("/events")
-    public String getEventPage(Authentication authentication){
+    public String getEventPage(Authentication authentication, Model model){
         if(authentication != null && authentication.isAuthenticated()){
             return "redirect:/home/events";
         }
+        model.addAttribute("modelCards", appUserServices.getEventsCard());
         return ConstantPages.EVENT_PAGE;
+    }
+
+    @GetMapping("/sendMessage")
+    public String sendMessade(){
+        Course course = new Course("English","120","Business course","link");
+
+        Assignment assignment = new Assignment(
+                "My assignment","This is what you should do",
+                course, LocalDate.now().toString()
+        );
+        adminServices.testAssignment(assignment);
+        return "redirect:/";
     }
 
 
@@ -118,15 +134,12 @@ public class AppController {
             Long id = appUserServices.getUserByEmail(email).getId();
             return "redirect:/verify?id="+id;
         }
-
         if(appUserServices.findIfExist(email)){
             return "redirect:/register?error";
         }
         Long id = appUserServices.createUser(registerUser);
         return "redirect:/verify?id="+id;
     }
-
-
 
 
 
@@ -143,8 +156,6 @@ public class AppController {
 
 
 
-
-
     @PostMapping("/verify/{id}")
     public String doVerification(
             @ModelAttribute("user") VerifyUser appUser,
@@ -155,8 +166,6 @@ public class AppController {
         }
         return "redirect:/verify?id="+id+"&invalid";
     }
-
-
 
 
 
@@ -190,7 +199,6 @@ public class AppController {
     }
 
 
-
     @GetMapping("/change-pass")
     public String changePassword(@Param("id")Long id, Model model){
         PasswordChange passwordChange = new PasswordChange();
@@ -213,10 +221,6 @@ public class AppController {
     }
 
 
-
-
-
-
     @GetMapping("/process_login")
     public String processLogin(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -229,8 +233,6 @@ public class AppController {
         }
         else return "redirect:/";
     }
-
-
 
 
 //    @GetMapping("/error")

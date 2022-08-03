@@ -14,16 +14,8 @@ public class Course {
     private String courseTitle;
     private String coursePrice;
     private String courseDetails;
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     private String imageUrl;
+
 
     public Course() {
     }
@@ -65,5 +57,13 @@ public class Course {
 
     public void setCourseDetails(String courseDetails) {
         this.courseDetails = courseDetails;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

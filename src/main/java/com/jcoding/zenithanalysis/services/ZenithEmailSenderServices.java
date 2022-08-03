@@ -1,8 +1,7 @@
 package com.jcoding.zenithanalysis.services;
 
-import com.jcoding.zenithanalysis.entity.AppUser;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;

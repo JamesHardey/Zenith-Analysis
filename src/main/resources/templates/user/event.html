@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Events | Zenith-Analysis</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
           crossorigin="anonymous">
@@ -17,18 +17,18 @@
     <header class="nav">
         <div class="max-width">
             <nav class="navbar">
-                <a class="logo" href="#">Zenith <span>Analysis</span></a>
+                <a class="logo" th:href="@{/}">Zenith <span>Analysis</span></a>
                 <div class="nav-right">
                     <div>
                         <ul>
-                            <li><a href="home.html">Home</a></li>
-                            <li><a href="course.html">Course Portfolio</a></li>
-                            <li><a href="home.html#assignments">Assignments</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="event.html">Event</a></li>
+                            <li><a th:href="@{/home}">Home</a></li>
+                            <li><a th:href="@{/home/courses}">Course Portfolio</a></li>
+                            <li><a th:href="@{/home/assignment}">Assignments</a></li>
+                            <li><a th:href="@{/home/contact-us}">Contact</a></li>
+                            <li><a th:href="@{/home/events}">Event</a></li>
                         </ul>
-                        <div>
-                            <form th:action="@{/logout}" method="post">
+                        <div class="login-register">
+                            <form th:action="@{/logout}" class="btn" method="post">
                                 <input type="submit" class="btn" value="Logout">
                             </form>
                         </div>
@@ -50,69 +50,18 @@
                     <h2>UPCOMING EVENTS</h2>
                 </div>
                 <div class="event-year">
-                    <h3>2022</h3>
-
-                    <div class="event-card">
+                    <h3></h3>
+                    <div class="event-card" th:each="card: ${modelCards}">
                         <div class="left-card">
-                            <div class="day">8</div>
-                            <div class="month">Nov</div>
+                            <div class="day" th:text="${card.day}"></div>
+                            <div class="month" th:text="${card.month}+' '+${card.year}"></div>
                         </div>
                         <div class="right-card">
-                            <h4>Event Title</h4>
+                            <h4 th:text="${card.title}"></h4>
                             <div class="description">
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta odio qui, quidem
-                                    tempore sequi est illum fuga doloribus minima repudiandae obcaecati, ad impedit vel
-                                    enim hic. Illum placeat at optio.</p>
+                                <p th:text="${card.details}"></p>
                             </div>
-                            <div class="time">10:00 AM</div>
-                        </div>
-                    </div>
-
-                    <div class="event-card">
-                        <div class="left-card">
-                            <div class="day">23</div>
-                            <div class="month">Sept</div>
-                        </div>
-                        <div class="right-card">
-                            <h4>Event Title</h4>
-                            <div class="description">
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta odio qui, quidem
-                                    tempore sequi est illum fuga doloribus minima repudiandae obcaecati, ad impedit vel
-                                    enim hic. Illum placeat at optio.</p>
-                            </div>
-                            <div class="time">10:00 AM</div>
-                        </div>
-                    </div>
-
-
-                    <div class="event-card">
-                        <div class="left-card">
-                            <div class="day">15</div>
-                            <div class="month">July</div>
-                        </div>
-                        <div class="right-card">
-                            <h4>Event Title</h4>
-                            <div class="description">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio iste velit, obcaecati
-                                    eos facilis unde laudantium inventore odit quia molestias?</p>
-                            </div>
-                            <div class="time">10:00 AM</div>
-                        </div>
-                    </div>
-
-
-                    <div class="event-card">
-                        <div class="left-card">
-                            <div class="day">15</div>
-                            <div class="month">July</div>
-                        </div>
-                        <div class="right-card">
-                            <h4>Event Title</h4>
-                            <div class="description">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio iste velit, obcaecati
-                                    eos facilis unde laudantium inventore odit quia molestias?</p>
-                            </div>
-                            <div class="time">10:00 AM</div>
+                            <div class="time" th:text="${card.time}"></div>
                         </div>
                     </div>
                 </div>
@@ -161,7 +110,7 @@
         </div>
     </footer>
 
-    <script src="../js/script.js"></script>
+    <script th:src="@{js/script.js}"></script>
 </body>
 
 </html>

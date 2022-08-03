@@ -13,7 +13,7 @@ public class AppUser {
     private String name;
     private String password;
     private boolean approved;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Roles role;
     private String verification;
     private boolean enabled;

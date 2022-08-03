@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Contact Us | Zenith-Analysis</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/contact.css">
@@ -16,18 +16,18 @@
     <header class="nav">
         <div class="max-width">
             <nav class="navbar">
-                <a class="logo" href="#">Zenith <span>Analysis</span></a>
+                <a class="logo" th:href="@{/}">Zenith <span>Analysis</span></a>
                 <div class="nav-right">
                     <div>
                         <ul>
-                            <li><a href="home.html">Home</a></li>
-                            <li><a href="course.html">Course Portfolio</a></li>
-                            <li><a href="home.html#assignments">Assignments</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="event.html">Event</a></li>
+                            <li><a th:href="@{/home}">Home</a></li>
+                            <li><a th:href="@{/home/courses}">Course Portfolio</a></li>
+                            <li><a th:href="@{/home/assignment}">Assignments</a></li>
+                            <li><a th:href="@{/home/contact-us}">Contact</a></li>
+                            <li><a th:href="@{/home/events}">Event</a></li>
                         </ul>
-                        <div>
-                            <form th:action="@{/logout}" method="post">
+                        <div class="login-register">
+                            <form th:action="@{/logout}" class="btn" method="post">
                                 <input type="submit" class="btn" value="Logout">
                             </form>
                         </div>
@@ -73,46 +73,41 @@
                         <div class="et-pb-contact-message"></div>
                         <div class="et_pb_contact">
                             <form class="et_pb_contact_form clearfix" method="post"
-                                action="https://www.elegantthemes.com/layouts/business/travel-agency-contact-page/live-demo">
-                                <p class="et_pb_contact_field et_pb_contact_field_0 et_pb_contact_field_last"
-                                    data-id="name" data-type="input">
+                                  th:action="@{/contact-us}" th:object="${contactDetail}">
+                                <p class=""
+                                   data-id="name" data-type="input">
 
-                                    <input type="text" id="sender-name" class="input" value=""
-                                        name="et_pb_contact_name_0" data-required_mark="required"
-                                        data-field_type="input" data-original_id="name" placeholder="Name">
+                                    <input type="text" id="name" class="input" value=""
+                                           name="name" th:field="*{name}" data-required_mark="required"
+                                           data-field_type="input" data-original_id="name" placeholder="Name">
                                 </p>
                                 <p class="et_pb_contact_field et_pb_contact_field_1 et_pb_contact_field_last"
-                                    data-id="email" data-type="email">
+                                   data-id="email" data-type="email">
 
-                                    <input type="text" id="et_pb_contact_email_0" class="input" value=""
-                                        name="et_pb_contact_email_0" data-required_mark="required"
-                                        data-field_type="email" data-original_id="email" placeholder="Email Address">
+                                    <input type="email" id="email" class="input" value=""
+                                           name="email" th:field="*{email}" data-required_mark="required"
+                                           data-field_type="email" data-original_id="email" placeholder="Email Address">
                                 </p>
                                 <p class="et_pb_contact_field et_pb_contact_field_2 et_pb_contact_field_last"
-                                    data-id="phone" data-type="input">
+                                   data-id="phone" data-type="input">
 
-                                    <input type="text" id="et_pb_contact_phone_0" class="input" value=""
-                                        name="et_pb_contact_phone_0" data-required_mark="required"
-                                        data-field_type="input" data-original_id="phone" placeholder="Phone"
-                                        pattern="[0-9\s-]*" title="Only numbers allowed.">
+                                    <input type="tel" id="tel" class="input" value=""
+                                           name="tel" th:field="*{phone}" data-required_mark="required"
+                                           data-field_type="input" data-original_id="phone" placeholder="Phone"
+                                           title="Only numbers allowed.">
                                 </p>
                                 <p class="et_pb_contact_field et_pb_contact_field_3 et_pb_contact_field_last"
-                                    data-id="message" data-type="text">
+                                   data-id="message" data-type="text">
 
-                                    <textarea name="et_pb_contact_message_0" id="et_pb_contact_message_0"
-                                        class="et_pb_contact_message input" data-required_mark="required"
-                                        data-field_type="text" data-original_id="message"
-                                        placeholder="Message"></textarea>
+                                    <textarea name="text-message" id="text-message"
+                                              th:field="*{message}" class="et_pb_contact_message input" data-required_mark="required"
+                                              data-field_type="text" data-original_id="message"
+                                              placeholder="Message"></textarea>
                                 </p>
-                                <input type="hidden" value="et_contact_proccess" name="et_pb_contactform_submit_0" />
                                 <div class="et_contact_bottom_container">
-                                    <button type="submit" name="et_builder_submit_button" class="submit-button"
-                                        data-icon="&#x24;">Send
-                                        Message</button>
+                                    <input type="submit" name="et_builder_submit_button" class="submit-button"
+                                           data-icon="&#x24;" value="Send Message">
                                 </div>
-                                <input type="hidden" id="" name="_wpnonce-et-pb-contact-form-submitted-0"
-                                    value="715f1b1d68" />
-                                <input type="hidden" name="_wp_http_referer" value="" />
                             </form>
                         </div>
                     </div>
@@ -217,7 +212,7 @@
             </div>
         </div>
     </footer>
-    <script src="../js/script.js"></script>
+    <script th:src="@{js/script.js}"></script>
 </body>
 
 </html>

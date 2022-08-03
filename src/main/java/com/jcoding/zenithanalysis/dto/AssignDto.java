@@ -2,39 +2,43 @@ package com.jcoding.zenithanalysis.dto;
 
 public class AssignDto {
 
-    private Long index;
+    private int index;
     private Long id;
     private String title;
     private String details;
+    private String course;
+    private String time;
     private String uploadDate;
     private String submissionDate;
 
     public AssignDto() {
     }
 
-    public AssignDto(Long index, Long id, String title, String details, String uploadDate, String submissionDate) {
+    public AssignDto(int index,Long id, String title,String course, String details,String uploadDate, String submissionDate) {
         this.index = index;
         this.id = id;
         this.title = title;
+        this.course = course;
         this.details = details;
         this.uploadDate = uploadDate;
         this.submissionDate = submissionDate;
     }
 
-    public Long getIndex() {
+    public AssignDto(Long id,String title,String course, String details, String uploadDate,String submissionDate) {
+        this.id = id;
+        this.title = title;
+        this.course = course;
+        this.details = details;
+        this.uploadDate = uploadDate;
+        this.submissionDate = submissionDate;
+    }
+
+    public int getIndex() {
         return index;
     }
 
-    public void setIndex(Long index) {
+    public void setIndex(int index) {
         this.index = index;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -46,19 +50,43 @@ public class AssignDto {
     }
 
     public String getCourse() {
-        return details;
+        return course;
     }
 
-    public void setCourse(String details) {
-        this.details = details;
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getUploadDate() {
         return uploadDate;
     }
 
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
     public void setUploadDate(String uploadDate) {
         this.uploadDate = uploadDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getSubmissionDate() {

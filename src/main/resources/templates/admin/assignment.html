@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin | Zenith-Analysis</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
      crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
 </head>
 
 <body>
@@ -39,7 +39,7 @@
             </h1>
             <div class="user-wrapper">
                 <div>
-                    <h4>Admin 101</h4>
+                    <h4 th:text="${name}"></h4>
                     <small>Admin</small>
                 </div>
                 <div>
@@ -63,6 +63,21 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
+                <tbody>
+                <tr th:each="assignment,iterator: ${assignments}">
+                    <td th:text="${iterator.count}"></td>
+                    <td th:text="${assignment.title}"></td>
+                    <td th:text="${assignment.course}"></td>
+                    <td th:text="${assignment.uploadDate}"></td>
+                    <td th:text="${assignment.submissionDate}"></td>
+                    <td class="actions">
+                        <div>
+                            <a th:href="@{/admin/assignment/delete/{id} (id=${assignment.id})}" class="delete-btn action-btn">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+
+                </tbody>
             </table>
 
             <div>

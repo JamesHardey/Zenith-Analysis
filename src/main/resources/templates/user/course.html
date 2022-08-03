@@ -17,18 +17,18 @@
     <header class="nav">
         <div class="max-width">
             <nav class="navbar">
-                <a class="logo" href="#">Zenith <span>Analysis</span></a>
+                <a class="logo" th:href="@{/}">Zenith <span>Analysis</span></a>
                 <div class="nav-right">
                     <div>
                         <ul>
-                            <li><a href="home.html">Home</a></li>
-                            <li><a href="course.html">Course Portfolio</a></li>
-                            <li><a href="home.html#assignments">Assignments</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="event.html">Event</a></li>
+                            <li><a th:href="@{/home}">Home</a></li>
+                            <li><a th:href="@{/home/courses}">Course Portfolio</a></li>
+                            <li><a th:href="@{/home/assignment}">Assignments</a></li>
+                            <li><a th:href="@{/home/contact-us}">Contact</a></li>
+                            <li><a th:href="@{/home/events}">Event</a></li>
                         </ul>
-                        <div>
-                            <form th:action="@{/logout}" method="post">
+                        <div class="login-register">
+                            <form th:action="@{/logout}" class="btn" method="post">
                                 <input type="submit" class="btn" value="Logout">
                             </form>
                         </div>
@@ -50,7 +50,7 @@
                 <div class="all-courses">
                     <ul class="list-item">
                         <li>
-                            <a href="">
+                            <a th:href="@{/home/contact-us}">
                                 <div class="course-card">
                                     <img src="../assets/bus1.jpg" alt="">
                                     <div class="course-right-side">
@@ -62,14 +62,14 @@
                                         </div>
                                         <div class="course-card-bottom">
                                             <div class="price-tag">Price: $110</div>
-                                            <a href="" class="enroll-btn">Click to Enroll</a>
+                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a th:href="@{/home/contact-us}">
                                 <div class="course-card">
                                     <img src="../assets/bus2.jpg" alt="">
                                     <div class="course-right-side">
@@ -80,7 +80,7 @@
             
                                         <div class="course-card-bottom">
                                             <div class="price-tag">Price: $110</div>
-                                            <a href="" class="enroll-btn">Click to Enroll</a>
+                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>
                                         </div>
 
                                     </div>
@@ -90,7 +90,7 @@
                         </li>
 
                         <li>
-                            <a href="">
+                            <a th:href="@{/home/contact-us}">
                                 <div class="course-card">
                                     <img src="../assets/bus1.jpg" alt="">
                                     <div class="course-right-side">
@@ -102,14 +102,14 @@
                                         </div>
                                         <div class="course-card-bottom">
                                             <div class="price-tag">Price: $110</div>
-                                            <a href="" class="enroll-btn">Click to Enroll</a>
+                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a th:href="@{/home/contact-us}">
                                 <div class="course-card">
                                     <img src="../assets/bus2.jpg" alt="">
                                     <div class="course-right-side">
@@ -120,7 +120,7 @@
             
                                         <div class="course-card-bottom">
                                             <div class="price-tag">Price: $110</div>
-                                            <a href="" class="enroll-btn">Click to Enroll</a>
+                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>
                                         </div>
 
                                     </div>
@@ -130,7 +130,7 @@
                         </li>
 
                         <li>
-                            <a href="">
+                            <a th:href="@{/home/contact-us}">
                                 <div class="course-card">
                                     <img src="../assets/bus1.jpg" alt="">
                                     <div class="course-right-side">
@@ -142,14 +142,14 @@
                                         </div>
                                         <div class="course-card-bottom">
                                             <div class="price-tag">Price: $110</div>
-                                            <a href="" class="enroll-btn">Click to Enroll</a>
+                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a th:href="@{/home/contact-us}">
                                 <div class="course-card">
                                     <img src="../assets/bus2.jpg" alt="">
                                     <div class="course-right-side">
@@ -160,7 +160,7 @@
             
                                         <div class="course-card-bottom">
                                             <div class="price-tag">Price: $110</div>
-                                            <a href="" class="enroll-btn">Click to Enroll</a>
+                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>
                                         </div>
 
                                     </div>
@@ -170,7 +170,7 @@
                         </li>
 
                         <li>
-                            <a href="">
+                            <a th:href="@{/home/contact-us}">
                                 <div class="course-card">
                                     <img src="../assets/bus1.jpg" alt="">
                                     <div class="course-right-side">
@@ -182,29 +182,25 @@
                                         </div>
                                         <div class="course-card-bottom">
                                             <div class="price-tag">Price: $110</div>
-                                            <a href="" class="enroll-btn">Click to Enroll</a>
+                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a th:href="@{/home/contact-us}">
                                 <div class="course-card">
                                     <img src="../assets/bus2.jpg" alt="">
                                     <div class="course-right-side">
                                         <h5>Business Process Modeling</h5>
                                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis
                                             rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>
-
-            
                                         <div class="course-card-bottom">
                                             <div class="price-tag">Price: $110</div>
-                                            <a href="" class="enroll-btn">Click to Enroll</a>
+                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>
                                         </div>
-
                                     </div>
-
                                 </div>
                             </a>
                         </li>
@@ -256,7 +252,7 @@
         </div>
     </footer>
 
-    <script src="../js/script.js"></script>
+    <script th:src="@{js/script.js}"></script>
 </body>
 
 </html>

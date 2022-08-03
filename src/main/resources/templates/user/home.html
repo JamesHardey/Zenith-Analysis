@@ -17,7 +17,7 @@
     <header class="nav">
         <div class="max-width">
             <nav class="navbar">
-                <a class="logo" href="#">Zenith <span>Analysis</span></a>
+                <a class="logo" th:href="@{/}">Zenith <span>Analysis</span></a>
                 <div class="nav-right">
                     <div>
                         <ul>
@@ -27,8 +27,8 @@
                             <li><a th:href="@{/home/contact-us}">Contact</a></li>
                             <li><a th:href="@{/home/events}">Event</a></li>
                         </ul>
-                        <div>
-                            <form th:action="@{/logout}" method="post">
+                        <div class="login-register">
+                            <form th:action="@{/logout}" class="btn" method="post">
                                 <input type="submit" class="btn" value="Logout">
                             </form>
                         </div>
@@ -78,7 +78,7 @@
                     <h3>On-Going Courses</h3>
 
                     <div class="group-course">
-                        <div class="card">
+                        <div class="card" th:each="course: ${courses}" th:object="${courses}">
                             <div>
                                 <img src="../assets/bus1.jpg" alt="">
                             </div>
@@ -160,8 +160,8 @@
         </div>
     </footer>
 
-    <script src="../js/script.js"></script>
-    <script src="../js/user.js"></script>
+    <script th:src="@{js/script.js}"></script>
+    <script th:src="@{/js/user.js}"></script>
 </body>
 
 </html>

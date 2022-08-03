@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses | Zenith-Analysis</title>
+    <title>Admin | Zenith-Analysis</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
      crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
 </head>
 
 <body>
@@ -39,7 +39,7 @@
             </h1>
             <div class="user-wrapper">
                 <div>
-                    <h4>Admin 101</h4>
+                    <h4 th:text="${name}"></h4>
                     <small>Admin</small>
                 </div>
                 <div>
@@ -63,13 +63,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Bola Tief</td>
-                        <td>bola@hmail.com</td>
-                        <td>Approved
+                    <tr th:each="d_course,iterator: ${courses}">
+                        <td th:text="${iterator.count}"></td>
+                        <td th:text="${d_course.course}"></td>
+                        <td th:text="${d_course.price}"></td>
+                        <td th:text="${d_course.numberOfStudents}"></td>
+                        <td class="actions">
+                            <div>
+                                <a th:href="@{/admin/course/delete/{id} (id=${d_course.id})}" class="delete-btn action-btn">Delete</a>
+                            </div>
                         </td>
-                        <td></td>
                     </tr>
                     
                 </tbody>

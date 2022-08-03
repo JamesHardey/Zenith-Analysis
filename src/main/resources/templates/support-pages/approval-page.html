@@ -39,12 +39,10 @@
             <div class="message-content">
                 <h2>Message</h2>
                 <div>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto quo hic itaque voluptatibus quia
-                        impedit inventore fuga sint quos. Explicabo quia dolorem asperiores qui deserunt amet totam,
-                        accusamus aperiam cupiditate?</p>
+                    <p th:object="${message}" th:text="${message.message}"></p>
                 </div>
 
-                <a href="" class="btn">Contact Admin</a>
+                <a th:href="@{/contact-us}" class="btn">Contact Admin</a>
             </div>
         </div>
     </section>

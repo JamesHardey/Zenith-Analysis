@@ -17,7 +17,7 @@ public class ConstantPages {
     public static String USER_COURSE_PAGE = "user/course";
     public static String USER_CONTACT_PAGE = "user/contact";
     public static String USER_EVENT_PAGE = "user/event";
-    public static String USER_ASSIGNMENT_PAGE = "user/home#assignment";
+    public static String USER_ASSIGNMENT_PAGE = "user/home#assignments";
 
     /**Support Pages **/
     public static String APPROVAL_SUPPORT_PAGE = "support-pages/approval-page";
@@ -37,8 +37,9 @@ public class ConstantPages {
     public static String ADMIN_ADD_EVENT = "admin/add-event";
     public static String ADMIN_ADD_UPLOAD = "admin/add-upload";
     public static String ADMIN_ADD_COURSE = "admin/add-course";
-
-
+    public static String ADMIN_ADD_ADMIN = "admin/add-admin";
+    public static String ADMIN_LIST = "admin/admin-list";
+    public static String ADMIN_EDIT_USER = "admin/edit-user";
 
 
 }

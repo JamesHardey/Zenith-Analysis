@@ -11,8 +11,14 @@
     font-family: 'Poppins', sans-serif;
 }
 
+
+
 body{
     background-color: #e4e4e4;
+}
+
+textarea{
+    resize: none;
 }
 
 .side-bar{
@@ -248,7 +254,7 @@ td{
     gap: 10px;
 }
 
-.upload-form select, 
+.upload-form select,
 .upload-form textarea,
 .upload-form input{
     padding: 5px 5px;
@@ -267,4 +273,28 @@ td{
     padding: 10px;
 }
 
+.actions{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.allow-btn{
+    background-color: green;
+    color: #fff;
+    padding: 5px 10px;
+}
+
+.approved{
+    background-color: blue;
+}
+
+.delete-btn{
+    background-color: crimson;
+}
+
+.action-btn{
+    color: #fff;
+    padding: 5px 10px;
+}
 

@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.expression.spel.ast.Assign;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -34,11 +35,11 @@ public class ZenithanalysisApplication implements CommandLineRunner {
 	@Override
 	public void run(String...args){
 
-		Roles userRole = new Roles("USER");
-		Roles adminRole = new Roles("ADMIN");
+//		Roles userRole = new Roles("USER");
+//		Roles adminRole = new Roles("ADMIN");
 
-		userRole = rolesRepo.save(userRole);
-		adminRole = rolesRepo.save(adminRole);
+//		userRole = rolesRepo.save(userRole);
+//		adminRole = rolesRepo.save(adminRole);
 
 
 //		AppUser gabriel = new AppUser("gabriel@gmail.com","Gabriel Petr", "11111111",userRole);
