@@ -25,22 +25,20 @@ public class ZenithEmailSenderServices {
         message.setTo(toEmail);
         message.setText(body);
         message.setSubject(subject);
-
         mailSender.send(message);
-
     }
 
     public void sendVerificationEmail(String email, String siteURL)
             throws MessagingException, UnsupportedEncodingException {
         String toAddress = email;
-        String fromAddress = "Your email address";
-        String senderName = "Your company name";
+        String fromAddress = "zenithsanalysis@gmail.com";
+        String senderName = "Zenith-Analysis";
         String subject = "Please verify your registration";
         String content = "Dear [[name]],<br>"
-                + "Please click the link below to verify your registration:<br>"
+                + "Your verification code for the registration is:<br>"
                 + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
                 + "Thank you,<br>"
-                + "Your company name.";
+                + "Zenith Analysis.";
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -51,15 +49,10 @@ public class ZenithEmailSenderServices {
 
         content = content.replace("[[name]]", "James");
         String verifyURL = siteURL + "/verify?code=" + 12345;
-
         content = content.replace("[[URL]]", verifyURL);
-
         helper.setText(content, true);
-
         mailSender.send(message);
-
     }
-
 
 
 }

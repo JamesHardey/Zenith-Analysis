@@ -27,6 +27,7 @@ public class AdminController {
         model.addAttribute("courseNumber",adminServices.getListOfCourses().size());
         model.addAttribute("assignmentNumber",adminServices.getAllAssignment().size());
         model.addAttribute("usersNumber",adminServices.getAllUser().size());
+        model.addAttribute("eventNumber",adminServices.getEvents().size());
         model.addAttribute("courses",adminServices.getAllRegisteredCourses().stream().limit(10).collect(Collectors.toList()));
         model.addAttribute("appUsers",adminServices.getAllUser().stream().limit(10).collect(Collectors.toList()));
         model.addAttribute("name",adminServices.getDisplayName());

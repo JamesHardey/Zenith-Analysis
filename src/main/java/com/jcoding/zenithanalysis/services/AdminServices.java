@@ -390,7 +390,7 @@ public class AdminServices {
     public boolean confirmAdminPassword(String password){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomAppUser presentAdmin = (CustomAppUser)authentication.getPrincipal();
-        return presentAdmin.getPassword().equals(encoder.encode(password));
+        return encoder.matches(password,presentAdmin.getPassword());
     }
 
     public void addNewAdmin(NewAdminDto newAdminDto){

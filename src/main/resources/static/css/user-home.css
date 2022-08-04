@@ -167,13 +167,14 @@ img{
 
 .assignment h6{
     margin-top: 10px;
-    color: rgb(126, 126, 126);
+    color: rgb(148, 148, 148);
     font-size: 14px;
 }
 
 .assignment p{
     font-size: 13px;
     margin: 10px 0;
+    color: #030303;
 }
 
 .date{
@@ -185,12 +186,6 @@ img{
 .date h6{
     font-size: 11px;
 }
-
-.date span{
-
-}
-
-
 
 @media (max-width: 967px){
     .main-section-content{

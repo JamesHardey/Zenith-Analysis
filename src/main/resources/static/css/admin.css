@@ -11,8 +11,6 @@
     font-family: 'Poppins', sans-serif;
 }
 
-
-
 body{
     background-color: #e4e4e4;
 }
@@ -58,7 +56,7 @@ textarea{
 }
 
 .side-menu li:hover{
-    background-color: #e4e4e4;
+    background-color: #000080;
 }
 
 .side-menu a{
@@ -179,6 +177,7 @@ header.active{
 table{
     border-collapse: collapse;
     width: 100%;
+    overflow-x: scroll;
 }
 
 
@@ -298,3 +297,64 @@ td{
     padding: 5px 10px;
 }
 
+
+
+
+@media (max-width: 967px){
+
+    .bottom-card{
+        grid-template-columns: 1fr;
+    }
+
+    .side-bar{
+        padding-top: 120px;
+    }
+
+    header.active{
+        left:0;
+        width: 100%;
+    }
+
+    .main-content.active{
+        margin-left: auto;
+        transition: all 0.3s ease;
+    }
+}
+
+@media (max-width: 777px){
+    .cards{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 580px){
+
+    .btn-menu{
+        margin-right: auto;
+    }
+
+    .btn-menu,.main-content h1{
+        font-size: 1.6rem;
+    }
+
+    .user-wrapper{
+        gap: 5px;
+    }
+
+    .user-wrapper div h4{
+        font-size: 12px;
+    }
+
+    .user-wrapper div a{
+        font-size: 11px;
+    }
+
+
+}
+
+
+@media (max-width: 450px){
+    .cards{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
