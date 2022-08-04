@@ -37,6 +37,7 @@
     <section class="verify-section">
         <div class="body-width">
             <div class="verify-content">
+                <p style="text-align:center; color:gray; font-size:12px;">Please check your email for the verification code</p>
                 <form th:action="@{/verify/{id} (id=${param.id})}" th:object="${user}" method="post">
                     <p th:if="${param.invalid}" style="color:red; font-size:14px; margin-top:10px; margin-bottom:10px;">Invalid Verification code</p>
                     <input type="text" name="code" id="code" th:field="*{code}" maxlength="6" minlength="6" placeholder="01W3R5" required>

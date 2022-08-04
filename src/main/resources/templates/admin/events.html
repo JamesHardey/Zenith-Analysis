@@ -65,9 +65,9 @@
                 <tbody>
                 <tr th:each="event,iterator: ${events}">
                     <td th:text="${iterator.count}"></td>
-                    <td th:text="${event.title}">Event Title</td>
-                    <td th:text="${event.time}">Event Title</td>
-                    <td th:text="${event.date}">Event Date</td>
+                    <td th:text="${event.title}"></td>
+                    <td th:text="${event.date}"></td>
+                    <td th:text="${event.time}"></td>
                     <td class="actions">
                         <div>
                             <a th:href="@{/admin/event/delete/{id} (id=${event.id})}"

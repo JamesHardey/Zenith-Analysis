@@ -18,6 +18,7 @@ import javax.transaction.Transactional;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -301,7 +302,7 @@ public class AppUserServices{
                     event1.setMonth(date.getMonth().toString().substring(0,3));
                     event1.setDay(Integer.toString(date.getDayOfMonth()));
                     event1.setYear(Integer.toString(date.getYear()));
-                    event1.setTime(event.getTime());
+                    event1.setTime(LocalTime.parse(event.getTime()));
                     return event1;
                 })
                 .collect(Collectors.toList());

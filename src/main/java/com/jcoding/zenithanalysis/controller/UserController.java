@@ -36,6 +36,7 @@ public class UserController {
             List<Course> courses = appUserServices.getCourses(authentication);
             model.addAttribute("courses", courses);
             model.addAttribute("assignments", appUserServices.getAssignments(authentication));
+            model.addAttribute("isEmpty",(courses.size() < 1));
             return ConstantPages.USER_HOME_PAGE;
         }
         return "redirect:/home/approval";
@@ -67,15 +68,16 @@ public class UserController {
 
 
     @GetMapping("/events")
-    public String getUserEvents(){
+    public String getUserEvents(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
+        model.addAttribute("modelCards", appUserServices.getEventsCard());
         return ConstantPages.USER_EVENT_PAGE;
     }
 
 
     @GetMapping("/courses")
-    public String getCourses(){
+    public String getCourses(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
         return ConstantPages.USER_COURSE_PAGE;
