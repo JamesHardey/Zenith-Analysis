@@ -141,9 +141,21 @@ input::placeholder
 }
 
 @media (max-width: 690px){
+    .register .max-width{
+        padding: 2px;
+    }
+
+    main .register-content {
+        padding: 5px;
+    }
+
+    main .register-content h3 {
+        text-align: center;
+    }
     main{
         grid-template-columns: 1fr;
         gap: 20px;
+        padding: 8px;
     }
     
     main .register-content{
@@ -153,6 +165,8 @@ input::placeholder
 
     .register-signup-form{
         margin-top: 30px;
+        padding-right: 0;
+        padding-left: 0;
     }
     
 }

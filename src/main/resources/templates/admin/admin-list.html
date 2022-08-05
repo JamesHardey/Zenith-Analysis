@@ -38,14 +38,19 @@
                 Administrator
             </h1>
             <div class="user-wrapper">
-                <div>
-                    <h4 th:text="${name}"></h4>
-                    <small>Admin</small>
-                </div>
-                <div>
-                    <form th:action="@{/logout}" method="post">
-                        <input type="submit" class="btn" value="Logout">
-                    </form>
+                <div class="dp-container">
+                    <div class="dp-image">
+                        <h3 th:text="${adminDisplay.firstCharacter}">J</h3>
+                    </div>
+                    <div class="arrow-container"></div>
+                    <div class="profile">
+                        <h5 th:text="${adminDisplay.name}"></h5>
+                        <small th:text="${adminDisplay.email}"></small>
+                        <p>Admin</p>
+                        <form th:action="@{/logout}" method="post">
+                            <input type="submit" class="btn" value="Logout">
+                        </form>
+                    </div>
                 </div>
             </div>
 

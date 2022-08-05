@@ -1,6 +1,7 @@
 package com.jcoding.zenithanalysis.services;
 
 import com.jcoding.zenithanalysis.dto.*;
+import com.jcoding.zenithanalysis.dto.user.AdminDisplay;
 import com.jcoding.zenithanalysis.dto.user.NewAdminDto;
 import com.jcoding.zenithanalysis.entity.*;
 import com.jcoding.zenithanalysis.repository.*;
@@ -405,11 +406,17 @@ public class AdminServices {
         appUserRepo.save(appUser);
     }
 
-    public String getDisplayName(){
+    public AdminDisplay getDisplayDetails(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
-        String name = user.getUser().getName();
-        return name.substring(0,name.indexOf(" "));
+        AppUser adminUser = user.getUser();
+        String firstChar = Character.toString(adminUser.getName().charAt(0));
+
+        return new AdminDisplay(
+                firstChar,
+                adminUser.getName(),
+                adminUser.getEmail()
+        );
     }
 
 }

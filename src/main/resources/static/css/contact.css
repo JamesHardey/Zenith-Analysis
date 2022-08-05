@@ -210,4 +210,14 @@
         grid-template-columns: 1fr;
         padding: 20px;
     }
+    .contact-section .contact-section-content .text-side h1{
+            font-size: 42px;
+    }
+
+}
+
+@media (max-width: 400px){
+ .contact-section .contact-section-content .text-side h1{
+        font-size: 32px;
+    }
 }

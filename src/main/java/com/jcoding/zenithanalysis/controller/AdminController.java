@@ -30,7 +30,7 @@ public class AdminController {
         model.addAttribute("eventNumber",adminServices.getEvents().size());
         model.addAttribute("courses",adminServices.getAllRegisteredCourses().stream().limit(10).collect(Collectors.toList()));
         model.addAttribute("appUsers",adminServices.getAllUser().stream().limit(10).collect(Collectors.toList()));
-        model.addAttribute("name",adminServices.getDisplayName());
+        model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_HOME_PAGE;
     }
 
@@ -40,7 +40,7 @@ public class AdminController {
     @GetMapping("/courses")
     public String getCourses(Model model){
         model.addAttribute("courses",adminServices.getAllRegisteredCourses());
-        model.addAttribute("name",adminServices.getDisplayName());
+        model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_COURSES_PAGE;
     }
 
@@ -48,7 +48,7 @@ public class AdminController {
     public String addCourse(Model model){
         CoursesDto coursesDto = new CoursesDto();
         model.addAttribute("course",coursesDto);
-        model.addAttribute("name",adminServices.getDisplayName());
+        model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_ADD_COURSE;
     }
 
@@ -75,7 +75,7 @@ public class AdminController {
     @GetMapping("/users")
     public String getUsers(Model model){
         model.addAttribute("users",adminServices.getAllUser());
-        model.addAttribute("name",adminServices.getDisplayName());
+        model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_USERS_PAGE;
     }
 
@@ -97,7 +97,7 @@ public class AdminController {
         List<AllowedCourses> courses = adminServices.getAllCourseAndStatusByUserId(userId);
         model.addAttribute("courses", courses);
         model.addAttribute("id",userId);
-        model.addAttribute("name",adminServices.getDisplayName());
+        model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_EDIT_USER;
     }
 
@@ -121,7 +121,7 @@ public class AdminController {
     @GetMapping("/assignments")
     public String getAssignments(Model model){
         model.addAttribute("assignments", adminServices.getAllAssignment());
-        model.addAttribute("name",adminServices.getDisplayName());
+        model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_ASSIGNMENT_PAGE;
     }
 
@@ -130,7 +130,7 @@ public class AdminController {
         AssignDto assignDto = new AssignDto();
         model.addAttribute("assign",assignDto);
         model.addAttribute("courses", adminServices.getListOfCourses());
-        model.addAttribute("name",adminServices.getDisplayName());
+        model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_ADD_ASSIGNMENT;
     }
 
@@ -151,7 +151,7 @@ public class AdminController {
     @GetMapping("/events")
     public String getEvents(Model model){
         model.addAttribute("events", adminServices.getEvents());
-        model.addAttribute("name",adminServices.getDisplayName());
+        model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_EVENT_PAGE;
     }
 
@@ -159,7 +159,7 @@ public class AdminController {
     public String addEvent(Model model){
         EventsDto event = new EventsDto();
         model.addAttribute("event",event);
-        model.addAttribute("name",adminServices.getDisplayName());
+        model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_ADD_EVENT;
     }
 
@@ -185,7 +185,7 @@ public class AdminController {
     @GetMapping("/uploads")
     public String getUploads(Model model){
         model.addAttribute("uploads", adminServices.getUploads());
-        model.addAttribute("name",adminServices.getDisplayName());
+        model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_UPLOAD_PAGE;
     }
 
@@ -194,7 +194,7 @@ public class AdminController {
         UploadDto uploadDto = new UploadDto();
         model.addAttribute("uploadDto",uploadDto);
         model.addAttribute("courses",adminServices.getListOfCourses());
-        model.addAttribute("name",adminServices.getDisplayName());
+        model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_ADD_UPLOAD;
     }
 
@@ -218,7 +218,7 @@ public class AdminController {
     public String createNewAdmin(Model model){
         NewAdminDto adminDto = new NewAdminDto();
         model.addAttribute("adminDto", adminDto);
-        model.addAttribute("name",adminServices.getDisplayName());
+        model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_ADD_ADMIN;
     }
 

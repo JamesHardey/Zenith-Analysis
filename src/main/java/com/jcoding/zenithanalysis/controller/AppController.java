@@ -155,7 +155,6 @@ public class AppController {
     }
 
 
-
     @PostMapping("/verify/{id}")
     public String doVerification(
             @ModelAttribute("user") VerifyUser appUser,
@@ -168,14 +167,11 @@ public class AppController {
     }
 
 
-
     @GetMapping("/resend/{id}")
     public String verification(@PathVariable("id") Long id){
         appUserServices.resendVerification(id);
         return "redirect:/verify?id="+id;
     }
-
-
 
 
     @GetMapping("/forget-pass")
@@ -217,7 +213,7 @@ public class AppController {
         if(appUserServices.verifyPassword(passwordChange,id))
             return "redirect:/login";
         else
-            return "redirect:/forget-pass";
+            return "redirect:/forget-pass?invalid_verification";
     }
 
 
