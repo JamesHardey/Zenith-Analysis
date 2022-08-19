@@ -31,8 +31,8 @@ a{
 
 .list-item {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 50px;
+    grid-template-columns: repeat(1,1fr);
+    gap: 30px;
 }
 
 .all-courses .list-item li{
@@ -46,16 +46,21 @@ a{
     display: flex;
     position: relative;
     box-shadow: 4px 5px 5px 1px #00000055;
+    width: 100%;
+}
+.course-card .img-cont{
+    width: 40%;
 }
 
 .course-card img{
-    width: 250px;
+    width: 100%;
     object-fit: cover;
-    height: 200px;
+    object-position: top;
+    height: fit-content;
 }
 
 .course-card h5{
-    font-size: 16px;
+    font-size: 22px;
     font-weight: 600;
 }
 
@@ -66,17 +71,22 @@ a{
 }
 
 .course-right-side{
-    padding: 10px 0 0 10px ;
+    flex: 60%;
+    padding: 10px 5px 5px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .course-card-bottom{
-    position: absolute;
     display: flex;
-    gap: 100px;
+    gap: 10px;
     align-items: center;
+    justify-content: space-between;
     left: 250px;
     bottom: 10px;
     margin-top: 20px;
+    margin-bottom: 10px;
     padding: 0 10px 0 5px;
 }
 
@@ -106,33 +116,33 @@ a{
     .course-card h5{
         font-size: 15px;
     }
-    
+
     .course-card p{
         font-size: 11px;
     }
-    
+
     .course-right-side{
         padding: 5px 0 0 5px ;
     }
 }
 
 @media (max-width: 1084px){
-    .list-item {
+    /* .list-item {
         grid-template-columns: 1fr;
         width: 80%;
         min-width: 600px;
         margin: 0 auto;
-    }
+    } */
 
     .course-card h5{
         font-size: 18px;
         font-weight: 600;
     }
-    
+
     .course-card p{
-        font-size: 14px;
+        font-size: 12px;
     }
-    
+
     .course-right-side{
         padding: 20px 10px 0 10px ;
     }
@@ -148,12 +158,12 @@ a{
 
 @media (max-width: 690px){
 
-    .list-item {
+    /* .list-item {
         grid-template-columns: 1fr;
         width: 90%;
         min-width: 500px;
         margin: 0 auto;
-    }
+    } */
 
     .course-card h5{
         font-size: 16px;
@@ -231,5 +241,7 @@ a{
         grid-template-columns: 1fr;
         min-height: fit-content;
     }
+
+
 }
 

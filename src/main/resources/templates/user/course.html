@@ -49,161 +49,182 @@
                 <h2>Courses</h2>
                 <div class="all-courses">
                     <ul class="list-item">
-                        <li>
-                            <a th:href="@{/home/contact-us}">
-                                <div class="course-card">
-                                    <img src="../assets/bus1.jpg" alt="">
-                                    <div class="course-right-side">
-                                        <h5>Business Systems Analysis</h5>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis
-                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>
-                                        <div class="rating">
-
-                                        </div>
-                                        <div class="course-card-bottom">
-                                            <div class="price-tag">Price: $110</div>
-                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>
-                                        </div>
-                                    </div>
+                        <li th:each="course: ${courses}">
+                            <div class="course-card">
+                                <div class="img-cont">
+                                    <img th:src="@{${course.imageUrl}}" alt="">
                                 </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a th:href="@{/home/contact-us}">
-                                <div class="course-card">
-                                    <img src="../assets/bus2.jpg" alt="">
-                                    <div class="course-right-side">
-                                        <h5>Business Process Modeling</h5>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis
-                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>
 
-            
-                                        <div class="course-card-bottom">
-                                            <div class="price-tag">Price: $110</div>
-                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>
-                                        </div>
-
+                                <div class="course-right-side">
+                                    <div>
+                                        <h5 th:text="${course.title}"></h5>
+                                        <p th:text="${course.details}"></p>
                                     </div>
 
-                                </div>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a th:href="@{/home/contact-us}">
-                                <div class="course-card">
-                                    <img src="../assets/bus1.jpg" alt="">
-                                    <div class="course-right-side">
-                                        <h5>Business Systems Analysis</h5>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis
-                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>
-                                        <div class="rating">
-
-                                        </div>
-                                        <div class="course-card-bottom">
-                                            <div class="price-tag">Price: $110</div>
-                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>
-                                        </div>
+                                    <div class="course-card-bottom">
+                                        <div class="price-tag" th:text="'Price: '+${course.price}"></div>
+                                        <a th:href="@{/contact-us}" class="enroll-btn">Click to Enroll</a>
                                     </div>
                                 </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a th:href="@{/home/contact-us}">
-                                <div class="course-card">
-                                    <img src="../assets/bus2.jpg" alt="">
-                                    <div class="course-right-side">
-                                        <h5>Business Process Modeling</h5>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis
-                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>
-
-            
-                                        <div class="course-card-bottom">
-                                            <div class="price-tag">Price: $110</div>
-                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </a>
+                            </div>
                         </li>
 
-                        <li>
-                            <a th:href="@{/home/contact-us}">
-                                <div class="course-card">
-                                    <img src="../assets/bus1.jpg" alt="">
-                                    <div class="course-right-side">
-                                        <h5>Business Systems Analysis</h5>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis
-                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>
-                                        <div class="rating">
 
-                                        </div>
-                                        <div class="course-card-bottom">
-                                            <div class="price-tag">Price: $110</div>
-                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a th:href="@{/home/contact-us}">
-                                <div class="course-card">
-                                    <img src="../assets/bus2.jpg" alt="">
-                                    <div class="course-right-side">
-                                        <h5>Business Process Modeling</h5>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis
-                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>
+<!--                        <li>-->
+<!--                            <a th:href="@{/home/contact-us}">-->
+<!--                                <div class="course-card">-->
+<!--                                    <img src="../assets/bus1.jpg" alt="">-->
+<!--                                    <div class="course-right-side">-->
+<!--                                        <h5>Business Systems Analysis</h5>-->
+<!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis-->
+<!--                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>-->
+<!--                                        <div class="rating">-->
 
-            
-                                        <div class="course-card-bottom">
-                                            <div class="price-tag">Price: $110</div>
-                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>
-                                        </div>
+<!--                                        </div>-->
+<!--                                        <div class="course-card-bottom">-->
+<!--                                            <div class="price-tag">Price: $110</div>-->
+<!--                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a th:href="@{/home/contact-us}">-->
+<!--                                <div class="course-card">-->
+<!--                                    <img src="../assets/bus2.jpg" alt="">-->
+<!--                                    <div class="course-right-side">-->
+<!--                                        <h5>Business Process Modeling</h5>-->
+<!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis-->
+<!--                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>-->
 
-                                    </div>
+<!--            -->
+<!--                                        <div class="course-card-bottom">-->
+<!--                                            <div class="price-tag">Price: $110</div>-->
+<!--                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>-->
+<!--                                        </div>-->
 
-                                </div>
-                            </a>
-                        </li>
+<!--                                    </div>-->
 
-                        <li>
-                            <a th:href="@{/home/contact-us}">
-                                <div class="course-card">
-                                    <img src="../assets/bus1.jpg" alt="">
-                                    <div class="course-right-side">
-                                        <h5>Business Systems Analysis</h5>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis
-                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>
-                                        <div class="rating">
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </li>-->
 
-                                        </div>
-                                        <div class="course-card-bottom">
-                                            <div class="price-tag">Price: $110</div>
-                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a th:href="@{/home/contact-us}">
-                                <div class="course-card">
-                                    <img src="../assets/bus2.jpg" alt="">
-                                    <div class="course-right-side">
-                                        <h5>Business Process Modeling</h5>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis
-                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>
-                                        <div class="course-card-bottom">
-                                            <div class="price-tag">Price: $110</div>
-                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+<!--                        <li>-->
+<!--                            <a th:href="@{/home/contact-us}">-->
+<!--                                <div class="course-card">-->
+<!--                                    <img src="../assets/bus1.jpg" alt="">-->
+<!--                                    <div class="course-right-side">-->
+<!--                                        <h5>Business Systems Analysis</h5>-->
+<!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis-->
+<!--                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>-->
+<!--                                        <div class="rating">-->
+
+<!--                                        </div>-->
+<!--                                        <div class="course-card-bottom">-->
+<!--                                            <div class="price-tag">Price: $110</div>-->
+<!--                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a th:href="@{/home/contact-us}">-->
+<!--                                <div class="course-card">-->
+<!--                                    <img src="../assets/bus2.jpg" alt="">-->
+<!--                                    <div class="course-right-side">-->
+<!--                                        <h5>Business Process Modeling</h5>-->
+<!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis-->
+<!--                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>-->
+
+<!--            -->
+<!--                                        <div class="course-card-bottom">-->
+<!--                                            <div class="price-tag">Price: $110</div>-->
+<!--                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>-->
+<!--                                        </div>-->
+
+<!--                                    </div>-->
+
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </li>-->
+
+<!--                        <li>-->
+<!--                            <a th:href="@{/home/contact-us}">-->
+<!--                                <div class="course-card">-->
+<!--                                    <img src="../assets/bus1.jpg" alt="">-->
+<!--                                    <div class="course-right-side">-->
+<!--                                        <h5>Business Systems Analysis</h5>-->
+<!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis-->
+<!--                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>-->
+<!--                                        <div class="rating">-->
+
+<!--                                        </div>-->
+<!--                                        <div class="course-card-bottom">-->
+<!--                                            <div class="price-tag">Price: $110</div>-->
+<!--                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a th:href="@{/home/contact-us}">-->
+<!--                                <div class="course-card">-->
+<!--                                    <img src="../assets/bus2.jpg" alt="">-->
+<!--                                    <div class="course-right-side">-->
+<!--                                        <h5>Business Process Modeling</h5>-->
+<!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis-->
+<!--                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>-->
+
+<!--            -->
+<!--                                        <div class="course-card-bottom">-->
+<!--                                            <div class="price-tag">Price: $110</div>-->
+<!--                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>-->
+<!--                                        </div>-->
+
+<!--                                    </div>-->
+
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </li>-->
+
+<!--                        <li>-->
+<!--                            <a th:href="@{/home/contact-us}">-->
+<!--                                <div class="course-card">-->
+<!--                                    <img src="../assets/bus1.jpg" alt="">-->
+<!--                                    <div class="course-right-side">-->
+<!--                                        <h5>Business Systems Analysis</h5>-->
+<!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis-->
+<!--                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>-->
+<!--                                        <div class="rating">-->
+
+<!--                                        </div>-->
+<!--                                        <div class="course-card-bottom">-->
+<!--                                            <div class="price-tag">Price: $110</div>-->
+<!--                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a th:href="@{/home/contact-us}">-->
+<!--                                <div class="course-card">-->
+<!--                                    <img src="../assets/bus2.jpg" alt="">-->
+<!--                                    <div class="course-right-side">-->
+<!--                                        <h5>Business Process Modeling</h5>-->
+<!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis-->
+<!--                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>-->
+<!--                                        <div class="course-card-bottom">-->
+<!--                                            <div class="price-tag">Price: $110</div>-->
+<!--                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </li>-->
 
                     </ul>
                 </div>

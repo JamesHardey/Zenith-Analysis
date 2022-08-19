@@ -1,4 +1,4 @@
-package com.jcoding.zenithanalysis.dto;
+package com.jcoding.zenithanalysis.dto.course;
 
 import com.jcoding.zenithanalysis.entity.Course;
 import javax.persistence.Entity;

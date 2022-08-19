@@ -1,10 +1,9 @@
 package com.jcoding.zenithanalysis.controller;
 
 
-import com.jcoding.zenithanalysis.dto.*;
+import com.jcoding.zenithanalysis.dto.contact.ContactUsDto;
+import com.jcoding.zenithanalysis.dto.user.*;
 import com.jcoding.zenithanalysis.entity.AppUser;
-import com.jcoding.zenithanalysis.entity.Assignment;
-import com.jcoding.zenithanalysis.entity.Course;
 import com.jcoding.zenithanalysis.services.AdminServices;
 import com.jcoding.zenithanalysis.services.AppUserServices;
 import com.jcoding.zenithanalysis.utils.ConstantPages;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Controller
@@ -63,7 +61,7 @@ public class AppController {
             @ModelAttribute("contactDetail") ContactUsDto contactUsDto){
         contactUsDto.setDateSent(LocalDateTime.now().toString());
         appUserServices.contactAdmin(contactUsDto);
-        return "redirect:/contact-us";
+        return "redirect:/contact-us?sent";
     }
 
 
@@ -78,30 +76,17 @@ public class AppController {
         return ConstantPages.EVENT_PAGE;
     }
 
-    @GetMapping("/sendMessage")
-    public String sendMessade(){
-        Course course = new Course("English","120","Business course","link");
-
-        Assignment assignment = new Assignment(
-                "My assignment","This is what you should do",
-                course, LocalDate.now().toString()
-        );
-        adminServices.testAssignment(assignment);
-        return "redirect:/";
-    }
-
 
 
 
     @GetMapping("/courses")
-    public String getCourses(Authentication authentication){
+    public String getCourses(Authentication authentication, Model model){
         if(authentication != null && authentication.isAuthenticated()){
             return "redirect:/home/courses";
         }
+        model.addAttribute("courses", appUserServices.getAllCourses());
         return ConstantPages.COURSE_PAGE;
     }
-
-
 
 
     @GetMapping("/login")
@@ -188,7 +173,7 @@ public class AppController {
     ){
         if(email == null || email.getEmail().isEmpty()) return "redirect:/forget-pass";
         AppUser appUser = appUserServices.getUserByEmail(email.getEmail());
-        if(appUser == null) return "redirect:/forget-pass";
+        if(appUser == null) return "redirect:/forget-pass?invalid";
         Long id = appUser.getId();
         appUserServices.sendRecoveryPassword(email.getEmail());
         return "redirect:/change-pass?id="+id;

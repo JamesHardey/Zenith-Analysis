@@ -73,6 +73,7 @@
                         data-form_unique_num="0" data-form_unique_id="">
                         <div class="et-pb-contact-message"></div>
                         <div class="et_pb_contact">
+                            <p th:if="${param.sent}" style="color:green; text-align:center;">Your Message has been delivered successfully</p>
                             <form class="et_pb_contact_form clearfix" method="post"
                                 th:action="@{/contact-us}" th:object="${contactDetail}">
                                 <p class=""

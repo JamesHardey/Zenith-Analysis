@@ -1,4 +1,4 @@
-package com.jcoding.zenithanalysis.dto;
+package com.jcoding.zenithanalysis.dto.course;
 
 public class CoursesDto {
 
@@ -7,6 +7,7 @@ public class CoursesDto {
     private String price;
     private String details;
     private Integer participants;
+    private String imageUrl;
 
     public CoursesDto() {
     }
@@ -24,6 +25,14 @@ public class CoursesDto {
         this.price = price;
         this.details = details;
         this.participants = participants;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Long getId() {

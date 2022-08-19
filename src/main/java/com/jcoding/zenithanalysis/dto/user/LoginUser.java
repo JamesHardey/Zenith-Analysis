@@ -1,4 +1,4 @@
-package com.jcoding.zenithanalysis.dto;
+package com.jcoding.zenithanalysis.dto.user;
 
 public class LoginUser {
 

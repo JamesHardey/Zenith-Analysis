@@ -1,4 +1,4 @@
-package com.jcoding.zenithanalysis.dto;
+package com.jcoding.zenithanalysis.dto.user;
 
 import com.jcoding.zenithanalysis.entity.AppUser;
 import org.springframework.security.core.GrantedAuthority;

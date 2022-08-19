@@ -1,6 +1,9 @@
-package com.jcoding.zenithanalysis.dto;
+package com.jcoding.zenithanalysis.dto.event;
 
 import com.jcoding.zenithanalysis.entity.Course;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 public class EventsDto {
 
@@ -9,6 +12,7 @@ public class EventsDto {
     private String title;
     private String details;
     private String date;
+//    @Temporal(TemporalType.TIME)
     private String time;
     private String course;
 

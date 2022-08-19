@@ -64,7 +64,7 @@
                 <select name="course" id="course" th:each="course: ${courses}" th:field="*{course}">
                     <option th:value="${course.courseTitle}" th:text="${course.courseTitle}"></option>
                 </select>
-                <textarea name="" id="" cols="30" rows="10" th:field="*{messageh}" placeholder="Message"></textarea>
+                <textarea name="" id="" cols="30" rows="10" th:field="*{message}" placeholder="Message"></textarea>
                 <input type="submit" value="Send">
             </form>
             <div>

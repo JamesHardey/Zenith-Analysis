@@ -55,7 +55,7 @@
                             <img src="../assets/cv.PNG" alt="">
                         </div>
                         <div class="btn-container">
-                            <a href="../assets/Basic CV Example.pdf" class="download-btn" target="_blank">Get pdf</a>
+                            <a href="../assets/resume/resume.pdf" class="download-btn" target="_blank">Get pdf</a>
                         </div>
                     </div>
                     <div class="cover-letter-sample">
@@ -65,7 +65,7 @@
                         </div>
 
                         <div class="btn-container">
-                            <a href="../assets/Basic CV Example.pdf" class="download-btn" target="_blank">Get pdf</a>
+                            <a href="../assets/cover_letter/cover-letter.pdf" class="download-btn" target="_blank">Get pdf</a>
                         </div>
                     </div>
 
@@ -74,6 +74,9 @@
             </aside>
 
             <section class="main-content">
+
+                <div id="name-title"><h1>Welcome back <span style="color: #000080;" th:text="${name}"></span>,</h1>
+                </div>
                 <section class="on-going-courses">
                     <h3>On-Going Courses</h3>
 
@@ -84,24 +87,21 @@
                             </div>
 
                             <div class="card-details">
-                                <h4 th:text="${course.courseTitle}">Business Administration</h4>
-                                <p th:text="${course.courseDetails}">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam consequatur error
-                                    dolores saepe, recusandae eos voluptatem hic reiciendis quae ea perspiciatis, cumque
-                                    ipsam dolorum blanditiis vitae distinctio debitis quas eius eum officia! Voluptates
-                                    nesciunt temporibus ipsum autem voluptate velit eos vitae ea. Temporibus eligendi
-                                    accusantium quisquam ab magnam tempora voluptate?</p>
+                                <h4 th:text="${course.courseTitle}"></h4>
+                                <p th:text="${course.courseDetails}"></p>
                             </div>
                         </div>
                     </div>
 
 
-                    <a th:href="@{/home/courses}" class="btn">View other courses</a>
+                    <a th:href="@{/home/courses}" class="btn">Apply for
+                        other courses</a>
                 </section>
 
                 <section class="assignment-section" id="assignments">
                     <h3>Assignments</h3>
                     <div th:if="${isEmpty}">
-                        <p style="font-size:16px">No Assignment at this present time</p>
+                        <p style="font-size:14px; margin-top:16px;">No Assignment at this present time</p>
                     </div>
                     <div th:each="assignment: ${assignments}" class="assignment">
                         <h4 class="title" th:text="${assignment.title}"></h4>

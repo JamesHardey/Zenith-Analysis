@@ -1,10 +1,11 @@
 package com.jcoding.zenithanalysis.controller;
 
-import com.jcoding.zenithanalysis.dto.ContactUsDto;
-import com.jcoding.zenithanalysis.dto.CustomAppUser;
+import com.jcoding.zenithanalysis.dto.contact.ContactUsDto;
+import com.jcoding.zenithanalysis.dto.user.CustomAppUser;
 import com.jcoding.zenithanalysis.dto.Message;
 import com.jcoding.zenithanalysis.dto.UserAssignmentDto;
 import com.jcoding.zenithanalysis.entity.AppUser;
+import com.jcoding.zenithanalysis.entity.Assignment;
 import com.jcoding.zenithanalysis.entity.Course;
 import com.jcoding.zenithanalysis.services.AppUserServices;
 import com.jcoding.zenithanalysis.utils.ConstantPages;
@@ -34,9 +35,13 @@ public class UserController {
         CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
         if(checkIfApproved(user.getUser())) {
             List<Course> courses = appUserServices.getCourses(authentication);
+            String fullName = user.getUser().getName();
+            String firstName = fullName.substring(0, fullName.indexOf(" "));
+            List<UserAssignmentDto> assignment = appUserServices.getAssignments(authentication);
+            model.addAttribute("name", fullName);
             model.addAttribute("courses", courses);
-            model.addAttribute("assignments", appUserServices.getAssignments(authentication));
-            model.addAttribute("isEmpty",(courses.size() < 1));
+            model.addAttribute("assignments", assignment);
+            model.addAttribute("isEmpty",(assignment.size() < 1));
             return ConstantPages.USER_HOME_PAGE;
         }
         return "redirect:/home/approval";
@@ -99,7 +104,7 @@ public class UserController {
             @ModelAttribute("contactDetail") ContactUsDto contactUsDto){
         contactUsDto.setDateSent(LocalDateTime.now().toString());
         appUserServices.contactAdmin(contactUsDto);
-        return "redirect:/home/contact-us";
+        return "redirect:/home/contact-us?sent";
     }
 
     private boolean checkIfApproved(AppUser appUser){

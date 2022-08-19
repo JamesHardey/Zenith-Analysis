@@ -1,7 +1,13 @@
 package com.jcoding.zenithanalysis.services;
 
 import com.jcoding.zenithanalysis.dto.*;
+import com.jcoding.zenithanalysis.dto.contact.ContactUsDto;
+import com.jcoding.zenithanalysis.dto.course.CoursesDto;
 import com.jcoding.zenithanalysis.dto.event.EventCard;
+import com.jcoding.zenithanalysis.dto.user.CustomAppUser;
+import com.jcoding.zenithanalysis.dto.user.PasswordChange;
+import com.jcoding.zenithanalysis.dto.user.RegisterUser;
+import com.jcoding.zenithanalysis.dto.user.VerifyUser;
 import com.jcoding.zenithanalysis.entity.AppUser;
 import com.jcoding.zenithanalysis.entity.Assignment;
 import com.jcoding.zenithanalysis.entity.Course;
@@ -20,7 +26,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -168,6 +173,7 @@ public class AppUserServices{
     }
 
     public AppUser getUserByEmail(String email){
+        if(appUserRepo.findByEmail(email.toLowerCase()).isEmpty()) return null;
         return appUserRepo.findByEmail(email.toLowerCase()).get();
     }
 
@@ -175,19 +181,40 @@ public class AppUserServices{
         return appUserRepo.findById(id).get();
     }
 
+    /* This method return all the courses available or uploaded by the admin*/
+    public List<CoursesDto> getAllCourses(){
+        List<CoursesDto> courses = new ArrayList<>();
+        courseRepository.findAll()
+                .stream()
+                .forEach((course) -> {
+                    CoursesDto courseDto = new CoursesDto(course.getId(),
+                            course.getCourseTitle(),
+                            course.getCoursePrice(),
+                            course.getCourseDetails()
+                            );
+                    courseDto.setImageUrl(course.getImageUrl());
+                    courses.add(courseDto);
+                });
 
+        return courses;
+    }
+
+
+    /* Verify the user using the verification code */
     public boolean verify(VerifyUser appUser){
         Optional<AppUser> user = appUserRepo.findById(appUser.getId());
         if(user.isEmpty()) return false;
         if(user.get().getVerification().equalsIgnoreCase(appUser.getCode())){
             user.get().setVerification(null);
             user.get().setEnabled(true);
+            sendWelcomeMessage(user.get().getEmail());
             return true;
         }
         return false;
     }
 
 
+    /* Get registered courses by user */
     public List<Course> getCourses(Authentication authentication){
         CustomAppUser appUser = (CustomAppUser) authentication.getPrincipal();
         List<RegisterCourse> registerCourseList=registerCourseRepo.findAllByUser(appUser.getUser());
@@ -201,7 +228,6 @@ public class AppUserServices{
 
         return courses;
     }
-
 
 
     public List<UserAssignmentDto> getAssignments(Authentication authentication){
@@ -264,6 +290,7 @@ public class AppUserServices{
             user.setEnabled(true);
             user.setVerification(null);
             appUserRepo.save(user);
+
             return true;
         }
         return false;
@@ -302,10 +329,23 @@ public class AppUserServices{
                     event1.setMonth(date.getMonth().toString().substring(0,3));
                     event1.setDay(Integer.toString(date.getDayOfMonth()));
                     event1.setYear(Integer.toString(date.getYear()));
-                    event1.setTime(LocalTime.parse(event.getTime()));
+                    event1.setTime(event.getTime());
                     return event1;
                 })
                 .collect(Collectors.toList());
+    }
+
+    private void sendWelcomeMessage(String email){
+
+        String subject = "Welcome to Zenith-Analysis";
+
+        String body = "You have successfully register for Zenith Anaylsis Business Program";
+
+        try {
+            zenithEmailSenderServices.sendEmail(subject,body,email);
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
 }

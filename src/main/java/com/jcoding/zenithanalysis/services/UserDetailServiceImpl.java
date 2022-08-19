@@ -1,6 +1,6 @@
 package com.jcoding.zenithanalysis.services;
 
-import com.jcoding.zenithanalysis.dto.CustomAppUser;
+import com.jcoding.zenithanalysis.dto.user.CustomAppUser;
 import com.jcoding.zenithanalysis.entity.AppUser;
 import com.jcoding.zenithanalysis.repository.AppUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;

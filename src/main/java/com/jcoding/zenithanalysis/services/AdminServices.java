@@ -1,7 +1,13 @@
 package com.jcoding.zenithanalysis.services;
 
 import com.jcoding.zenithanalysis.dto.*;
+import com.jcoding.zenithanalysis.dto.assignment.AssignDto;
+import com.jcoding.zenithanalysis.dto.course.AllowedCourses;
+import com.jcoding.zenithanalysis.dto.course.CoursesDto;
+import com.jcoding.zenithanalysis.dto.course.RegisteredCourse;
+import com.jcoding.zenithanalysis.dto.event.EventsDto;
 import com.jcoding.zenithanalysis.dto.user.AdminDisplay;
+import com.jcoding.zenithanalysis.dto.user.CustomAppUser;
 import com.jcoding.zenithanalysis.dto.user.NewAdminDto;
 import com.jcoding.zenithanalysis.entity.*;
 import com.jcoding.zenithanalysis.repository.*;
@@ -11,13 +17,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
-import javax.swing.text.DateFormatter;
 import javax.transaction.Transactional;
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -101,7 +105,14 @@ public class AdminServices {
     }
 
     public void addCourse(CoursesDto courseDto){
-        Course course = new Course(courseDto.getTitle(),courseDto.getPrice(),courseDto.getDetails(),"");
+
+        Course course = new Course(
+                courseDto.getTitle(),
+                courseDto.getPrice(),
+                courseDto.getDetails(),
+                courseDto.getImageUrl()
+        );
+
         courseRepository.save(course);
     }
 
@@ -224,7 +235,8 @@ public class AdminServices {
         event.setTitle(eventsDto.getTitle());
         event.setDetails(eventsDto.getDetails());
         event.setDate(eventsDto.getDate());
-        event.setTime(eventsDto.getTime());
+        String time = formatTime(eventsDto.getTime());
+        event.setTime((time!=null) ? time : eventsDto.getTime());
         eventsRepo.save(event);
         return true;
     }
@@ -406,6 +418,10 @@ public class AdminServices {
         appUserRepo.save(appUser);
     }
 
+    public void addResume(ResumeUploadDto resumeUploadDto){
+
+    }
+
     public AdminDisplay getDisplayDetails(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
@@ -417,6 +433,18 @@ public class AdminServices {
                 adminUser.getName(),
                 adminUser.getEmail()
         );
+    }
+
+
+    private String formatTime(String time){
+        SimpleDateFormat format_24 = new SimpleDateFormat("HH:mm");
+        try {
+            Date tim = format_24.parse(time);
+            time = new SimpleDateFormat("hh:mm aa").format(tim);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return time;
     }
 
 }

@@ -19,15 +19,21 @@
                 <div class="nav-right">
                     <div>
                         <ul>
-                            <li><a th:href="@{/}">Home</a></li>
-                            <li><a th:href="@{/about}">About Us</a></li>
-                            <li><a th:href="@{/contact-us}">Contact</a></li>
-                            <li><a th:href="@{/courses}">Course Portfolio</a></li>
-                            <li><a th:href="@{/events}">Event</a></li>
+                            <li><a th:href="@{/home}">Home</a></li>
+                            <li><a th:href="@{/home/courses}">Course Portfolio</a></li>
+                            <li><a th:href="@{/home/assignment}">Assignments</a></li>
+                            <li><a th:href="@{/home/contact-us}">Contact</a></li>
+                            <li><a th:href="@{/home/events}">Event</a></li>
                         </ul>
+                        <div class="login-register">
+                            <form th:action="@{/logout}" class="btn" method="post">
+                                <input type="submit" class="btn" value="Logout">
+                            </form>
+                        </div>
                         <div class="menu-btn">
                             <i class="fas fa-bars btn-menu open-menu"></i>
                         </div>
+
                     </div>
                 </div>
             </nav>

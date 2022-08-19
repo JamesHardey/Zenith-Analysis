@@ -40,6 +40,7 @@ public class ConstantPages {
     public static String ADMIN_ADD_ADMIN = "admin/add-admin";
     public static String ADMIN_LIST = "admin/admin-list";
     public static String ADMIN_EDIT_USER = "admin/edit-user";
+    public static String ADMIN_UPLOAD_RESUME = "admin/add-resume-cl";
 
 
 }

@@ -2,22 +2,36 @@ package com.jcoding.zenithanalysis.controller;
 
 
 import com.jcoding.zenithanalysis.dto.*;
+import com.jcoding.zenithanalysis.dto.assignment.AssignDto;
+import com.jcoding.zenithanalysis.dto.course.AllowedCourses;
+import com.jcoding.zenithanalysis.dto.course.CoursesDto;
+import com.jcoding.zenithanalysis.dto.event.EventsDto;
 import com.jcoding.zenithanalysis.dto.user.NewAdminDto;
-import com.jcoding.zenithanalysis.entity.AppUser;
-import com.jcoding.zenithanalysis.entity.Course;
 import com.jcoding.zenithanalysis.services.AdminServices;
 import com.jcoding.zenithanalysis.utils.ConstantPages;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
+    @Value("${resume_path}")
+    private String resumePath;
+
+    @Value("${cover_letter_path}")
+    private String coverLetterPath;
 
     @Autowired
     private AdminServices adminServices;
@@ -34,9 +48,8 @@ public class AdminController {
         return ConstantPages.ADMIN_HOME_PAGE;
     }
 
-
-
     /* Course Mapping*/
+
     @GetMapping("/courses")
     public String getCourses(Model model){
         model.addAttribute("courses",adminServices.getAllRegisteredCourses());
@@ -54,7 +67,33 @@ public class AdminController {
 
     @PostMapping("/add-course")
     public String saveCourse(
-            @ModelAttribute("course") CoursesDto coursesDto){
+            @ModelAttribute("course") CoursesDto coursesDto,
+            @RequestParam("file") MultipartFile file
+            ){
+
+        coursesDto.setPrice("$"+coursesDto.getPrice());
+        Path folderPath = Paths.get("src/main/resources/static/assets/course/"+coursesDto.getTitle());
+        if(!Files.exists(folderPath)){
+            try {
+                Files.createDirectory(folderPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "redirect:/admin/add-course?failed";
+            }
+        }
+
+        String path1 = folderPath.toString();
+        System.out.println(path1);
+        Path path = Paths.get(path1, file.getOriginalFilename());
+        try {
+            Files.write(path, file.getBytes());
+            String currentPath = path.toString();
+            String savePath = currentPath.substring(25,currentPath.length());
+            coursesDto.setImageUrl(savePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         adminServices.addCourse(coursesDto);
         return "redirect:/admin/add-course?success";
     }
@@ -67,9 +106,6 @@ public class AdminController {
 
     /* End of Mapping */
 
-
-
-
     /* User Mapping*/
 
     @GetMapping("/users")
@@ -79,7 +115,7 @@ public class AdminController {
         return ConstantPages.ADMIN_USERS_PAGE;
     }
 
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id){
         adminServices.deleteUser(id);
         return "redirect:/admin/users";
@@ -136,7 +172,7 @@ public class AdminController {
 
     @PostMapping("/add-assignment")
     public String postAssignment(@ModelAttribute("assign") AssignDto assignDto){
-        if(adminServices.addAssignment(assignDto)) return "redirect:/admin/add-assignment?success";
+        if(adminServices.addAssignment(assignDto)) return "redirect:/admin/assignments";
         return "redirect:/admin/add-assignment?error";
     }
 
@@ -165,7 +201,7 @@ public class AdminController {
 
     @PostMapping("/add-event")
     public String addEventToDatabase(@ModelAttribute("event") EventsDto event){
-        if(adminServices.addEvents(event)) return "redirect:/admin/add-event?success";
+        if(adminServices.addEvents(event)) return "redirect:/admin/events";
         return "redirect:/admin/add-event?error";
     }
 
@@ -176,9 +212,6 @@ public class AdminController {
     }
 
     /* End of Mapping */
-
-
-
 
     /* Upload Mapping */
 
@@ -200,7 +233,7 @@ public class AdminController {
 
     @PostMapping("/add-upload")
     public String uploadLink(@ModelAttribute("uploadDto") UploadDto uploadDto){
-        if(adminServices.addUpload(uploadDto)) return "redirect:/admin/add-upload?success";
+        if(adminServices.addUpload(uploadDto)) return "redirect:/admin/uploads";
         return "redirect:/admin/add-upload?failed";
     }
 
@@ -231,10 +264,44 @@ public class AdminController {
             return "redirect:/admin/add-admin?error";
 
         adminServices.addNewAdmin(adminDto);
-        return "redirect:/admin/add-admin?success";
+        return "redirect:/admin/users";
     }
 
 
+    @GetMapping("/add-resume")
+    public String addResume(Model model){
+        model.addAttribute("resumeDto", new ResumeUploadDto());
+        model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
+        return ConstantPages.ADMIN_UPLOAD_RESUME;
+    }
 
+    @PostMapping("/add-resume")
+    public String uploadResume(
+            @ModelAttribute("resumeDto") ResumeUploadDto resumeUploadDto,
+            @RequestParam("file") MultipartFile file
+    ){
+
+        if( file!= null && file.getOriginalFilename().endsWith(".pdf")){
+            String path = "";
+            System.out.println(resumeUploadDto.getType());
+            if(resumeUploadDto.getType().equals("Resume")){
+                path = resumePath+"resume.pdf";
+            }
+            else path = coverLetterPath+"cover-letter.pdf";
+
+            Path path1 = Paths.get(path);
+
+            try {
+                Files.deleteIfExists(path1);
+                Files.createFile(path1);
+                Files.write(path1, file.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "redirect:/admin/add-resume?failed";
+            }
+            return "redirect:/admin/";
+        }
+        return "redirect:/admin/add-resume?failed";
+    }
 
 }

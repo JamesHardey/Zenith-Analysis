@@ -67,7 +67,7 @@ img{
 .nav .navbar .logo{
     color:  var(--primary-color);
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .nav .navbar .logo span{
@@ -176,12 +176,16 @@ img{
     height: 100vh;
     color: #fff;
     min-height: 500px;
+    max-height: 700px;
     background-size: cover;
     font-family:'Poppins', sans-serif;
 }
 
 .home .max-width{
     width: 100%;
+    max-width: max-content;
+    background-color: #000000aa;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -192,18 +196,21 @@ img{
     text-align: center;
     width: 70%;
     text-align: center;
+    line-height: 1.5em;
 }
 
 .home .max-width .top-home h3{
     width: 100%;
+    line-height: 1.4em;
     font-size: 38px;
 }
 
 .home .max-width .top-home p{
-    margin: 0 10px 30px;
+    margin: 20px 10px 30px;
 }
 
 .home .max-width .top-home .btn{
+    margin-top: 20px;
     padding: 15px 30px;
     background-color: var(--primary-color);
     color: #fffffe;
@@ -407,7 +414,7 @@ img{
 
 .courses-section .courses-content .btn{
     padding: 10px 20px;
-    background-color: var(--primary-color);
+    background-color: #13138f;;
     width: 220px;
     transition: all 0.32s ease;
     color: #fff;
@@ -504,6 +511,7 @@ img{
     flex: 25%;
     text-align: left;
     height: 350px;
+    min-height: 420px;
     padding: 70px 30px 15px;
     position: relative;
     border: 1px solid #6e6c6c;
@@ -515,6 +523,7 @@ img{
 .testimonial-section .testimonial-content .testimonial-card>h3{
     margin: 5px;
     font-size: 18px;
+
 }
 
 .testimonial-section .testimonial-content .testimonial-card .left-quote{
@@ -550,7 +559,7 @@ img{
 }
 
 .testimonial-section .testimonial-content .testimonial-card p{
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 13px;
     font-weight: 400;
     margin-left: 6px;
@@ -635,6 +644,66 @@ img{
 
 
 
+
+/* Join-us */
+
+.join-us{
+    background-color: #fff;
+}
+
+.join-us-content{
+    position: relative;
+}
+
+.join-us-content iframe{
+    width: 100%;
+    /* min-height: fit-content; */
+}
+
+.join-us-content .transparent-back{
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: #00000088;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width:100%;
+}
+
+.join-us-content .transparent-back div{
+    text-align: center;
+    color: #fff;
+    margin-bottom: 5%;
+}
+
+.join-us-content .transparent-back div h2{
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.join-us-content .transparent-back div p{
+    font-size: 1.4rem;
+}
+
+.transparent-back a{
+    text-align: center;
+    border: 2px solid #13138f;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #13138f;
+    padding: 10px 40px;
+    border-radius: 30px;
+}
+
+.transparent-back a:hover{
+    background-color: #13138f;
+    color: #fff;
+}
+
+/* End of Join-us */
 
 
 
@@ -982,6 +1051,18 @@ img{
         margin-right: 10px;
     }
 
+    .join-us-content .transparent-back div h2{
+        font-size: 2.3rem;
+    }
+
+    .join-us-content .transparent-back div p{
+        font-size: 1.3rem;
+    }
+
+    .transparent-back a{
+        font-size: 24px;
+    }
+
     .footer-section .footer-content{
         grid-template-columns: 1fr;
         row-gap: 50px;
@@ -1037,6 +1118,8 @@ img{
 
     .testimonial-section .testimonial-content .testimonial-card{
         margin: 0 40px;
+        padding-left: 5px;
+        padding-right: 5px;
     }
 
     .testimonial-section .testimonial-content .testimonial-card>h3{
@@ -1052,7 +1135,7 @@ img{
 
 @media (max-width: 494px){
     .nav .navbar .logo{
-        font-size: 19px;
+        font-size: 20px;
     }
 }
 
@@ -1068,12 +1151,12 @@ img{
     }
 
     .nav .navbar .logo{
-        font-size: 18px;
+        font-size: 19px;
     }
 
     .nav .navbar .login-register .btn{
         font-size: 10px;
-        padding: 3px 10px;
+        padding: 2px 7px;
     }
 
     .home .max-width .top-home{
@@ -1103,6 +1186,19 @@ img{
         font-size: 13px;
         text-align: justify;
      }
+
+
+     .join-us-content .transparent-back div h2{
+        font-size: 2rem;
+    }
+
+    .join-us-content .transparent-back div p{
+        font-size: 1rem;
+    }
+
+     .transparent-back a{
+        font-size: 18px;
+    }
 }
 
 @media (max-width: 350px){
@@ -1118,6 +1214,18 @@ img{
     .nav .navbar .login-register .btn{
         font-size: 8px;
         padding: 2px 10px;
+    }
+
+    .join-us-content .transparent-back div h2{
+        font-size: 1.6rem;
+    }
+
+    .join-us-content .transparent-back div p{
+        font-size: 0.8rem;
+    }
+
+    .transparent-back a{
+        font-size: 14px;
     }
 
 }

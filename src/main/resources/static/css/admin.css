@@ -31,15 +31,17 @@ textarea{
 }
 
 .side-bar-logo{
-    height: 90px;
     padding: 1.2rem 0rem 1rem 2rem;
+    background-color: #000080;
     color: #fff;
     font-size: 15px;
     font-weight: 700;
+    border: 3px solid #fff;
+    border-width: 0 0 3px 0;
 }
 
 .side-menu {
-    margin-top: 1rem;
+    margin-top: 0.4rem;
     z-index: 100;
 }
 
@@ -49,10 +51,12 @@ textarea{
 }
 
 .side-menu li{
-    margin-bottom: 1.7rem;
+    margin-bottom: 0.4rem;
     padding: 5px;
     padding-left: 1rem;
+    padding-right: 0;
     width: 100%;
+    border-bottom: 2px solid #fff;
 }
 
 .side-menu li:hover{
@@ -93,6 +97,7 @@ i {
     text-align: center;
     align-items: center;
     width: 40px;
+    cursor: pointer;
 }
 
 
@@ -154,7 +159,7 @@ header.active{
     transform: rotate(135deg);
     top: 60px;
     display: none;
-    box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.2);
+    /* box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.2); */
 }
 
 .profile{
@@ -167,7 +172,7 @@ header.active{
     padding-top: 20px;
     padding-left: 15px;
     text-align: left;
-    box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.2);
+    box-shadow: 5px 5px rgba(0,0,0,0.2);
     border: 1px solid #969696;
     border-width: 0 1px 0 1px;
     display: none;
@@ -250,8 +255,9 @@ th,td{
     text-align: center;
 }
 
+
 th{
-    padding: 10px 0;
+    padding: 10px 3px;
 }
 
 thead tr{
@@ -302,7 +308,7 @@ td{
 }
 
 .upload-section{
-    padding-top: 60px;
+    padding-top: 30px;
 }
 
 .upload-section h2{
@@ -346,6 +352,7 @@ td{
     gap: 10px;
 }
 
+
 .allow-btn{
     background-color: green;
     color: #fff;
@@ -368,7 +375,61 @@ td{
 .table-section{
     overflow-x: scroll;
 }
+.table-section h2{
+    margin: 10px 0;
+    text-align: center;
+}
 
+
+.alert-dialog{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #00000055;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.alert-dialog.pop{
+    display:flex;
+}
+
+.alert-main-content{
+    padding: 20px;
+    background-color: #fff;
+    margin: 0 auto 20vh;
+    text-align: center;
+    font-weight: 500;
+}
+
+.alert-main-content p{
+    font-size: 1.3rem;
+}
+
+.alert-main-content div{
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.alert-main-content div a,
+.alert-main-content div input{
+    color: #fff;
+    background-color: #000080;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+}
+
+.alert-main-content div input{
+    background-color: red;
+}
 
 
 
@@ -378,8 +439,8 @@ td{
         grid-template-columns: 1fr;
     }
 
-    .side-bar{
-        padding-top: 120px;
+    .side-bar-logo{
+        padding-top: 5.3rem;
     }
 
     header.active{
@@ -430,9 +491,24 @@ td{
     .cards{
         grid-template-columns: repeat(1, 1fr);
     }
+
+    .alert-main-content{
+        max-width: 320px;
+        width: 90vw;
+    }
 }
 
-@media (max-width: 320px){
+@media (max-width: 280px){
+    .btn-menu,.main-content h1{
+        font-size: 1.4rem;
+    }
 
+    i{
+        font-size: 18px;
+    }
+
+    .btn-menu{
+        width: 20px;
+    }
 }
 

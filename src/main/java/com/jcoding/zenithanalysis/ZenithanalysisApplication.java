@@ -1,7 +1,6 @@
 package com.jcoding.zenithanalysis;
 
-import com.jcoding.zenithanalysis.dto.RegisterUser;
-import com.jcoding.zenithanalysis.entity.*;
+import com.jcoding.zenithanalysis.entity.Roles;
 import com.jcoding.zenithanalysis.repository.RolesRepo;
 import com.jcoding.zenithanalysis.services.AdminServices;
 import com.jcoding.zenithanalysis.services.AppUserServices;
@@ -10,11 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.expression.spel.ast.Assign;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.time.LocalDate;
 
 @SpringBootApplication
 public class ZenithanalysisApplication implements CommandLineRunner {

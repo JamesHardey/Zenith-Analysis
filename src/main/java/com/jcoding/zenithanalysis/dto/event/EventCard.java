@@ -7,14 +7,14 @@ public class EventCard {
     private String year;
     private String month;
     private String day;
-    private LocalTime time;
+    private String time;
     private String title;
     private String details;
 
     public EventCard() {
     }
 
-    public EventCard(String year, String month, String day, LocalTime time, String title, String details) {
+    public EventCard(String year, String month, String day, String time, String title, String details) {
         this.year = year;
         this.month = month;
         this.day = day;
@@ -47,11 +47,11 @@ public class EventCard {
         this.day = day;
     }
 
-    public LocalTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

@@ -56,7 +56,7 @@
 
         </header>
 
-        <div>
+        <div class="table-section">
             <table class="tables">
                 <thead>
                     <tr>
@@ -79,11 +79,13 @@
                     </tr>
                 </tbody>
             </table>
-
-            <div>
-                <a th:href="@{/admin/add-upload}" class="btn add-course-btn">New Upload</a>
-            </div>
         </div>
+
+        <div>
+            <a th:href="@{/admin/add-upload}" class="btn add-course-btn">New Upload</a>
+            <a th:href="@{/admin/add-resume}" class="btn add-course-btn">Upload Resume</a>
+        </div>
+
     </div>
 
     <script src="../js/admin.js"></script>
