@@ -62,11 +62,11 @@
                         <input type="email" name="email" id="email" th:field="*{email}" placeholder="Email" required>
                     </div>
                     <div class="form">
-                        <input type="password" name="password" id="password" th:field="*{password}" placeholder="Password" required>
+                        <input type="password" name="password" id="password" th:field="*{password}" minlength="6" placeholder="Password" required>
                     </div>
 
                     <div class="form">
-                        <input type="password" name="confirm-password" id="confirm-password" th:field="*{confirmPassword}" placeholder="Confirm Password"
+                        <input type="password" name="confirm-password" id="confirm-password" th:field="*{confirmPassword}" minlength="6" placeholder="Confirm Password"
                         required>
                     </div>
                     <div class="form-btn">

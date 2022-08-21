@@ -52,7 +52,7 @@
                         <li th:each="course: ${courses}">
                             <div class="course-card">
                                 <div class="img-cont">
-                                    <img th:src="@{${course.imageUrl}}" alt="">
+                                    <img src="assets/bus1.jpg" alt="">
                                 </div>
 
                                 <div class="course-right-side">
@@ -62,7 +62,7 @@
                                     </div>
 
                                     <div class="course-card-bottom">
-                                        <div class="price-tag" th:text="'Price: '+${course.price}"></div>
+                                        <div class="price-tag" th:text="'Price: &pound' +${course.price}"></div>
                                         <a th:href="@{/contact-us}" class="enroll-btn">Click to Enroll</a>
                                     </div>
                                 </div>

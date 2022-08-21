@@ -67,34 +67,32 @@ public class AdminController {
 
     @PostMapping("/add-course")
     public String saveCourse(
-            @ModelAttribute("course") CoursesDto coursesDto,
-            @RequestParam("file") MultipartFile file
+            @ModelAttribute("course") CoursesDto coursesDto
+//            @RequestParam("file") MultipartFile file
             ){
 
-        coursesDto.setPrice("$"+coursesDto.getPrice());
-        Path folderPath = Paths.get("src/main/resources/static/assets/course/"+coursesDto.getTitle());
-        if(!Files.exists(folderPath)){
-            try {
-                Files.createDirectory(folderPath);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "redirect:/admin/add-course?failed";
-            }
-        }
-
-        String path1 = folderPath.toString();
-        System.out.println(path1);
-        Path path = Paths.get(path1, file.getOriginalFilename());
-        try {
-            Files.write(path, file.getBytes());
-            String currentPath = path.toString();
-            String savePath = currentPath.substring(25,currentPath.length());
-            coursesDto.setImageUrl(savePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        adminServices.addCourse(coursesDto);
+//        coursesDto.setPrice("$"+coursesDto.getPrice());
+//        Path folderPath = Paths.get("./course-images/"+coursesDto.getTitle());
+//        if(!Files.exists(folderPath)){
+//            try {
+//                Files.createDirectory(folderPath);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                return "redirect:/admin/add-course?failed";
+//            }
+//        }
+//
+//        String path1 = folderPath.toString();
+//        Path path = Paths.get(path1, file.getOriginalFilename());
+//        try {
+//            Files.write(path, file.getBytes());
+//            String currentPath = path.toString();
+//            String savePath = currentPath.substring(25,currentPath.length());
+//            coursesDto.setImageUrl(savePath);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        if(!adminServices.addCourse(coursesDto)) return "redirect:/admin/add-course?failed";
         return "redirect:/admin/add-course?success";
     }
 

@@ -9,17 +9,19 @@ public class TestFile1 {
 
     public static void main(String[] args) {
         //String path = TestFile1.class.getResource("static").getPath();
-        Path path = Paths.get("static").toAbsolutePath();
-        if(!Files.exists(path)){
+        Path folderPath = Paths.get(
+                "./upload/"
+        );
+        if(!Files.exists(folderPath)){
             try {
-                Files.createDirectory(path);
+                Files.createDirectory(folderPath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         System.out.println(
-                Files.exists(path));
-        System.out.println(path);
+                Files.exists(folderPath));
+        System.out.println(folderPath);
 
     }
 }

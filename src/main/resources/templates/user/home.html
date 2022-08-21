@@ -75,16 +75,16 @@
 
             <section class="main-content">
 
-                <div id="name-title"><h1>Welcome back <span style="color: #000080;" th:text="${name}"></span>,</h1>
+                <div id="name-title"><h1>Welcome <span style="color: #000080;" th:text="${name}"></span>,</h1>
                 </div>
                 <section class="on-going-courses">
                     <h3>On-Going Courses</h3>
 
                     <div class="group-course">
                         <div class="card" th:each="course: ${courses}" th:object="${courses}">
-                            <div>
-                                <img src="../assets/bus1.jpg" alt="">
-                            </div>
+<!--                            <div>-->
+<!--                                <img src="../assets/bus1.jpg" alt="">-->
+<!--                            </div>-->
 
                             <div class="card-details">
                                 <h4 th:text="${course.courseTitle}"></h4>
@@ -99,7 +99,7 @@
                 </section>
 
                 <section class="assignment-section" id="assignments">
-                    <h3>Assignments</h3>
+                    <h2>Assignments</h2>
                     <div th:if="${isEmpty}">
                         <p style="font-size:14px; margin-top:16px;">No Assignment at this present time</p>
                     </div>

@@ -3,11 +3,13 @@
     font-family:'Poppins', sans-serif;
 }
 
+
 .main-section-content{
     padding: 80px 20px 100px 0;
     min-height: 70vh;
     max-width: 1300px;
     margin: 0 auto;
+    /* background-color: rgb(247, 247, 247); */
 }
 
 .main-width{
@@ -29,6 +31,7 @@
     padding: 15px;
     background-color: #a6a6a755;
     border-radius: 50%;
+
 }
 
 .side-menu i{
@@ -51,6 +54,7 @@ aside{
 
 .cv-sample, .cover-letter-sample{
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
 }
 
 img{
@@ -66,8 +70,8 @@ img{
 
 #name-title{
     margin: 30px 10px;
-    font-weight: 600;
-    font-size: 28px;
+    font-weight: 500;
+    font-size: 24px;
 }
 
 .on-going-courses{
@@ -75,6 +79,13 @@ img{
     background-color: #fff;
     padding: 20px 25px;
     border-radius: 15px;
+
+}
+
+.on-going-courses h3{
+    font-size: 1.7rem;
+    margin-bottom: 30px;
+    color: #0000BF;
 }
 
 .on-going-courses .btn{
@@ -91,17 +102,27 @@ img{
 }
 
 .group-course .card{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     padding: 15px;
     gap: 20px;
-    border: 1px solid #030303;
+    border: 1px solid #d3d3d3;
     border-width: 0 0 1px 0;
+    margin-bottom: 40px;
 }
 
+.card .img-cont{
+    width: fit-content;
+}
+
+
 .card img{
-    width: 100%;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
+}
+
+.card-details{
+    padding: 0 10px;
 }
 
 .card-details h4{
@@ -125,7 +146,7 @@ img{
     width: 100%;
     color: #fff;
     padding: 7px 20px;
-    background-color: blue;
+    background-color: #0000FF;
     font-size: 14px;
     font-weight: 500;
     border-radius: 5%;
@@ -138,6 +159,7 @@ img{
 
 .cv-sample h3, .cover-letter-sample h3{
     margin-bottom: 15px;
+    color: #000040;
 }
 
 .cv-sample, .cover-letter-sample{
@@ -148,9 +170,7 @@ img{
 
 .assignment-section{
     padding: 25px 30px;
-    border: 2px solid #a6a6a7;
-    border-radius: 20px;
-    border-width: 2px 0 0 2px;
+    border-radius: 10px;
     margin-top: 40px;
     background-color: #fff;
 }
@@ -163,11 +183,12 @@ img{
     border: 1px solid #030303;
     border-width: 0 0 1px 0;
     padding-bottom: 5px;
+    color: #0000BF;;
 }
 
 .assignment-section .assignment{
     margin: 30px 0;
-    border: 1px solid #a6a6a7;
+    border: 1px solid #c7c7c744;
     border-width: 0 0 1px 0;
     padding-bottom: 10px;
 }
@@ -175,18 +196,31 @@ img{
 .assignment h4{
     font-size: 22px;
     margin-bottom: 30px;
+
+}
+
+.assignment span{
+    color: #000040;
+    font-weight: 600;
 }
 
 .assignment h6{
     margin-top: 10px;
-    color: rgb(148, 148, 148);
-    font-size: 14px;
+    color: rgb(175, 175, 175);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.assignment h6,
+.assignment p
+{
+    padding-left: 10px;
 }
 
 .assignment p{
-    font-size: 13px;
+    font-size: 15px;
     margin: 10px 0;
-    color: #030303;
+    color: #3d3d3d;
 }
 
 .date{

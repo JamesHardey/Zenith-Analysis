@@ -16,9 +16,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.mail.MessagingException;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -101,11 +107,15 @@ public class AdminServices {
         assignmentRepo.deleteAll(assignmentRepo.findAllByCourse(course));
         registerCourseRepo.deleteAll(registerCourseRepo.findAllByCourse(course));
         uploadRepo.deleteAll(uploadRepo.findAllByCourse(course));
-        courseRepository.delete(course);
+        deleteCourse(course);
     }
 
-    public void addCourse(CoursesDto courseDto){
-
+    @Transactional
+    public boolean addCourse(CoursesDto courseDto
+            //, MultipartFile file
+    ){
+        courseDto.setPrice(courseDto.getPrice());
+        //courseDto.setImageUrl(file.getOriginalFilename());
         Course course = new Course(
                 courseDto.getTitle(),
                 courseDto.getPrice(),
@@ -113,7 +123,23 @@ public class AdminServices {
                 courseDto.getImageUrl()
         );
 
-        courseRepository.save(course);
+         courseRepository.save(course);
+//        Path folderPath = Paths.get(
+//                "./upload/"
+//                        +savedCourse.getId()
+//        );
+//
+//        try {
+//            Files.createDirectory(folderPath);
+//            String path1 = folderPath.toString();
+//            Path path = Paths.get(path1, file.getOriginalFilename());
+//            Files.write(path, file.getBytes());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            courseRepository.delete(course);
+//            return false;
+//        }
+        return true;
     }
 
     public void deleteRegisterCourse(RegisterCourse registerCourse){
@@ -123,7 +149,6 @@ public class AdminServices {
     public RegisterCourse addCourseRegister(RegisterCourse registerCourse){
         return registerCourseRepo.save(registerCourse);
     }
-
 
     public List<EventsDto> getEvents(){
         List<EventsDto> eventsDtoList = new ArrayList<>();

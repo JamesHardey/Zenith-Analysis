@@ -60,7 +60,8 @@ public class ZenithSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/assets/**", "/css/**", "/js/**", "/webjars/**", "/h2-console/**");
+        web.ignoring().antMatchers("/assets/**", "/css/**",
+                "/js/**", "/webjars/**", "/h2-console/**","/assets/course-images/**");
     }
 
 

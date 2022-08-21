@@ -85,6 +85,7 @@ public class UserController {
     public String getCourses(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
+        model.addAttribute("courses", appUserServices.getAllCourses());
         return ConstantPages.USER_COURSE_PAGE;
     }
 
