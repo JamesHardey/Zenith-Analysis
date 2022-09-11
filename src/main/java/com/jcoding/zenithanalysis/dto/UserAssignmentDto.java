@@ -1,5 +1,7 @@
 package com.jcoding.zenithanalysis.dto;
 
+import com.jcoding.zenithanalysis.entity.Course;
+
 public class UserAssignmentDto {
 
     private int index;
@@ -7,6 +9,7 @@ public class UserAssignmentDto {
     private String details;
     private String uploadDate;
     private String submissionDate;
+    private String courseTitle;
 
     public UserAssignmentDto() {
     }
@@ -41,6 +44,14 @@ public class UserAssignmentDto {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    public void setCourseTitle(Course course){
+        this.courseTitle = course.getCourseTitle();
+    }
+
+    public String getCourseTitle(){
+        return courseTitle;
     }
 
     public String getUploadDate() {

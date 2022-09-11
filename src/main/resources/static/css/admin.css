@@ -60,8 +60,14 @@ textarea{
 }
 
 .side-menu li:hover{
-    background-color: #000080;
+    background-color: #fff;
+    color: #000080;
 }
+
+.side-menu li:hover a{
+    color: #000080;
+}
+
 
 .side-menu a{
     padding-left: 1rem;
@@ -252,12 +258,11 @@ table{
 
 
 th,td{
-    text-align: center;
+    text-align: left;
 }
 
-
 th{
-    padding: 10px 3px;
+    padding: .4rem .8rem;
 }
 
 thead tr{
@@ -279,7 +284,7 @@ thead td{
 }
 
 td{
-    padding: .5rem 1rem;
+    padding: .4rem .8rem;
     font-size: .8rem;
     font-weight: 600;
     color: #222;
@@ -346,7 +351,6 @@ td{
 
 .actions{
     display: flex;
-    justify-content: center;
     align-items: center;
     margin: auto;
     gap: 10px;

@@ -19,7 +19,15 @@ public class EventsDto {
     public EventsDto() {
     }
 
-    public EventsDto(int index,Long id, String title, String details, String date, String time, String course) {
+    public EventsDto(Long id, String title, String details, String date, String time) {
+        this.id = id;
+        this.title = title;
+        this.details = details;
+        this.date = date;
+        this.time = time;
+    }
+
+    public EventsDto(int index, Long id, String title, String details, String date, String time, String course) {
         this.index = index;
         this.id = id;
         this.title = title;
@@ -83,5 +91,18 @@ public class EventsDto {
 
     public void setCourse(String course) {
         this.course = course;
+    }
+
+    @Override
+    public String toString() {
+        return "EventsDto{" +
+                "index=" + index +
+                ", id=" + id +
+                ", title='" + title + '\'' +
+                ", details='" + details + '\'' +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", course='" + course + '\'' +
+                '}';
     }
 }

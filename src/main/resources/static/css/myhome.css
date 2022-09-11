@@ -1,0 +1,533 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    border: none;
+}
+
+
+.nav{
+    z-index: 200;
+}
+
+
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.main-width{
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+
+
+main{
+    min-height: fit-content;
+}
+
+
+.home-container{
+    display: grid;
+    background-color: rgb(253, 253, 253);
+    grid-template-columns: 250px 2fr 250px;
+    border: 1px solid rgb(197, 197, 197);
+    border-width: 1px 0 0 0;
+    min-height: fit-content;
+}
+
+/* Left panel styling */
+aside.aside-left{
+    background-color: #fff;
+}
+
+aside.aside-left h2{
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 10px 0;
+    padding: 10px;
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+aside.aside-left .courses{
+    border: 1px solid rgb(219, 219, 219);
+    border-width: 0 0 1px;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+aside.aside-left .courses li,
+aside.aside-left .assignment li{
+    font-size: 15px;
+    background-color: beige;
+    border: 1px solid #fff;
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+/* Main Content stlying */
+.main{
+    background-color: #fff;
+    border: 1px solid rgb(197, 197, 197);
+    border-width: 0 1px 0 1px;
+}
+
+.main > div{
+    position: relative;
+}
+
+.main div .courses-class{
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(248, 248, 248);
+    padding: 20px;
+    display: none;
+    padding-top: 40px;
+}
+
+.main .courses-class h3{
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.main .content .course-class{
+    margin-top: 40px;
+}
+
+
+.main .content .course-class h3{
+    font-size: 20px;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.main .content .course-class p:first-of-type{
+    font-size: 16px;
+    margin: 10px 0;
+    color: gray;
+    margin-left: 2px;
+}
+
+
+.main .content .course-class p:nth-of-type(2){
+    font-size: .9rem;
+    line-height: 1.4em;
+    word-spacing: 0.3em;
+    margin-left: 5px;
+}
+
+.link-btn{
+    margin: 20px 0 30px;
+}
+
+
+.main .content .course-class a{
+    background-color: rgb(21, 21, 255);
+    color: white;
+    font-size: 13px;
+    padding: 5px 10px;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+.main .recent-assignment{
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(249, 249, 249);
+    padding: 40px 20px 20px;
+    display: none;
+}
+
+.main .courses-class.active,
+.main .recent-assignment.active{
+    display: block;
+}
+
+.recent-assignment h2{
+    font-size: 26px;
+    margin: 10px 0 0;
+}
+
+.recent-assignment .ass{
+    margin: 20px 0;
+    padding: 10px;
+}
+
+.recent-assignment .ass .title-home{
+    font-size: 1.3rem;
+}
+
+.recent-assignment .ass .instr{
+    margin: 20px 0 10px;
+    font-size: 1rem;
+    opacity: .7;
+}
+
+.recent-assignment .ass .date{
+    margin: 20px 0 10px;
+}
+
+.recent-assignment .ass .date h6{
+    font-size: .8rem;
+    opacity: .6;
+    margin: 5px 0;
+}
+
+.recent-assignment .ass .date span{
+    opacity: 1;
+    font-size: .9rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes view {
+    from{
+        opacity: 0;
+    }
+
+    to{
+        opacity: 1;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/* Right panel styling */
+aside.aside-right{
+    background-color: #fff;
+}
+
+
+
+aside.aside-right .res-cl-sample .head{
+    padding: 8px;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+aside.aside-right .res-cl-sample h4{
+    font-size: .8rem;
+    background-color: blue;
+    color: #fff;
+    opacity: .8;
+    padding: 8px;
+    cursor: pointer;
+}
+
+aside.aside-right .res-cl-sample img{
+    width: 100%;
+    height: 100%;
+    max-height: 400px
+    ;
+}
+
+aside.aside-right .res-cl-sample .btn-container{
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+aside.aside-right .res-cl-sample a{
+    background-color: blue;
+    padding: 5px 10px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+aside.aside-right h2{
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 10px 0;
+    opacity: 0.9;
+    padding: 0 5px;
+}
+
+aside.aside-right .events{
+    padding: 5px;
+}
+
+aside.aside-right .event{
+    border: 1px solid rgb(224, 224, 224);
+    border-width: 0 0 1px;
+    padding: 10px;
+    /* text-align: left; */
+}
+
+aside.aside-right .event h5{
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+aside.aside-right .event p{
+    font-size: 14px;
+    padding: 0 0 5px 5px;
+}
+
+aside.aside-right .events .up-com-btn{
+    text-align: center;
+}
+
+aside.aside-right .events .button{
+    margin: 20px auto;
+    background-color: rgb(24, 90, 212);
+    border: 1px solid rgb(24, 90, 212);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+aside.aside-right .events .button:hover{
+    background-color: #fff;
+    color: rgb(24, 90, 212);
+}
+
+aside.aside-right .res-cl-sample h4{
+    cursor: pointer;
+    margin-bottom: 20px;
+    user-select: none;
+    transition: all 0.3s ease;
+}
+
+aside.aside-right .cv-sample .cv-display,
+aside.aside-right .cover-letter-sample .cv-display{
+    display: none;
+    transition: all 0.3s ease;
+}
+
+
+aside.aside-right .cv-sample .cv-display.show,
+aside.aside-right .cover-letter-sample .cv-display.show{
+    display: block;
+    transition: all 0.3s ease;
+    
+}
+
+
+
+@keyframes drop {
+
+   
+    
+}
+
+
+
+@media (max-width: 1024px) {
+
+    .main-width{
+        width: 100%;
+    }
+
+    .home-container{
+        grid-template-columns: 250px 1fr 300px;
+    }
+
+    aside.aside-left{
+       grid-column: 1 / span 3;
+       width: 100%;
+       height: fit-content;
+       display: flex;
+       justify-content: center;
+       border: 1px solid rgb(156, 156, 156);
+       border-width: 0 0 1px;
+       margin-bottom: 1px;
+       grid-row: 2 / span;
+       text-align: center;
+    }
+
+    aside.aside-left .courses{
+        border: 2px solid #eee;
+        border-width: 0 2px 0 0;
+        flex: 50%;
+        height: 70px;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        z-index: 30;
+    }   
+
+    aside.aside-left .assignments{
+        border: 2px solid #eee;
+        border-width: 0 0 0 2px;
+        flex: 50%;
+        height: 70px;
+        position: relative;
+        z-index: 20;
+    }
+
+    .main{
+        grid-column: 1 / span 2;
+    }
+
+    aside.aside-left .courses ul,
+    aside.aside-left .assignment ul{
+        position: absolute;
+        background-color: #fff;
+        left: 0;
+        right: 0;
+        top: 102%;
+        width: 350px;
+        margin: 0 auto;
+        display: none;
+        border: 2px solid #eee;
+        box-shadow: 0 8px 16px 0px rgba(0, 0, 0, 0/2);
+    }
+
+    aside.aside-left .courses ul li,
+    aside.aside-left .assignment ul li{
+        background-color: #fff;
+        color: #000;
+    }
+       
+
+
+    aside.aside-left .courses ul li:hover,
+    aside.aside-left .assignment ul li:hover{
+        background-color: #000080;
+        color: #fff;
+    }
+
+    aside.aside-left .courses ul.show,
+    aside.aside-left .assignment  ul.show{
+        display: block;
+    }
+
+    
+    
+    
+}
+
+
+@keyframes anim {
+    from{
+        opacity: 0;
+        display: block;
+    }
+
+    to{
+        opacity: 1;
+    }
+    
+}
+
+
+
+@media (max-width: 838px) {
+
+    .main,
+    aside.aside-left,
+    aside.aside-right{
+        grid-column: 1 / span 3;
+        width: 100%;
+    }
+
+    aside.aside-left h2{
+        font-size: 1.2rem;
+    }
+
+   
+
+
+    .home-container{
+        grid-template-columns: 1fr;
+    }
+
+
+
+    aside.aside-right{
+        width: 350px;
+        text-align: center;
+        margin: 20px auto;
+        flex-direction: column;
+    }
+
+    aside.aside-right .res-cl-sample .head {
+        font-size: 1.2rem;
+    }
+
+
+    aside.aside-right .res-cl-sample img{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+
+@media (max-width: 450px){
+
+    aside.aside-left{
+        display: flex;
+        flex-direction: column;
+        border: none;
+    }
+
+    aside.aside-left h2{
+        font-size: 1rem;
+        text-align: left;
+        padding-left: 20px;
+    }
+
+    aside.aside-left .courses>ul{
+        text-align: left;
+        width: 300px;
+    }
+
+    aside.aside-left .courses,
+    aside.aside-left .assignments{
+        border: 1px solid rgb(184, 182, 182);
+        border-width: 0 0 2px;
+    }
+
+    
+
+}
+
+@media (max-width: 300px){
+    aside.aside-right{
+        width: 100%;
+    }
+}

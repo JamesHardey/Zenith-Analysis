@@ -30,10 +30,10 @@ public class ZenithSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
        http.authorizeRequests()
                .antMatchers("/login", "/register",
-                       "/", "/contact-us", "/about", "/events",
-                       "/courses", "/verify", "/verify/**",
+                       "/", "/contact-us", "/about","/events","/events/**",
+                       "/courses", "/verify", "/verify/**","/error",
                        "/resend/**", "/h2-console/**","/sendMessage",
-                       "/change-pass/**","/forget-pass"
+                       "/change-pass/**","/forget-pass","/upload/**"
                ).permitAll()
                .antMatchers("/home/**")
                .hasAuthority("USER")
@@ -58,11 +58,14 @@ public class ZenithSecurityConfig extends WebSecurityConfigurerAdapter{
        http.headers().frameOptions().sameOrigin();
     }
 
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/assets/**", "/css/**",
-                "/js/**", "/webjars/**", "/h2-console/**","/assets/course-images/**");
+                "/js/**", "/webjars/**",
+                "/h2-console/**","/upload/**");
     }
+
 
 
 

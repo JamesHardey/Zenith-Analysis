@@ -18,6 +18,7 @@ public class ConstantPages {
     public static String USER_CONTACT_PAGE = "user/contact";
     public static String USER_EVENT_PAGE = "user/event";
     public static String USER_ASSIGNMENT_PAGE = "user/home#assignments";
+    public static String USER_NEW_HOME_PAGE = "user/dhome";
 
     /**Support Pages **/
     public static String APPROVAL_SUPPORT_PAGE = "support-pages/approval-page";

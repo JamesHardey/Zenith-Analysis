@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Page | Zenith-Analysis</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="shortcut icon" href="http://www.example.com/myicon.ico" />
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/error.css}">
+</head>
+
+<body>
+    <header class="nav">
+        <div class="max-width">
+            <nav class="navbar">
+                <a class="logo" href="#">Zenith <span>Analysis</span></a>
+                <div class="nav-right">
+                    <div>
+                        <ul>
+                            <li><a th:href="@{/}">Home</a></li>
+                            <li><a th:href="@{/about}">About Us</a></li>
+                            <li><a th:href="@{/contact-us}">Contact</a></li>
+                            <li><a th:href="@{/courses}">Course Portfolio</a></li>
+                            <li><a th:href="@{/events}">Event</a></li>
+                        </ul>
+                        <!-- <div class="login-register">
+                            <a href="./login.html" class="btn">Login</a>
+                            <a href="./register.html" class="btn">Register</a>
+                        </div> -->
+                        <div class="menu-btn">
+                            <i class="fas fa-bars btn-menu open-menu"></i>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="error-section">
+        <div class="max-width">
+            <div class="error-main">
+                <!-- <p>Oops</p> -->
+                <p>OopS!!!</p>
+                <div class="img-container">
+                    <img th:src="@{/assets/main-error.jpg}" alt="">
+                </div>
+                <div class="content">
+                    <p>An Error has occurred</p>
+                </div>
+
+                <a th:href="@{/}">Go back home</a>
+            </div>
+        </div>
+    </section>
+
+    <div th:replace="common::footer"></div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

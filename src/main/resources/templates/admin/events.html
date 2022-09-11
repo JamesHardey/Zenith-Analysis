@@ -10,9 +10,50 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
      crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/modal.css}">
 </head>
 
 <body>
+
+    <div class="modal edit" id="edit-event-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Edit Event</h4>
+                <button class="modal-close">X</button>
+            </div>
+            <form th:action="@{/admin/event/save}" class="form" method="post">
+                <input type="text" name="id" id="id" readonly>
+                <input type="text" name="title" id="title" placeholder="Event Title" required>
+                <input type="time" name="time" id="sub-time" required>
+                <input type="date" name="date" id="sub-date" required>
+                <textarea name="details" id="details" cols="30" rows="10"
+                          maxlength="170" minlength="50"
+                          placeholder="Details" required></textarea>
+                <div class="modal-footer">
+                    <button class="modal-close">Close</button>
+                    <input type="submit" value="Save">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="delete-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close">X</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete ? </p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-close">No</button>
+                <a id="delete-confirm">Yes</a>
+            </div>
+        </div>
+    </div>
+
+
+
     <aside class="side-bar">
         <div class="side-bar-logo">
             <h1>Zenith-Analysis</h1>
@@ -30,6 +71,7 @@
     </aside>
 
     <div class="main-content">
+
         <header>
             <h1>
                 <div class="btn-menu">
@@ -53,7 +95,6 @@
                     </div>
                 </div>
             </div>
-
         </header>
 
         <div class="table-section">
@@ -78,6 +119,10 @@
                             <a th:href="@{/admin/event/delete/{id} (id=${event.id})}"
                                class="delete-btn action-btn">Delete</a>
                         </div>
+                        <div>
+                            <a th:href="@{/admin/event/{id} (id=${event.id})}"
+                               class="allow-btn action-btn event-edit">Edit</a>
+                        </div>
                     </td>
                 </tr>
                 </tbody>
@@ -87,10 +132,10 @@
         <div>
             <a th:href="@{/admin/add-event}" class="btn add-course-btn">Add Event</a>
         </div>
-
     </div>
 
     <script src="../js/admin.js"></script>
+    <script src="../js/modal.js"></script>
 </body>
 
 </html>

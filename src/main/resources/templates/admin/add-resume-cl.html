@@ -58,7 +58,8 @@
 
         <div class="upload-section">
             <h2>Add Resume/Cover Letter</h2>
-            <form th:action="@{/admin/add-resume}" class="upload-form" th:object="${resumeDto}" method="post" enctype="multipart/form-data">
+            <form th:action="@{/admin/add-resume}" class="upload-form" th:object="${resumeDto}"
+                  method="post" enctype="multipart/form-data">
                 <select name="type" id="type" th:field="*{type}">
                     <option value="Resume">Resume</option>
                     <option value="Cover Letter">Cover Letter</option>

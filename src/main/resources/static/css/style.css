@@ -29,23 +29,37 @@ textarea{
 img{
     width: 100%;
 }
+
 .max-width{
     max-width: 1300px;
     padding: 0 60px;
     margin: auto;
 }
 
+.about .about-content .title,
+.services .title,
+.courses-section .courses-content .title,
+.testimonial-section .testimonial-content .title
+{
+    text-align: center;
+    margin: 5px auto;
+    width: fit-content;
+    border: 5px solid #000080;
+    border-width: 0 0 5px;
+}
+
+
 .nav{
     background-color: #fff;
     color: var(--primary-color);
-    position: fixed;
     box-shadow: 0 0 30px rgba(7, 51, 84, 0.17);
     width: 100%;
     transition: all 0.3s ease;
-    z-index: 2;
+    z-index: 99;
 }
 
 .nav.scrolling{
+    position: fixed;
     background-color: var(--primary-color);
     color: #fff;
 }
@@ -172,8 +186,8 @@ img{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url(../assets/bg.png) no-repeat center;
-    height: 100vh;
+    /* background: url(../assets/bg.png) no-repeat center; */
+    height: fit-content;
     color: #fff;
     min-height: 500px;
     max-height: 700px;
@@ -240,10 +254,11 @@ img{
 }
 
 .about .about-content .title{
-    font-size: 38px;
+    font-size: 32px;
     color: #030303;
     font-weight: 700;
-    margin: 20px 0 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .about .about-content .divider{
@@ -322,10 +337,10 @@ img{
     padding: 20px 0 100px;
 }
 .services .title{
-    font-size: 38px;
+    font-size: 32px;
     font-weight: 700;
     color: #030303;
-    margin: 20px 0 0;
+    margin-top: 20px;
     text-align: center;
     font-family:'Poppins', sans-serif;
 }
@@ -481,7 +496,6 @@ img{
 }
 
 
-
 /* Testimonial Section */
 .testimonial-section{
     font-family:'Poppins', sans-serif;
@@ -493,7 +507,9 @@ img{
 .testimonial-section .testimonial-content h2{
     font-size: 38px;
     color: #fffffe;
-    margin: 20px 0 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-color: #2121eb;
     text-align: center;
 }
 
@@ -957,11 +973,16 @@ img{
         display: inline-block;
     }
 
+
     .about .about-content-main .about-content-text,
     .about .about-content-main .about-content-image,
     .about .about-content-main .about-content-image-2{
         width: 100%;
         text-align: center;
+    }
+
+    .about .about-content-main .about-content-text p{
+        text-align: left;
     }
 
     .about .about-content-main .about-content-image,
@@ -1071,7 +1092,6 @@ img{
 }
 
 @media (max-width: 590px){
-
 
     .max-width{
         padding: 0 15px;

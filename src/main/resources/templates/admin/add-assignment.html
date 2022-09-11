@@ -62,7 +62,7 @@
                 <select name="course" id="course" th:field="*{course}">
                     <option th:each="d_course: ${courses}" th:value="${d_course.courseTitle}" th:text="${d_course.courseTitle}"></option>
                 </select>
-                <input type="time" name="sub-time" id="sub-time" th:field="*{time}" required>
+<!--                <input type="time" name="sub-time" id="sub-time" th:field="*{time}" required>-->
                 <input type="date" name="sub-date" id="sub-date" th:field="*{submissionDate}" required>
                 <textarea name="" id="" cols="30" rows="10" placeholder="Instructions" th:field="*{details}" required></textarea>
                 <input type="submit" value="Add">

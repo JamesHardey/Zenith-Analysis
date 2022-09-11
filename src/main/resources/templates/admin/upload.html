@@ -10,9 +10,49 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
      crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/modal.css}">
 </head>
 
 <body>
+
+    <div class="modal" id="delete-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close">X</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete ?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-close">No</button>
+                <a id="delete-confirm">Yes</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal edit" id="edit-upload-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Edit Class Uploads </h4>
+                <button class="modal-close">X</button>
+            </div>
+
+            <form th:action="@{/admin/upload/save}" class="form" method="post">
+                <input type="text" name="id" id="id" readonly>
+                <input type="text" name="title" id="title" placeholder="Title" required>
+                <input type="url" name="url" id="url" placeholder="Drive URL" required>
+                <select name="course" id="course" >
+                    <option th:each="course: ${courses}"  th:value="${course.courseTitle}" th:text="${course.courseTitle}"></option>
+                </select>
+                <textarea name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+                <div class="modal-footer">
+                    <button class="modal-close">Close</button>
+                    <input type="submit" value="Save">
+                </div>
+            </form>
+        </div>
+    </div>
+
     <aside class="side-bar">
         <div class="side-bar-logo">
             <h1>Zenith-Analysis</h1>
@@ -40,7 +80,7 @@
             <div class="user-wrapper">
                 <div class="dp-container">
                     <div class="dp-image">
-                        <h3 th:text="${adminDisplay.firstCharacter}">J</h3>
+                        <h3 th:text="${adminDisplay.firstCharacter}"></h3>
                     </div>
                     <div class="arrow-container"></div>
                     <div class="profile">
@@ -62,6 +102,7 @@
                     <tr>
                         <th>S/N</th>
                         <th>Upload Title</th>
+                        <th>URL</th>
                         <th>Upload Date</th>
                         <th>Actions</th>
                     </tr>
@@ -71,9 +112,15 @@
                         <td th:text="${iterator.count}"></td>
                         <td th:text="${upload.title}"></td>
                         <td th:text="${upload.url}"></td>
+                        <td th:text="${upload.uploadDate}"></td>
                         <td class="actions">
                             <div>
-                                <a th:href="@{/admin/upload/delete/{id} (id=${upload.id})}" class="delete-btn action-btn">Delete</a>
+                                <a th:href="@{/admin/upload/delete/{id} (id=${upload.id})}"
+                                   class="delete-btn action-btn">Delete</a>
+                            </div>
+                            <div>
+                                <a th:href="@{/admin/upload/{id} (id=${upload.id})}"
+                                   class="allow-btn action-btn upload-edit">Edit</a>
                             </div>
                         </td>
                     </tr>
@@ -89,6 +136,7 @@
     </div>
 
     <script src="../js/admin.js"></script>
+    <script src="../js/modal.js"></script>
 </body>
 
 </html>

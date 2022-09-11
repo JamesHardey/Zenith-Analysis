@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 @Service
 public class ZenithEmailSenderServices {
@@ -17,15 +18,19 @@ public class ZenithEmailSenderServices {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendEmail(String subject, String body, String... toEmail)
+    public void sendEmail(String subject, String body, List<String> emails)
             throws MessagingException, UnsupportedEncodingException {
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("no-reply@zenith-analysis.com");
-        message.setTo(toEmail);
         message.setText(body);
         message.setSubject(subject);
-        mailSender.send(message);
+        emails.stream()
+                .forEach((email -> {
+                    message.setTo(email);
+                    mailSender.send(message);
+                }));
+
     }
 
     public void sendVerificationEmail(String email, String siteURL)

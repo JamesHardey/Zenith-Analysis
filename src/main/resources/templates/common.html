@@ -1,0 +1,115 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="mainHeader">
+    <header class="nav">
+        <div class="max-width">
+            <nav class="navbar">
+                <a class="logo" th:href="@{/}">Zenith <span>Analysis</span></a>
+                <div class="nav-right">
+                    <div>
+                        <ul>
+                            <li><a th:href="@{/}">Home</a></li>
+                            <li><a th:href="@{/about}">About Us</a></li>
+                            <li><a th:href="@{/contact-us}">Contact</a></li>
+                            <li><a th:href="@{/courses}">Course Portfolio</a></li>
+                            <li><a th:href="@{/events}">Event</a></li>
+                        </ul>
+                        <div class="login-register">
+                            <a th:href="@{/login}" class="btn">Login</a>
+                            <a th:href="@{/register}" class="btn">Register</a>
+                        </div>
+                        <div class="menu-btn">
+                            <i class="fas fa-bars btn-menu open-menu"></i>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+</div>
+
+<div th:fragment="footer">
+    <footer class="footer-section">
+        <div class="max-width">
+            <div class="footer-content">
+
+                <div class="footer-left">
+                    <div class="footer-contact-us">
+                        <div class="image-circle">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <p>1290 Stiven Street Raleigh,
+                            <br><strong>London</strong>
+                        </p>
+                    </div>
+                    <div class="footer-contact-us">
+                        <div class="image-circle">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <p>
+                            (+44)7498905840
+                            <br>
+                            (+44)7868204431
+                        </p>
+                    </div>
+                    <div class="footer-contact-us">
+                        <div class="image-circle">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <p>mayorscott13@gmail.com
+                            <br>
+                            horlaneakhel@gmail.com
+                        </p>
+                    </div>
+                </div>
+                <div class="footer-right">
+                    <h4>About the company</h4>
+                    <p>Our company is a sure plug in achieving your certification dreams
+                        in SCF, IIBA, CCBA, BCS, CBAP, ACC</p>
+                    <div class="footer-social-media">
+                        <div><i class="fab fa-facebook-f facebook"></i></div>
+                        <div><i class="fab fa-twitter twitter"></i></div>
+                        <div><i class="fab fa-youtube youtube"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script th:src="@{/js/s-media.js}"></script>
+    </footer>
+</div>
+
+
+<div th:fragment="userHeader">
+    <header class="nav">
+        <div class="max-width">
+            <nav class="navbar">
+                <a class="logo" th:href="@{/}">Zenith <span>Analysis</span></a>
+                <div class="nav-right">
+                    <div>
+                        <ul>
+                            <li><a th:href="@{/home}">Home</a></li>
+                            <li><a th:href="@{/home/courses}">Course Portfolio</a></li>
+                            <li><a th:href="@{/home/contact-us}">Contact</a></li>
+                            <li><a th:href="@{/home/events}">Event</a></li>
+                        </ul>
+                        <div class="login-register">
+                            <form th:action="@{/logout}" class="btn" method="post">
+                                <input type="submit" class="btn" value="Logout">
+                            </form>
+                        </div>
+                        <div class="menu-btn">
+                            <i class="fas fa-bars btn-menu open-menu"></i>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+</div>
+
+</body>
+</html>

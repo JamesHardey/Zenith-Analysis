@@ -2,277 +2,65 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <title>Zenith-Analysis | Training you to being a business owner</title>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zenith-Analysis | Training you to being a business owner</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
+          crossorigin="anonymous">
     <link rel="shortcut icon" href="http://www.example.com/myicon.ico" />
     <link rel="stylesheet" href="../css/course.css">
 </head>
 
 <body>
-    <header class="nav">
-        <div class="max-width">
-            <nav class="navbar">
-                <a class="logo" th:href="@{/}">Zenith <span>Analysis</span></a>
-                <div class="nav-right">
-                    <div>
-                        <ul>
-                            <li><a th:href="@{/home}">Home</a></li>
-                            <li><a th:href="@{/home/courses}">Course Portfolio</a></li>
-                            <li><a th:href="@{/home/assignment}">Assignments</a></li>
-                            <li><a th:href="@{/home/contact-us}">Contact</a></li>
-                            <li><a th:href="@{/home/events}">Event</a></li>
-                        </ul>
-                        <div class="login-register">
-                            <form th:action="@{/logout}" class="btn" method="post">
-                                <input type="submit" class="btn" value="Logout">
-                            </form>
-                        </div>
-                        <div class="menu-btn">
-                            <i class="fas fa-bars btn-menu open-menu"></i>
-                        </div>
-
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </header>
-
+    <div th:replace="common::userHeader"></div>
     <section class="main-section-content">
         <div class="max-width">
 
             <div class="course-list-section">
-                <h2>Courses</h2>
-                <div class="all-courses">
-                    <ul class="list-item">
-                        <li th:each="course: ${courses}">
-                            <div class="course-card">
-                                <div class="img-cont">
-                                    <img src="assets/bus1.jpg" alt="">
+                <h2 class="title">Courses</h2>
+                <ul class="list-item">
+                    <li th:each="course: ${courses}">
+                        <div class="course-card">
+
+                            <div class="left-side">
+                                <div class="image">
+                                    <img th:src="@{${'/upload/'+course.imageUrl}}" alt="">
                                 </div>
-
-                                <div class="course-right-side">
+                                <div class="bottom">
+                                    <div class="course-price" th:text="'&pound' +${course.price}"></div>
                                     <div>
-                                        <h5 th:text="${course.title}"></h5>
-                                        <p th:text="${course.details}"></p>
-                                    </div>
-
-                                    <div class="course-card-bottom">
-                                        <div class="price-tag" th:text="'Price: &pound' +${course.price}"></div>
-                                        <a th:href="@{/contact-us}" class="enroll-btn">Click to Enroll</a>
+                                        <a class="btn" th:href="@{/home/contact-us}">Click to Enroll</a>
                                     </div>
                                 </div>
                             </div>
-                        </li>
 
+                            <div class="right-side">
+                                <div class="top">
+                                    <p class="course-title" th:text="${course.title}"></p>
+                                    <p class="course-desc" th:text="${course.details}"></p>
+                                </div>
 
-<!--                        <li>-->
-<!--                            <a th:href="@{/home/contact-us}">-->
-<!--                                <div class="course-card">-->
-<!--                                    <img src="../assets/bus1.jpg" alt="">-->
-<!--                                    <div class="course-right-side">-->
-<!--                                        <h5>Business Systems Analysis</h5>-->
-<!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis-->
-<!--                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>-->
-<!--                                        <div class="rating">-->
+                                <div class="mid-section">
+                                    <p>Level: Intermediate</p>
+                                    <p>Duration: 2-months</p>
+                                </div>
 
-<!--                                        </div>-->
-<!--                                        <div class="course-card-bottom">-->
-<!--                                            <div class="price-tag">Price: $110</div>-->
-<!--                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <a th:href="@{/home/contact-us}">-->
-<!--                                <div class="course-card">-->
-<!--                                    <img src="../assets/bus2.jpg" alt="">-->
-<!--                                    <div class="course-right-side">-->
-<!--                                        <h5>Business Process Modeling</h5>-->
-<!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis-->
-<!--                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>-->
-
-<!--            -->
-<!--                                        <div class="course-card-bottom">-->
-<!--                                            <div class="price-tag">Price: $110</div>-->
-<!--                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>-->
-<!--                                        </div>-->
-
-<!--                                    </div>-->
-
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                        </li>-->
-
-<!--                        <li>-->
-<!--                            <a th:href="@{/home/contact-us}">-->
-<!--                                <div class="course-card">-->
-<!--                                    <img src="../assets/bus1.jpg" alt="">-->
-<!--                                    <div class="course-right-side">-->
-<!--                                        <h5>Business Systems Analysis</h5>-->
-<!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis-->
-<!--                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>-->
-<!--                                        <div class="rating">-->
-
-<!--                                        </div>-->
-<!--                                        <div class="course-card-bottom">-->
-<!--                                            <div class="price-tag">Price: $110</div>-->
-<!--                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <a th:href="@{/home/contact-us}">-->
-<!--                                <div class="course-card">-->
-<!--                                    <img src="../assets/bus2.jpg" alt="">-->
-<!--                                    <div class="course-right-side">-->
-<!--                                        <h5>Business Process Modeling</h5>-->
-<!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis-->
-<!--                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>-->
-
-<!--            -->
-<!--                                        <div class="course-card-bottom">-->
-<!--                                            <div class="price-tag">Price: $110</div>-->
-<!--                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>-->
-<!--                                        </div>-->
-
-<!--                                    </div>-->
-
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                        </li>-->
-
-<!--                        <li>-->
-<!--                            <a th:href="@{/home/contact-us}">-->
-<!--                                <div class="course-card">-->
-<!--                                    <img src="../assets/bus1.jpg" alt="">-->
-<!--                                    <div class="course-right-side">-->
-<!--                                        <h5>Business Systems Analysis</h5>-->
-<!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis-->
-<!--                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>-->
-<!--                                        <div class="rating">-->
-
-<!--                                        </div>-->
-<!--                                        <div class="course-card-bottom">-->
-<!--                                            <div class="price-tag">Price: $110</div>-->
-<!--                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <a th:href="@{/home/contact-us}">-->
-<!--                                <div class="course-card">-->
-<!--                                    <img src="../assets/bus2.jpg" alt="">-->
-<!--                                    <div class="course-right-side">-->
-<!--                                        <h5>Business Process Modeling</h5>-->
-<!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis-->
-<!--                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>-->
-
-<!--            -->
-<!--                                        <div class="course-card-bottom">-->
-<!--                                            <div class="price-tag">Price: $110</div>-->
-<!--                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>-->
-<!--                                        </div>-->
-
-<!--                                    </div>-->
-
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                        </li>-->
-
-<!--                        <li>-->
-<!--                            <a th:href="@{/home/contact-us}">-->
-<!--                                <div class="course-card">-->
-<!--                                    <img src="../assets/bus1.jpg" alt="">-->
-<!--                                    <div class="course-right-side">-->
-<!--                                        <h5>Business Systems Analysis</h5>-->
-<!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis-->
-<!--                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>-->
-<!--                                        <div class="rating">-->
-
-<!--                                        </div>-->
-<!--                                        <div class="course-card-bottom">-->
-<!--                                            <div class="price-tag">Price: $110</div>-->
-<!--                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <a th:href="@{/home/contact-us}">-->
-<!--                                <div class="course-card">-->
-<!--                                    <img src="../assets/bus2.jpg" alt="">-->
-<!--                                    <div class="course-right-side">-->
-<!--                                        <h5>Business Process Modeling</h5>-->
-<!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad enim blanditiis-->
-<!--                                            rerum minima autem cumque possimus fugiat saepe obcaecati. Tenetur.</p>-->
-<!--                                        <div class="course-card-bottom">-->
-<!--                                            <div class="price-tag">Price: $110</div>-->
-<!--                                            <a th:href="@{/home/contact-us}" class="enroll-btn">Click to Enroll</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                        </li>-->
-
-                    </ul>
-                </div>
+                                <div class="bottom">
+                                    <p>Prerequisites: None</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </section>
-
-    <footer class="footer-section">
-        <div class="max-width">
-            <div class="footer-content">
-
-                <div class="footer-left">
-                    <div class="footer-contact-us">
-                        <div class="image-circle">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <p>1290 Stiven Street Raleigh,
-                            <br><strong> New York City</strong>
-                        </p>
-                    </div>
-                    <div class="footer-contact-us">
-                        <div class="image-circle">
-                            <i class="fas fa-phone-alt"></i>
-                        </div>
-                        <p>(+45)24361823</p>
-                    </div>
-                    <div class="footer-contact-us">
-                        <div class="image-circle">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <p>example@gmail.com</p>
-                    </div>
-                </div>
-                <div class="footer-right">
-                    <h4>About the company</h4>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione provident maiores numquam,
-                        cupiditate voluptatem dolores! Provident in laboriosam quod numquam corporis autem rerum,
-                        inventore, voluptatum doloremque illum, dicta repellendus vitae!</p>
-                    <div class="footer-social-media">
-                        <div><i class="fab fa-facebook-f"></i></div>
-                        <div><i class="fab fa-twitter"></i></div>
-                        <div><i class="fab fa-youtube"></i></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
+    <div th:replace="common::footer"></div>
     <script th:src="@{/js/script.js}"></script>
 </body>
 

@@ -4,6 +4,8 @@
 }
 
 
+
+
 .event-page{
     padding-top: 100px;
     background-color: #fffffe;
@@ -17,13 +19,15 @@
 
 .event-page .max-width .event-home{
     width: 80%;
-    margin: 40px auto;
+    margin: 40px auto 0;
     border: 2px solid #eee;
     border-width: 2px 2px 0 2px;
     border-radius: 20px;
     padding: 40px 40px;
     position: relative;
 }
+
+
 .shape{
     position: absolute;
     transform: rotateZ(45deg);
@@ -40,7 +44,7 @@
     font-size: 36px;
     font-weight: 700;
     text-align: left;
-    color: #f21137;
+    color: #000080;
 }
 
 .event-page .max-width .event-home .event-year h3{
@@ -48,7 +52,7 @@
     border: 1px solid #e4e4e4;
     border-width: 0 0 1px 0;
     font-weight: 500;
-    
+
 }
 
 .event-page .max-width .event-home .event-year{
@@ -105,6 +109,52 @@
     font-size: 14px;
     font-weight: 600;
 }
+
+
+.event-page .event-year .linker {
+    width: 100%;
+    display: flex;
+    margin-top: 80px;
+    margin-bottom: 20px;
+    gap: 15px;
+    justify-content: center;
+}
+
+.event-page .event-year .linker ul {
+    display: flex;
+    gap: 10px;
+    text-align: right;
+}
+
+
+.event-page .event-year .linker ul li a {
+    display: flex;
+    padding: 0.1rem;
+    justify-content: center;
+    align-items: center;
+    background-color: #00f;
+    opacity: .6;
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    font-size: 0.7rem;
+    transition: all 0.3s ease;
+}
+
+.event-page .event-year .linker ul li a:hover {
+    transform: translateY(-3px);
+    opacity: 1;
+}
+
+.event-page .event-year .linker ul li.active a {
+    background-color: rgb(5, 5, 173);
+    opacity: 1;
+}
+
+
+
+
+
 
 @media (max-width: 967px){
     .event-page .max-width .event-home{

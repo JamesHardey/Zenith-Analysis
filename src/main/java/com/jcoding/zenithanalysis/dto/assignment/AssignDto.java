@@ -24,6 +24,15 @@ public class AssignDto {
         this.submissionDate = submissionDate;
     }
 
+    public AssignDto(Long id,String title,String course, String details,String submissionDate) {
+        this.id = id;
+        this.title = title;
+        this.course = course;
+        this.details = details;
+        this.submissionDate = submissionDate;
+    }
+
+
     public AssignDto(Long id,String title,String course, String details, String uploadDate,String submissionDate) {
         this.id = id;
         this.title = title;

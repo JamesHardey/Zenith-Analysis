@@ -2,12 +2,14 @@ package com.jcoding.zenithanalysis.controller;
 
 
 import com.jcoding.zenithanalysis.dto.contact.ContactUsDto;
+import com.jcoding.zenithanalysis.dto.event.EventCard;
 import com.jcoding.zenithanalysis.dto.user.*;
 import com.jcoding.zenithanalysis.entity.AppUser;
 import com.jcoding.zenithanalysis.services.AdminServices;
 import com.jcoding.zenithanalysis.services.AppUserServices;
 import com.jcoding.zenithanalysis.utils.ConstantPages;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,8 +32,16 @@ public class AppController {
 
     @GetMapping
     public String home(Authentication authentication){
+        System.out.println(authentication);
         if(authentication != null && authentication.isAuthenticated()){
-            return "redirect:/home";
+            CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
+            System.out.println(user.getUser().getRole().getName());
+            return (user
+                    .getUser()
+                    .getRole()
+                    .getName()
+                    .equals("ADMIN"))?
+                    "redirect:/admin":"redirect:/home";
         }
         return ConstantPages.HOME_PAGE;
     }
@@ -65,17 +75,24 @@ public class AppController {
     }
 
 
-
-
     @GetMapping("/events")
     public String getEventPage(Authentication authentication, Model model){
+        return getEventByPage(authentication, model, 1);
+    }
+
+
+    @GetMapping("/events/{pageNumber}")
+    public String getEventByPage(Authentication authentication, Model model, @PathVariable int pageNumber){
         if(authentication != null && authentication.isAuthenticated()){
             return "redirect:/home/events";
         }
-        model.addAttribute("modelCards", appUserServices.getEventsCard());
+        Page<EventCard> eventCards = appUserServices.getEventsCard(pageNumber);
+        model.addAttribute("modelCards", eventCards.getContent());
+        model.addAttribute("eventPages",eventCards.getTotalPages());
+        model.addAttribute("currentActPage",pageNumber);
+        System.out.println("Pages "+eventCards.getTotalPages());
         return ConstantPages.EVENT_PAGE;
     }
-
 
 
 

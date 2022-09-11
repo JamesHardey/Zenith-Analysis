@@ -10,9 +10,47 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
      crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/modal.css}">
 </head>
 
 <body>
+
+    <div class="modal" id="delete-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close">X</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete ?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-close">No</button>
+                <a id="delete-confirm">Yes</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal edit" id="edit-courses-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Edit Course </h4>
+                <button class="modal-close">X</button>
+            </div>
+            <form th:action="@{/admin/course/save}" class="form" method="post" enctype="multipart/form-data">
+                <input type="text" name="id" id="id" readonly>
+                <input type="text" name="title" id="title" placeholder="Title" required>
+                <input type="number" name="price" id="price" placeholder="Price" required>
+                <textarea name="details" id="details" cols="30" rows="10" minlength="70"
+                          maxlength="250" placeholder="Course Description" required></textarea>
+                <input type="file" name="file" id="file" accept="image/png, image/jpeg">
+                <div class="modal-footer">
+                    <button class="modal-close">Close</button>
+                    <input type="submit" value="Save">
+                </div>
+            </form>
+        </div>
+    </div>
+
     <aside class="side-bar">
         <div class="side-bar-logo">
             <h1>Zenith-Analysis</h1>
@@ -55,7 +93,6 @@
             </div>
 
         </header>
-
         <div class="table-section">
             <table class="tables">
                 <thead>
@@ -75,15 +112,19 @@
                         <td th:text="${d_course.numberOfStudents}"></td>
                         <td class="actions">
                             <div>
-                                <a th:href="@{/admin/course/delete/{id} (id=${d_course.id})}" class="delete-btn action-btn">Delete</a>
+                                <a th:href="@{/admin/course/delete/{id} (id=${d_course.id})}"
+                                   class="delete-btn action-btn">Delete</a>
+                            </div>
+
+                            <div>
+                                <a th:href="@{/admin/course/{id} (id=${d_course.id})}"
+                                   class="allow-btn action-btn course-edit">Edit</a>
                             </div>
                         </td>
                     </tr>
-                    
                 </tbody>
             </table>
         </div>
-
 
         <div>
             <a th:href="@{/admin/add-course}" class="btn add-course-btn">Add Course</a>
@@ -92,5 +133,6 @@
     </div>
 
     <script src="../js/admin.js"></script>
+    <script src="../js/modal.js"></script>
 </body>
 </html>

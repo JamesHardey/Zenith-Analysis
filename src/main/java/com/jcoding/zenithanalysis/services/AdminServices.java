@@ -25,13 +25,11 @@ import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -75,7 +73,7 @@ public class AdminServices {
         }
 
         try {
-            zenithEmailSenderServices.sendEmail("Link to Class Video", body, String.valueOf(emails));
+            zenithEmailSenderServices.sendEmail("Link to Class Video", body, emails);
         } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -110,12 +108,11 @@ public class AdminServices {
         deleteCourse(course);
     }
 
-    @Transactional
     public boolean addCourse(CoursesDto courseDto
-            //, MultipartFile file
+            , MultipartFile file
     ){
         courseDto.setPrice(courseDto.getPrice());
-        //courseDto.setImageUrl(file.getOriginalFilename());
+        courseDto.setImageUrl(file.getOriginalFilename());
         Course course = new Course(
                 courseDto.getTitle(),
                 courseDto.getPrice(),
@@ -123,24 +120,57 @@ public class AdminServices {
                 courseDto.getImageUrl()
         );
 
-         courseRepository.save(course);
-//        Path folderPath = Paths.get(
-//                "./upload/"
-//                        +savedCourse.getId()
-//        );
-//
-//        try {
-//            Files.createDirectory(folderPath);
-//            String path1 = folderPath.toString();
-//            Path path = Paths.get(path1, file.getOriginalFilename());
-//            Files.write(path, file.getBytes());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            courseRepository.delete(course);
-//            return false;
-//        }
+        Course savedCourse = courseRepository.save(course);
+        Path folderPath = Paths.get(
+                "upload/"+savedCourse.getId()
+        ).toAbsolutePath();
+
+        try {
+            Files.deleteIfExists(folderPath);
+            Files.createDirectory(folderPath);
+            String path1 = folderPath.toString();
+            Path path = Paths.get(path1, file.getOriginalFilename());
+            Files.write(path, file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+            courseRepository.delete(course);
+            return false;
+        }
         return true;
     }
+
+    public CoursesDto getCourseById(Long id){
+        Course course = courseRepository.findById(id).get();
+        CoursesDto coursesDto = new CoursesDto();
+        coursesDto.setId(course.getId());
+        coursesDto.setTitle(course.getCourseTitle());
+        coursesDto.setPrice(course.getCoursePrice());
+        coursesDto.setDetails(course.getCourseDetails());
+        return coursesDto;
+    }
+
+    public void updateCourse(CoursesDto coursesDto, MultipartFile file){
+        Course course = courseRepository.findById(coursesDto.getId()).get();
+        course.setCourseTitle(coursesDto.getTitle());
+        course.setCoursePrice(coursesDto.getPrice());
+        course.setCourseDetails(coursesDto.getDetails());
+        if(coursesDto.getImageUrl() != null) {
+            course.setImageUrl(coursesDto.getImageUrl());
+            Path folderPath = Paths.get(
+                    "upload/"+course.getId()
+            ).toAbsolutePath();
+            try {
+                if(!Files.exists(folderPath)) Files.createDirectory(folderPath);
+                String path1 = folderPath.toString();
+                Path path = Paths.get(path1, file.getOriginalFilename());
+                Files.write(path, file.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        courseRepository.save(course);
+    }
+
 
     public void deleteRegisterCourse(RegisterCourse registerCourse){
         registerCourseRepo.delete(registerCourse);
@@ -149,6 +179,7 @@ public class AdminServices {
     public RegisterCourse addCourseRegister(RegisterCourse registerCourse){
         return registerCourseRepo.save(registerCourse);
     }
+
 
     public List<EventsDto> getEvents(){
         List<EventsDto> eventsDtoList = new ArrayList<>();
@@ -228,6 +259,7 @@ public class AdminServices {
         return uploadDtoList;
     }
 
+
     public boolean addAssignment(AssignDto assignDto){
         Optional<Course> courseAvailability = courseRepository.findByCourseTitle(assignDto.getCourse());
         if(courseAvailability.isEmpty()) return false;
@@ -238,9 +270,32 @@ public class AdminServices {
         newAssignment.setUploadDate(LocalDate.now().toString());
 
         Assignment savedAssignment = assignmentRepo.save(newAssignment);
-        if(!sendAssignment(savedAssignment)) return false;
+        sendAssignment(savedAssignment);
         Long id = savedAssignment.getId();
         return id > 0;
+    }
+
+    public AssignDto getAssignmentById(Long id){
+        Assignment ass = assignmentRepo.findById(id).get();
+        return new AssignDto(
+                ass.getId(),
+                ass.getTitle(),
+                ass.getCourse().getCourseTitle(),
+                ass.getInstructions(),
+                ass.getSubmissionDate()
+        );
+    }
+
+    public void updateAssignment(AssignDto assignDto){
+        Assignment assignment = assignmentRepo.findById(assignDto.getId()).get();
+        assignment.setTitle(assignDto.getTitle());
+        assignment.setCourse(
+                courseRepository.findByCourseTitle(
+                        assignDto.getCourse()
+                ).get());
+        assignment.setInstructions(assignDto.getDetails());
+        assignment.setSubmissionDate(assignDto.getSubmissionDate());
+        assignmentRepo.save(assignment);
     }
 
     public boolean addUpload(UploadDto uploadDto){
@@ -250,9 +305,32 @@ public class AdminServices {
         upload.setCourse(course);
         upload.setMessage(uploadDto.getMessage());
         upload.setUrl(uploadDto.getUrl());
+        upload.setUploadDate(LocalDate.now().toString());
         uploadRepo.save(upload);
         sendUpload(upload);
         return true;
+    }
+
+    public UploadDto getUploadById(Long id){
+        Uploads uploads = uploadRepo.findById(id).get();
+        UploadDto uploadDto = new UploadDto();
+        uploadDto.setId(uploads.getId());
+        uploadDto.setUrl(uploads.getUrl());
+        uploadDto.setTitle(uploads.getTitle());
+        uploadDto.setCourse(uploads.getCourse().getCourseTitle());
+        uploadDto.setMessage(uploads.getMessage());
+        return uploadDto;
+    }
+
+    public void updateUploadClass(UploadDto uploadDto){
+        Uploads upload = uploadRepo.findById(uploadDto.getId()).get();
+        Course course = courseRepository.findByCourseTitle(uploadDto.getCourse()).get();
+        upload.setTitle(uploadDto.getTitle());
+        upload.setCourse(course);
+        upload.setMessage(uploadDto.getMessage());
+        upload.setUrl(uploadDto.getUrl());
+        upload.setUploadDate(LocalDate.now().toString());
+        uploadRepo.save(upload);
     }
 
     public boolean addEvents(EventsDto eventsDto){
@@ -266,10 +344,30 @@ public class AdminServices {
         return true;
     }
 
+    public void editEvent(EventsDto eventsDto){
+        Events event = eventsRepo.findById(eventsDto.getId()).get();
+        event.setTitle(eventsDto.getTitle());
+        event.setTime(formatTime(eventsDto.getTime()));
+        event.setDate(eventsDto.getDate());
+        eventsRepo.save(event);
+    }
+
     public void deleteEvent(Long id){
         Events events = eventsRepo.findById(id).get();
         eventsRepo.delete(events);
     }
+
+    public EventsDto getEventById(Long id){
+        Events event = eventsRepo.findById(id).get();
+        return new EventsDto(
+                event.getId(),
+                event.getTitle(),
+                event.getDetails(),
+                event.getDate(),
+                reFormatTime(event.getTime())
+                );
+    }
+
 
     public boolean addCourse(){
         return false;
@@ -301,7 +399,7 @@ public class AdminServices {
 
         if(emails.length >0){
             try {
-                zenithEmailSenderServices.sendEmail(subject,body,emails);
+                zenithEmailSenderServices.sendEmail(subject,body, Arrays.asList(emails));
             } catch (MessagingException | UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -328,7 +426,7 @@ public class AdminServices {
         };
 
         try {
-            zenithEmailSenderServices.sendEmail(subject,body,emails);
+            zenithEmailSenderServices.sendEmail(subject,body, List.of(emails));
         } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -350,7 +448,7 @@ public class AdminServices {
         String body = uploads.getMessage();
 
         try {
-            zenithEmailSenderServices.sendEmail(subject, body, String.valueOf(emails));
+            zenithEmailSenderServices.sendEmail(subject, body, emails);
         } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -466,6 +564,17 @@ public class AdminServices {
         try {
             Date tim = format_24.parse(time);
             time = new SimpleDateFormat("hh:mm aa").format(tim);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return time;
+    }
+
+    private String reFormatTime(String time){
+        SimpleDateFormat format_24 = new SimpleDateFormat("hh:mm aa");
+        try {
+            Date tim = format_24.parse(time);
+            time = new SimpleDateFormat("HH:mm").format(tim);
         } catch (ParseException e) {
             e.printStackTrace();
         }

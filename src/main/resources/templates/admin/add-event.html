@@ -62,7 +62,7 @@
                 <input type="time" name="sub-time" id="sub-time" th:field="*{time}" placeholder="Time" required>
                 <input type="date" name="sub-date" id="sub-date" th:field="*{date}" placeholder="Date" required>
                 <textarea name="event-details" id="event-details" cols="30" rows="10" th:field="*{details}"
-                          placeholder="Details" required></textarea>
+                          maxlength="170" minlength="50" placeholder="Details" required></textarea>
                 <input type="submit" value="Add">
             </form>
 
