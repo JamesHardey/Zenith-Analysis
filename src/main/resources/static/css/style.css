@@ -527,7 +527,7 @@ img{
     flex: 25%;
     text-align: left;
     height: 350px;
-    min-height: 420px;
+    min-height: 450px;
     padding: 70px 30px 15px;
     position: relative;
     border: 1px solid #6e6c6c;
@@ -811,7 +811,8 @@ img{
 
 /* End of footer */
 
-
+@media (max-width: 1140px){
+}
 
 @media (max-width: 1104px){
 

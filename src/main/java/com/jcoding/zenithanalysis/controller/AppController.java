@@ -32,7 +32,6 @@ public class AppController {
 
     @GetMapping
     public String home(Authentication authentication){
-        System.out.println(authentication);
         if(authentication != null && authentication.isAuthenticated()){
             CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
             System.out.println(user.getUser().getRole().getName());

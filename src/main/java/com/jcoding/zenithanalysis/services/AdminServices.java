@@ -97,7 +97,20 @@ public class AdminServices {
     }
 
     public void deleteCourse(Course course){
-        courseRepository.delete(course);
+        try {
+            if(course.getImageUrl() != null){
+                Files.deleteIfExists(
+                        Paths.get(
+                        "upload/"+course.getId()+
+                                "/"+course.getImageUrl()
+                        ));
+
+                Files.deleteIfExists(Paths.get("upload/"+course.getId()));
+            }
+            courseRepository.delete(course);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteCourse(Long courseId){
@@ -221,7 +234,15 @@ public class AdminServices {
 
             }
             index++;
-            registeredCourses.add(new RegisteredCourse(index,course.getId() ,course.getCourseTitle(), course.getCoursePrice(),count));
+            registeredCourses.add(
+                    new RegisteredCourse(
+                            index,
+                            course.getId() ,
+                            course.getCourseTitle(),
+                            course.getCoursePrice(),
+                            count
+                    )
+            );
         }
         return registeredCourses;
     }
@@ -581,4 +602,19 @@ public class AdminServices {
         return time;
     }
 
+
+    public boolean uploadResume(String pathName,MultipartFile file){
+        Path path1 = Paths.get(
+                "upload/"+pathName
+        ).toAbsolutePath();
+        try {
+            Files.deleteIfExists(path1);
+            Files.createFile(path1);
+            Files.write(path1, file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

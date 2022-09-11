@@ -310,6 +310,7 @@ public class AdminController {
         return ConstantPages.ADMIN_ADD_ADMIN;
     }
 
+
     @PostMapping("/add-admin")
     public String addNewAdmin(@ModelAttribute("adminDto") NewAdminDto adminDto){
         if(adminServices.findUserByEmail(adminDto.getEmail()))
@@ -336,28 +337,20 @@ public class AdminController {
             @RequestParam("file") MultipartFile file
     ){
 
-        if( file!= null && file.getOriginalFilename().endsWith(".pdf")){
+        if(!file.isEmpty() && file.getOriginalFilename().endsWith(".pdf")){
             String path = "";
             System.out.println(resumeUploadDto.getType());
             if(resumeUploadDto.getType().equals("Resume")){
-                path = resumePath+"resume.pdf";
+                path = "resume/resume.pdf";
             }
-            else path = coverLetterPath+"cover-letter.pdf";
+            else path = "cover_letter/cover-letter.pdf";
 
-            Path path1 = Paths.get(path);
-
-            try {
-                Files.deleteIfExists(path1);
-                Files.createFile(path1);
-                Files.write(path1, file.getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "redirect:/admin/add-resume?failed";
+            if(adminServices.uploadResume(path,file)){
+                return "redirect:/admin/";
             }
-            return "redirect:/admin/";
+            else return "redirect:/admin/add-resume?failed";
         }
         return "redirect:/admin/add-resume?failed";
     }
-
 
 }
