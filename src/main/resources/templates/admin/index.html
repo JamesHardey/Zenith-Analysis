@@ -13,54 +13,18 @@
 </head>
 
 <body>
-    <aside class="side-bar">
-        <div class="side-bar-logo">
-            <h1>Zenith-Analysis</h1>
-        </div>
-        <div class="side-menu">
-            <ul>
-                <li><a th:href="@{/admin}"><span>Dashboard</span></a></li>
-                <li><a th:href="@{/admin/users}"><span>Users</span></a></li>
-                <li><a th:href="@{/admin/assignments}"><span>Assignment</span></a></li>
-                <li><a th:href="@{/admin/courses}"><span>Courses</span></a></li>
-                <li><a th:href="@{/admin/uploads}"><span>Upload</span></a></li>
-                <li><a th:href="@{/admin/events}"><span>Events</span></a></li>
-            </ul>
-        </div>
-    </aside>
+
+    <div th:replace="admin_common::adminNav"></div>
 
     <div class="main-content">
-        <header>
-            <h1>
-                <div class="btn-menu">
-                    <i class="fas fa-bars open-menu"></i>
-                </div>
-                Administrator
-            </h1>
-            <div class="user-wrapper">
-                <div class="dp-container">
-                    <div class="dp-image">
-                        <h3 th:text="${adminDisplay.firstCharacter}">J</h3>
-                    </div>
-                    <div class="arrow-container"></div>
-                    <div class="profile">
-                        <h5 th:text="${adminDisplay.name}"></h5>
-                        <small th:text="${adminDisplay.email}"></small>
-                        <p>Admin</p>
-                        <form th:action="@{/logout}" method="post">
-                            <input type="submit" class="btn" value="Logout">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <div th:replace="admin_common::topMenu"></div>
 
         <main>
             <div class="cards">
                 <div class="card">
                     <div>
                         <h1 th:text="${courseNumber}"></h1>
-                        <span>Courses</span>
+                        <span>Modules</span>
                     </div>
                 </div>
                 <div class="card">
@@ -91,7 +55,7 @@
                         <h2>Users</h2>
                         <a th:href="@{/admin/users}" class="btn">See all<span></span></a>
                     </div>
-                    <table>
+                    <table style="width: 100%;">
                         <thead>
                             <tr>
                                 <th>S/N</th>
@@ -114,14 +78,14 @@
 
                 <div class="courses-table">
                     <div class="card-header">
-                        <h2>Courses</h2>
+                        <h2>Modules</h2>
                         <a th:href="@{/admin/courses}" class="btn">See all<span></span></a>
                     </div>
-                    <table>
+                    <table style="width: 100%;">
                         <thead>
                             <tr>
                                 <th >S/N</th>
-                                <th>Course</th>
+                                <th>Module</th>
                                 <th>No. of Applicants</th>
                             </tr>
                         </thead>

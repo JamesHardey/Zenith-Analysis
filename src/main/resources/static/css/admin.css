@@ -252,8 +252,9 @@ header.active{
 
 table{
     border-collapse: collapse;
-    width: 100%;
-    overflow-x: scroll;
+    width: fit-content;
+    margin: 0 auto;
+    overflow-x: auto;
 }
 
 
@@ -377,13 +378,18 @@ td{
 }
 
 .table-section{
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 .table-section h2{
     margin: 10px 0;
     text-align: center;
 }
 
+.bottom-btn{
+    width: 100%;
+    margin-top: 30px;
+    text-align: center;
+}
 
 .alert-dialog{
     position: fixed;

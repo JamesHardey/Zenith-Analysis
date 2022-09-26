@@ -1,18 +1,34 @@
 $(document).ready(function(){
 
-    $('#btn-course p').click(function(){
-
-        $('.main .recent-assignment').removeClass('active');
-        $('.main .courses-class').addClass('active');
+    $('.aside-left i').click(function(){
+        $('.aside-left .courses i').toggleClass('show');
+        $('.aside-left .courses .sub-menu').toggleClass('show');
     });
 
-    $('#btn-ass').click(function(){
 
+
+    $('#btn-ass').click(function(){
+        $('.aside-left .courses i').removeClass('show');
+        $('.aside-left .courses .sub-menu').removeClass('show');
         $('.main .courses-class').removeClass('active');
+        $('.main .my-course').removeClass('active');
         $('.main .recent-assignment').addClass('active');
     });
 
 
+    $('.sub-menu li').click(function(){
+        $('.main .courses-class').removeClass('active');
+        $('.main .recent-assignment').removeClass('active');
+        $('.main .my-course').addClass('active');
+    });
+
+    $('#btn-act').click(function(){
+        $('.aside-left .courses i').removeClass('show');
+        $('.aside-left .courses .sub-menu').removeClass('show');
+        $('.main .recent-assignment').removeClass('active');
+        $('.main .my-course').removeClass('active');
+        $('.main .courses-class').addClass('active');
+    });
 
     $('#cv-dis').click(function(){
         $('.aside-right .res-cl-sample .cv-sample').toggleClass('show');
@@ -26,24 +42,12 @@ $(document).ready(function(){
     });
 
 
-    // $('.courses li').click(function(){
-    //     $('.main .recent-assignment').removeClass('active');
-    //     $('.main .courses-class').addClass('active');
-    // })
-
-
-    // $('.assignment li').click(function(){
-    //     $('.main .courses-class').removeClass('active');
-    //     $('.main .recent-assignment').addClass('active');
-    // });
-
     $('.link').click(function(evt){
         let links = document.querySelectorAll('.link');
         links.forEach((n) => {
            n.classList.remove('active')
         });
         evt.currentTarget.classList.add('active');
-        console.log(evt);
     });
 
 });

@@ -1,0 +1,21 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+  <div th:fragment="deleteModal">
+    <div class="modal" id="delete-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="modal-close">X</button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete <span id="item"></span></p>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-close">No</button>
+          <a id="delete-confirm">Yes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

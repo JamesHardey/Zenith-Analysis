@@ -18,27 +18,21 @@
 
 <body>
     <div th:replace="common::mainHeader"></div>
-<!--    <section class="home">-->
-<!--        <div class="max-width">-->
-<!--            <div class="top-home">-->
-<!--                <h3>We teach you to thrive in business</h3>-->
-<!--                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In enim fugiat alias reiciendis temporibus-->
-<!--                    quod-->
-<!--                    facere quibusdam minima provident obcaecati. Vel aperiam sed repellat, perspiciatis qui blanditiis.-->
-<!--                    Vero, nemo! Ipsam!</p>-->
-<!--                <div>-->
-<!--                    <a th:href="@{/register}" class="btn">Get Started</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </section>-->
+
+    <div class="upcoming-events">
+        <div class="latest-event-content">
+            <p>Next Event</p>
+            <p>22, Sept. 2022</p>
+            <a href="">Check it out</a>
+        </div>
+    </div>
 
     <section class="home">
         <div class="slideshow-container">
             <div class="slides fade">
                 <img src="/assets/bus1.jpg" alt="">
                 <div class="text">
-                    <h3 class="slideInFromRight">Welcome to Zenith-Analysis</h3>
+                    <h3 class="slideInFromRight">Welcome to Zenith Analysis</h3>
                     <p class="slideInFromLeft">Zenith-Analysis training at its best.
                         We teach you to thrive in business and analyse it better.
                         We offer the best training and make sure you are successful in your chosen career path</p>
@@ -48,10 +42,10 @@
             <div class="slides fade">
                 <img src="/assets/bus3.jpg" alt="">
                 <div class="text">
-                    <h3 class="slideInFromRight">Welcome</h3>
-                    <p class="slideInFromLeft">Zenith-Analysis training at its best.
-                        We teach you to thrive in business and analyse it better.
-                        We offer the best training and make sure you are successful in your chosen career path</p>
+                    <h3 class="slideInFromRight">Here In Zenith Analysis</h3>
+                    <p class="slideInFromLeft">Learn business analysis skills, fast track your income and build
+                    in your confidence in two months. We are here to help leverage your existing skills and experience
+                    to transform your career as a business analyst without a technical degree or experience</p>
                 </div>
             </div>
 
@@ -59,10 +53,9 @@
             <div class="slides fade">
                 <img src="/assets/bus5.jpg" alt="">
                 <div class="text">
-                    <h3 class="slideInFromRight">Welcome</h3>
-                    <p class="slideInFromLeft">Zenith-Analysis training at its best.
-                        We teach you to thrive in business and analyse it better.
-                        We offer the best training and make sure you are successful in your chosen career path</p>
+                    <h3 class="slideInFromRight">Training Program</h3>
+                    <p class="slideInFromLeft">By the end of the training program, there would be a CV review and
+                    we will teach you how to access 80% of available jobs and tutor you in readiness for interview</p>
                 </div>
             </div>
 
@@ -109,7 +102,7 @@
                         </div>
                     </div>
                     <div class="about-content-image">
-                        <img src="./assets/bi-business-intelligence-roadmap.png">
+                        <img src="./assets/image-zenith.jpg">
                     </div>
                 </div>
 
@@ -155,7 +148,7 @@
                             <a th:href="@{/courses}">
                                 <div class="course">
                                     <img src="assets/bus1.jpg" alt="">
-                                    <div class="price-tag">&pound;1100</div>
+                                    <div class="price-tag">&pound;1200</div>
                                     <h5>Business Systems Analysis</h5>
                                 </div>
                             </a>
@@ -182,7 +175,7 @@
                             <a th:href="@{/courses}">
                                 <div class="course">
                                     <img src="assets/bus4.jpg" alt="">
-                                    <div class="price-tag">&pound;1250</div>
+                                    <div class="price-tag">&pound;800</div>
                                     <h5>Agile Business Analysis Program</h5>
                                 </div>
                             </a>
@@ -191,7 +184,7 @@
                             <a th:href="@{/courses}">
                                 <div class="course">
                                     <img src="assets/bus5.jpg" alt="">
-                                    <div class="price-tag">&pound;1250</div>
+                                    <div class="price-tag">&pound;1200</div>
                                     <h5>Business Analysis</h5>
                                 </div>
                             </a>
@@ -218,7 +211,7 @@
                             <a th:href="@{/courses}">
                                 <div class="course">
                                     <img src="assets/bus8.jpg" alt="">
-                                    <div class="price-tag">$220</div>
+                                    <div class="price-tag">&pound;110</div>
                                     <h5>Product Owner </h5>
                                 </div>
                             </a>
@@ -247,7 +240,7 @@
                                     d="M464 256h-80v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8c-88.4 0-160 71.6-160 160v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48zm-288 0H96v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8C71.6 32 0 103.6 0 192v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48z" />
                             </svg>
                         </div>
-                        <img src="assets/person1.jpg" alt="">
+                        <!--<img src="assets/person1.jpg" alt="">-->
                         <p>I am quite an introvert and I thought business analysis is not for me
                             but this training is well detailed and interactive that I felt very comfortable.
                             I am now very out spoken and I got my ﬁrst business analysis role immediately after
@@ -270,7 +263,7 @@
                                     d="M464 256h-80v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8c-88.4 0-160 71.6-160 160v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48zm-288 0H96v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8C71.6 32 0 103.6 0 192v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48z" />
                             </svg>
                         </div>
-                        <img src="assets/person2.jpg" alt="">
+<!--                        <img src="assets/person2.jpg" alt="">-->
                         <p>The mentorship and support during and after the training is so good that
                             I landed my job after my very ﬁrst interview. I recommend the training
                             because you will never be left alone. The support is so great. Thumbs up</p>
@@ -291,10 +284,9 @@
                                     d="M464 256h-80v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8c-88.4 0-160 71.6-160 160v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48zm-288 0H96v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8C71.6 32 0 103.6 0 192v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48z" />
                             </svg>
                         </div>
-                        <img src="assets/person3.jpg" alt="">
-                        <p>I always have this fear about interview but the support I got from Zenith made my
-                            interview experience so wonderful, the training is also well detailed that
-                            I conquered my fear immediately because I could answer all my interview question.
+<!--                        <img src="assets/person3.jpg" alt="">-->
+                        <p>I always have this fear about interview but Zenith helped me conquered that fear
+                            with the help of the training which was well detailed.
                             I am now a certified business analyst, scrum master and product owner.
                             I give Zenith 5 stars because of the effort they put into the training</p>
                         <div class="right-quote">
@@ -315,7 +307,7 @@
                                     d="M464 256h-80v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8c-88.4 0-160 71.6-160 160v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48zm-288 0H96v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8C71.6 32 0 103.6 0 192v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48z" />
                             </svg>
                         </div>
-                        <img src="assets/person4.jpg" alt="">
+<!--                        <img src="assets/person4.jpg" alt="">-->
 
                         <p>"I will recommend Zenith as the best place to get trained,
                             the training will move you from beginner to expert in weeks.
@@ -334,6 +326,26 @@
             </div>
         </div>
     </section>
+
+
+    <section class="next-event-section">
+        <div class="max-width">
+            <div class="next-event-content">
+                <div class="inner-content">
+                    <h3>Zenith Upcoming Events</h3>
+                    <p>Next Training</p>
+                    <p>
+                        <i class="far fa-clock"></i>
+                        Sat, 27 December 2022.
+                    </p>
+                    <div class="button">
+                        <a href="">Events</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <section class="join-us">
 

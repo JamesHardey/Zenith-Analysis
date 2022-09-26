@@ -15,25 +15,12 @@
 
 <body>
 
-    <div class="modal" id="delete-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="modal-close">X</button>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure you want to delete ?</p>
-            </div>
-            <div class="modal-footer">
-                <button class="modal-close">No</button>
-                <a id="delete-confirm">Yes</a>
-            </div>
-        </div>
-    </div>
+    <div th:replace="modals::deleteModal"></div>
 
     <div class="modal edit" id="edit-courses-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h4>Edit Course </h4>
+                <h4>Edit Module </h4>
                 <button class="modal-close">X</button>
             </div>
             <form th:action="@{/admin/course/save}" class="form" method="post" enctype="multipart/form-data">
@@ -51,55 +38,17 @@
         </div>
     </div>
 
-    <aside class="side-bar">
-        <div class="side-bar-logo">
-            <h1>Zenith-Analysis</h1>
-        </div>
-        <div class="side-menu">
-            <ul>
-                <li><a th:href="@{/admin}"><span>Dashboard</span></a></li>
-                <li><a th:href="@{/admin/users}"><span>Users</span></a></li>
-                <li><a th:href="@{/admin/assignments}"><span>Assignment</span></a></li>
-                <li><a th:href="@{/admin/courses}"><span>Courses</span></a></li>
-                <li><a th:href="@{/admin/uploads}"><span>Upload</span></a></li>
-                <li><a th:href="@{/admin/events}"><span>Events</span></a></li>
-            </ul>
-        </div>
-    </aside>
+    <div th:replace="admin_common::adminNav"></div>
 
     <div class="main-content">
-        <header>
-            <h1>
-                <div class="btn-menu">
-                    <i class="fas fa-bars open-menu"></i>
-                </div>
-                Administrator
-            </h1>
-            <div class="user-wrapper">
-                <div class="dp-container">
-                    <div class="dp-image">
-                        <h3 th:text="${adminDisplay.firstCharacter}">J</h3>
-                    </div>
-                    <div class="arrow-container"></div>
-                    <div class="profile">
-                        <h5 th:text="${adminDisplay.name}"></h5>
-                        <small th:text="${adminDisplay.email}"></small>
-                        <p>Admin</p>
-                        <form th:action="@{/logout}" method="post">
-                            <input type="submit" class="btn" value="Logout">
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-        </header>
+        <div th:replace="admin_common::topMenu"></div>
         <div class="table-section">
             <table class="tables">
                 <thead>
                     <tr>
                         <th>S/N</th>
-                        <th>Course Title</th>
-                        <th>Price</th>
+                        <th>Module Title</th>
+<!--                        <th>Price</th>-->
                         <th>Participants</th>
                         <th>Actions</th>
                     </tr>
@@ -108,7 +57,7 @@
                     <tr th:each="d_course,iterator: ${courses}">
                         <td th:text="${iterator.count}"></td>
                         <td th:text="${d_course.course}"></td>
-                        <td th:text="${d_course.price}"></td>
+<!--                        <td th:text="${d_course.price}"></td>-->
                         <td th:text="${d_course.numberOfStudents}"></td>
                         <td class="actions">
                             <div>
@@ -126,8 +75,8 @@
             </table>
         </div>
 
-        <div>
-            <a th:href="@{/admin/add-course}" class="btn add-course-btn">Add Course</a>
+        <div class="bottom-btn">
+            <a th:href="@{/admin/add-course}" class="btn add-course-btn">Add Module</a>
         </div>
 
     </div>

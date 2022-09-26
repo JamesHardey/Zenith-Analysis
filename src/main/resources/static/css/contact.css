@@ -1,11 +1,11 @@
 
 /* contact us section */
 
-:root{
+/*:root{
     --primary-color:#000080;
     --secondary-color:#b3ae38;
     --fade-primary-color: #6f53fa;
-}
+}*/
 
 *{
     font-family:'Poppins', sans-serif;
@@ -133,7 +133,7 @@
 .address-section .address-content .box{
     min-height: 350px;
     background-color: #fffffe;
-    padding: 50px 40px;
+    padding: 50px 20px;
     margin: 20px 10px;
     text-align: center;
     border-radius: 10px;
@@ -178,6 +178,12 @@
 
 /* End of address */
 
+@media (max-width: 1042px){
+    .address-section .address-content{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 @media (max-width: 890px){
     .contact-section .max-width{
         padding: 0;
@@ -185,10 +191,6 @@
 
     .address-section .address-content{
         padding: 20px 10px;
-    }
-
-    .address-section .address-content{
-        grid-template-columns: 1fr 1fr;
     }
     
 }

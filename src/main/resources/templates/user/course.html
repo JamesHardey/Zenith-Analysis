@@ -20,44 +20,7 @@
     <div th:replace="common::userHeader"></div>
     <section class="main-section-content">
         <div class="max-width">
-
-            <div class="course-list-section">
-                <h2 class="title">Courses</h2>
-                <ul class="list-item">
-                    <li th:each="course: ${courses}">
-                        <div class="course-card">
-
-                            <div class="left-side">
-                                <div class="image">
-                                    <img th:src="@{${'/upload/'+course.imageUrl}}" alt="">
-                                </div>
-                                <div class="bottom">
-                                    <div class="course-price" th:text="'&pound' +${course.price}"></div>
-                                    <div>
-                                        <a class="btn" th:href="@{/home/contact-us}">Click to Enroll</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="right-side">
-                                <div class="top">
-                                    <p class="course-title" th:text="${course.title}"></p>
-                                    <p class="course-desc" th:text="${course.details}"></p>
-                                </div>
-
-                                <div class="mid-section">
-                                    <p>Level: Intermediate</p>
-                                    <p>Duration: 2-months</p>
-                                </div>
-
-                                <div class="bottom">
-                                    <p>Prerequisites: None</p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <div th:replace="common::courses"></div>
         </div>
     </section>
     <div th:replace="common::footer"></div>

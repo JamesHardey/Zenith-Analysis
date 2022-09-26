@@ -14,12 +14,16 @@
 .about-home-page{
     display: flex;
     height: 60vh;
-    background: url(../assets/bg4.jpg) no-repeat center;
+    background: url(../assets/Classroom-training.jpg) no-repeat center;
     color: #fffffe;
     min-height: 500px;
     background-size: cover;
     max-width: 1400px;
     margin: auto;
+}
+
+.top-text{
+    font-size: 32px;
 }
 
 .cover-width{

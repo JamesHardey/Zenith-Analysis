@@ -53,8 +53,8 @@
 
     <section class="main-section-content">
         <div class="max-width">
-
-            <div class="course-list-section">
+            <div th:replace="common::courses"></div>
+            <!--<div class="course-list-section">
                 <h2 class="title">Courses</h2>
                 <ul class="list-item">
                     <li th:each="course: ${courses}">
@@ -90,7 +90,7 @@
                         </div>
                     </li>
                 </ul>
-            </div>
+            </div>-->
         </div>
     </section>
 

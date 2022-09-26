@@ -44,7 +44,7 @@
     font-size: 36px;
     font-weight: 700;
     text-align: left;
-    color: #000080;
+    color: var(--dark-primary);
 }
 
 .event-page .max-width .event-home .event-year h3{
@@ -115,7 +115,6 @@
     width: 100%;
     display: flex;
     margin-top: 80px;
-    margin-bottom: 20px;
     gap: 15px;
     justify-content: center;
 }
