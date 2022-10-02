@@ -54,6 +54,8 @@
                     </div>
                     <div>
                         <p th:if="${param.error}" style="color:red; text-align: center; font-size: 14px;">This email is already registered</p>
+                        <p th:if="${param.password_error}" style="color:red; text-align: center; font-size: 14px;">Password not the same</p>
+
                     </div>
                 </form>
             </main>
