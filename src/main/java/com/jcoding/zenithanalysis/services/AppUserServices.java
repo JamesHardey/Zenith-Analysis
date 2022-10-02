@@ -398,7 +398,7 @@ public class AppUserServices{
 
 
 
-    public List<EventsDto> getLatestEvents(){
+    public List<EventsDto> getLatestEvents(int counts){
         List<Events> events = eventsRepo.findAll()
                 .stream()
                 .sorted((event1, event2) ->
@@ -406,8 +406,9 @@ public class AppUserServices{
                             event1.getDate(),
                             event2.getDate()
                     ))
-                .limit(2)
+                .limit(counts)
                 .collect(Collectors.toList());
+
         return events.stream()
                 .map(event -> {
                     EventsDto events1 = new EventsDto();

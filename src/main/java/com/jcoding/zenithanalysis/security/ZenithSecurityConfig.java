@@ -29,7 +29,7 @@ public class ZenithSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
        http.authorizeRequests()
-               .antMatchers("/login", "/register",
+               .antMatchers("/login", "/register", "/enroll",
                        "/", "/contact-us", "/about","/events","/events/**",
                        "/courses", "/verify", "/verify/**","/error",
                        "/resend/**", "/h2-console/**","/sendMessage",

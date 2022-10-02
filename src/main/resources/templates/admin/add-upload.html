@@ -51,6 +51,7 @@
                     <option th:each="course: ${courses}"  th:value="${course.courseTitle}" th:text="${course.courseTitle}"></option>
                 </select>
                 <textarea name="" id="" cols="30" rows="10" th:field="*{message}" placeholder="Message"></textarea>
+                <input type="file" name="file" id="file" th:field="*{documentURL}">
                 <input type="submit" value="Send">
             </form>
             <div>

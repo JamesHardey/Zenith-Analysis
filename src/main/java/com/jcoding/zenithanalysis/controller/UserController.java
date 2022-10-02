@@ -38,7 +38,6 @@ public class UserController {
     }
 
 
-
     @GetMapping("/activities/{pageNumber}")
     public String findByPage(Model model, @PathVariable int pageNumber){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -52,7 +51,7 @@ public class UserController {
             model.addAttribute("currentAssPage", 1);
             model.addAttribute("currentActPage", pageNumber);
             model.addAttribute("coursesAssignments",assignment.getContent());
-            model.addAttribute("events",appUserServices.getLatestEvents());
+            model.addAttribute("events",appUserServices.getLatestEvents(2));
             model.addAttribute("noActivity",activities.getContent().size() < 1);
             model.addAttribute("noAssignments",assignment.getContent().size() < 1);
             model.addAttribute("activities", activities.getContent());
@@ -64,8 +63,6 @@ public class UserController {
 
         return "redirect:/home/approval";
     }
-
-
 
 
     @GetMapping("/all-assignments/{pageNumber}")
@@ -92,8 +89,6 @@ public class UserController {
 
         return "redirect:/home/approval";
     }
-
-
 
 
     @GetMapping("/users")

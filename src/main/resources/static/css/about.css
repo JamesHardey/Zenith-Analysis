@@ -51,6 +51,13 @@
     font-weight: 600;
 }
 
+.about .about-content .about-content-text ol li{
+    list-style-type: decimal;
+    padding: 0 10px;
+    margin-inline: 20px;
+    text-align: left;
+    font-size: 14px;
+}
 
 
 

@@ -10,6 +10,7 @@ public class AssignDto {
     private String time;
     private String uploadDate;
     private String submissionDate;
+    private String documentURL;
 
     public AssignDto() {
     }
@@ -104,5 +105,13 @@ public class AssignDto {
 
     public void setSubmissionDate(String submissionDate) {
         this.submissionDate = submissionDate;
+    }
+
+    public String getDocumentURL() {
+        return documentURL;
+    }
+
+    public void setDocumentURL(String documentURL) {
+        this.documentURL = documentURL;
     }
 }

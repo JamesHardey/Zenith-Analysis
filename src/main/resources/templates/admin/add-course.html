@@ -46,10 +46,10 @@
             <h2>Add Course</h2>
             <form th:action="@{/admin/add-course}" class="upload-form" method="post" th:object="${course}" enctype="multipart/form-data">
                 <input type="text" name="title" id="title" th:field="*{title}" placeholder="Title" required>
-                <input type="number" name="price" id="price" th:field="*{price}" placeholder="Price" required>
+
                 <textarea name="message" id="message" th:field="*{details}" cols="30" rows="10" placeholder="Message"
                           minlength="70" maxlength="250" required></textarea>
-                <input type="file" name="file" id="file" accept="image/png, image/jpeg">
+<!--                <input type="file" name="file" id="file" accept="image/png, image/jpeg">-->
                 <input type="submit" value="SAVE">
             </form>
             <div>

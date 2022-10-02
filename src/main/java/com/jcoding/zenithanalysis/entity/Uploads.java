@@ -17,6 +17,7 @@ public class Uploads {
     private Course course;
     private String uploadDate;
     private String message;
+    private String documentURL;
 
 
     public Uploads() {
@@ -76,5 +77,13 @@ public class Uploads {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getDocumentURL() {
+        return documentURL;
+    }
+
+    public void setDocumentURL(String documentURL) {
+        this.documentURL = documentURL;
     }
 }

@@ -30,11 +30,11 @@ public class AppController {
     @Autowired
     private AdminServices adminServices;
 
+
     @GetMapping
-    public String home(Authentication authentication){
+    public String home(Authentication authentication, Model model){
         if(authentication != null && authentication.isAuthenticated()){
             CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
-            System.out.println(user.getUser().getRole().getName());
             return (user
                     .getUser()
                     .getRole()
@@ -42,9 +42,19 @@ public class AppController {
                     .equals("ADMIN"))?
                     "redirect:/admin":"redirect:/home";
         }
+        model.addAttribute("latestEvent",appUserServices.getLatestEvents(1));
         return ConstantPages.HOME_PAGE;
     }
 
+
+
+    @GetMapping("/enroll")
+    public String enrollCourse(Authentication authentication){
+        return (
+                authentication != null
+                        && authentication.isAuthenticated()
+        ) ? "redirect:/home/contact-us": "redirect:/register";
+    }
 
 
 

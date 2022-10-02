@@ -20,6 +20,7 @@
     <div th:replace="common::userHeader"></div>
     <main class="main-section-content">
         <div class="main-width">
+
             <div class="home-container">
 
                 <!-- Left Panel containing courses and assignment -->
@@ -34,8 +35,21 @@
 
                         <div class="sub-menu">
                             <ul>
-                                <li>
-                                    Business Admin
+                                <li id="item-1">
+                                    Business Analysis
+                                </li>
+                                <li id="item-2">
+                                    Business Process Modelling Notation(BPMN)
+                                </li>
+                                <li id="item-3">
+                                    Scrum
+                                </li>
+                                <li id="item-4">
+                                    Presentation Guide
+                                </li>
+
+                                <li id="item-5">
+                                    Interviews Questions and Answers
                                 </li>
                             </ul>
                         </div>
@@ -62,10 +76,11 @@
                 </aside>
 
 
-
                 <!-- Main Content of the Home page -->
                 <div class="main">
+
                     <div>
+
                         <!-- Display Course classess uploaded -->
                         <div class="courses-class active">
                             <div class="content">
@@ -95,8 +110,6 @@
                             </div>
                         </div>
 
-
-
                         <!-- Display Assignment Uploaded by Admin -->
                         <div class="recent-assignment">
                             <h3 class="header">Assignments</h3>
@@ -125,7 +138,6 @@
                             </div>
 
                         </div>
-
 
                         <!-- Display Course details -->
                         <div class="my-course">
@@ -194,11 +206,11 @@
                         </div>
 
                     </div>
+
                 </div>
 
 
                 <!-- Right Panel of the page containing Events and CV download -->
-
                 <aside class="aside-right">
 
                     <div class="events">

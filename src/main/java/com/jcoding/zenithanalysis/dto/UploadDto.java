@@ -12,6 +12,7 @@ public class UploadDto {
     private String course;
     private String uploadDate;
     private String message;
+    private String documentURL;
 
     public UploadDto() {
     }
@@ -80,5 +81,13 @@ public class UploadDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDocumentURL() {
+        return documentURL;
+    }
+
+    public void setDocumentURL(String documentURL) {
+        this.documentURL = documentURL;
     }
 }

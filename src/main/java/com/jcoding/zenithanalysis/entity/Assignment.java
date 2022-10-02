@@ -16,6 +16,7 @@ public class Assignment {
     private Course course;
     private String uploadDate;
     private String submissionDate;
+    private String documentURL;
 
     public Assignment() {
     }
@@ -74,5 +75,13 @@ public class Assignment {
 
     public void setSubmissionDate(String submissionDate) {
         this.submissionDate = submissionDate;
+    }
+
+    public String getDocumentURL() {
+        return documentURL;
+    }
+
+    public void setDocumentURL(String documentURL) {
+        this.documentURL = documentURL;
     }
 }
