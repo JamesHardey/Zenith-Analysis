@@ -148,6 +148,9 @@ public class AppController {
         if(appUserServices.findIfExist(email)){
             return "redirect:/register?error";
         }
+        if(!(registerUser.getPassword().equals(registerUser.getConfirmPassword()))){
+            return "redirect:/register?error";
+        }
         Long id = appUserServices.createUser(registerUser);
         return "redirect:/verify?id="+id;
     }
