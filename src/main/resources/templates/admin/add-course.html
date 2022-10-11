@@ -43,14 +43,22 @@
         </header>
 
         <div class="upload-section">
-            <h2>Add Course</h2>
-            <form th:action="@{/admin/add-course}" class="upload-form" method="post" th:object="${course}" enctype="multipart/form-data">
-                <input type="text" name="title" id="title" th:field="*{title}" placeholder="Title" required>
 
-                <textarea name="message" id="message" th:field="*{details}" cols="30" rows="10" placeholder="Message"
-                          minlength="70" maxlength="250" required></textarea>
-<!--                <input type="file" name="file" id="file" accept="image/png, image/jpeg">-->
+            <h2>Add Course</h2>
+
+            <form th:action="@{/admin/add-resource}" class="upload-form" method="post" th:object="${resource}"
+                  enctype="multipart/form-data">
+
+                <select name="resourceType" id="resourceType" th:field="*{resourceType}">
+                    <option value="Presentation Guide">Presentation Guide</option>
+                    <option value="Resume">Resume</option>
+                    <option value="Cover Letter">Cover Letter</option>
+                </select>
+
+                <input type="text" name="title" id="title" placeholder="Name" required>
+                <input type="file" name="file" id="file" placeholder="Upload file" required>
                 <input type="submit" value="SAVE">
+
             </form>
             <div>
                 <p style="text-align: center; margin-top: 10px; color:gray; font-size: 13px;" th:if="${param.success}">You have successfully add a course</p>

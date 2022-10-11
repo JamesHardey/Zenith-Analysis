@@ -1,12 +1,10 @@
 package com.jcoding.zenithanalysis.dto.assignment;
 
 public class AssignDto {
-
-    private int index;
     private Long id;
     private String title;
     private String details;
-    private String course;
+    private String module;
     private String time;
     private String uploadDate;
     private String submissionDate;
@@ -15,41 +13,24 @@ public class AssignDto {
     public AssignDto() {
     }
 
-    public AssignDto(int index,Long id, String title,String course, String details,String uploadDate, String submissionDate) {
-        this.index = index;
+    public AssignDto(Long id,String title,String module, String details,String submissionDate) {
         this.id = id;
         this.title = title;
-        this.course = course;
+        this.module = module;
+        this.details = details;
+        this.submissionDate = submissionDate;
+    }
+
+
+    public AssignDto(Long id,String title,String module, String details, String uploadDate,String submissionDate) {
+        this.id = id;
+        this.title = title;
+        this.module = module;
         this.details = details;
         this.uploadDate = uploadDate;
         this.submissionDate = submissionDate;
     }
 
-    public AssignDto(Long id,String title,String course, String details,String submissionDate) {
-        this.id = id;
-        this.title = title;
-        this.course = course;
-        this.details = details;
-        this.submissionDate = submissionDate;
-    }
-
-
-    public AssignDto(Long id,String title,String course, String details, String uploadDate,String submissionDate) {
-        this.id = id;
-        this.title = title;
-        this.course = course;
-        this.details = details;
-        this.uploadDate = uploadDate;
-        this.submissionDate = submissionDate;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
 
     public String getTitle() {
         return title;
@@ -59,12 +40,12 @@ public class AssignDto {
         this.title = title;
     }
 
-    public String getCourse() {
-        return course;
+    public String getModule() {
+        return module;
     }
 
-    public void setCourse(String course) {
-        this.course = course;
+    public void setModule(String module) {
+        this.module = module;
     }
 
     public String getTime() {

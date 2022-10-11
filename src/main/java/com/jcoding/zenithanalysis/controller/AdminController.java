@@ -3,8 +3,6 @@ package com.jcoding.zenithanalysis.controller;
 
 import com.jcoding.zenithanalysis.dto.*;
 import com.jcoding.zenithanalysis.dto.assignment.AssignDto;
-import com.jcoding.zenithanalysis.dto.course.AllowedCourses;
-import com.jcoding.zenithanalysis.dto.course.CoursesDto;
 import com.jcoding.zenithanalysis.dto.event.EventsDto;
 import com.jcoding.zenithanalysis.dto.user.CustomAppUser;
 import com.jcoding.zenithanalysis.dto.user.NewAdminDto;
@@ -19,10 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,11 +39,13 @@ public class AdminController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
         if(user.getUser().getRole().getName().equals("USER")) return "redirect:/home";
-        model.addAttribute("courseNumber",adminServices.getListOfCourses().size());
+        model.addAttribute("courseNumber",6);
         model.addAttribute("assignmentNumber",adminServices.getAllAssignment().size());
         model.addAttribute("usersNumber",adminServices.getAllUser().size());
         model.addAttribute("eventNumber",adminServices.getEvents().size());
-        model.addAttribute("courses",adminServices.getAllRegisteredCourses().stream().limit(10).collect(Collectors.toList()));
+
+        List<UploadDto> uploads = adminServices.getUploads().stream().limit(10).collect(Collectors.toList());
+        model.addAttribute("uploads", uploads);
         model.addAttribute("appUsers",adminServices.getAllUser().stream().limit(10).collect(Collectors.toList()));
         model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_HOME_PAGE;
@@ -60,55 +56,53 @@ public class AdminController {
 
     /* Course Mapping*/
 
-    @GetMapping("/courses")
+    @GetMapping("/resources")
     public String getCourses(Model model){
-        model.addAttribute("courses",adminServices.getAllRegisteredCourses());
+        model.addAttribute("resources",adminServices.getALLResources());
         model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_COURSES_PAGE;
     }
 
-    @GetMapping("/add-course")
+    @GetMapping("/add-resource")
     public String addCourse(Model model){
-        CoursesDto coursesDto = new CoursesDto();
-        model.addAttribute("course",coursesDto);
+        ResourceDto resourceDto = new ResourceDto();
+        model.addAttribute("resource",resourceDto);
         model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_ADD_COURSE;
     }
 
-    @PostMapping("/add-course")
+    @PostMapping("/add-resource")
     public String saveCourse(
-            @ModelAttribute("course") CoursesDto coursesDto,
+            @ModelAttribute("resource") ResourceDto resourceDto,
             @RequestParam("file") MultipartFile file
             ){
-        if(!adminServices.addCourse(coursesDto,file)) return "redirect:/admin/add-course?failed";
-        return "redirect:/admin/courses";
+        if(!adminServices.addResource(resourceDto,file)) return "redirect:/admin/add-resource?failed";
+        return "redirect:/admin/resources";
     }
 
-    @GetMapping("/course/delete/{id}")
-    public String deleteCourse(@PathVariable("id") Long courseId){
-        adminServices.deleteCourse(courseId);
-        return "redirect:/admin/courses";
+    @GetMapping("/resource/delete/{id}")
+    public String deleteCourse(@PathVariable("id") Long resourceId){
+        adminServices.deleteResource(resourceId);
+        return "redirect:/admin/resources";
     }
 
-    @GetMapping("/course/{id}")
+    @GetMapping("/resource/{id}")
     @ResponseBody
-    public CoursesDto getCourseById(@PathVariable("id") Long id){
-        return adminServices.getCourseById(id);
+    public ResourceDto getResourceById(@PathVariable("id") Long id){
+        return adminServices.getResourceById(id);
     }
 
-    @PostMapping("/course/save")
-    public String updateCourse(CoursesDto coursesDto,
+    @PostMapping("/resource/save")
+    public String updateResource(ResourceDto resourceDto,
                                @RequestParam("file") MultipartFile file
                                ){
-        if(coursesDto.getId() == null)
-            return "redirect:/admin/courses?failed";
-        if(!file.isEmpty()) coursesDto.setImageUrl(file.getOriginalFilename());
-        adminServices.updateCourse(coursesDto, file);
-        return "redirect:/admin/courses";
+        if(resourceDto.getId() == null)
+            return "redirect:/admin/resources?failed";
+        adminServices.updateResource(resourceDto, file);
+        return "redirect:/admin/resources";
     }
 
     /* End of Mapping */
-
 
 
 
@@ -133,25 +127,6 @@ public class AdminController {
         return "redirect:/admin/users";
     }
 
-    @GetMapping("/course-allow/{id}")
-    public String getAllCourseStatusWithUser(
-            @PathVariable("id") Long userId, Model model){
-        List<AllowedCourses> courses = adminServices.getAllCourseAndStatusByUserId(userId);
-        model.addAttribute("courses", courses);
-        model.addAttribute("id",userId);
-        model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
-        return ConstantPages.ADMIN_EDIT_USER;
-    }
-
-    @GetMapping("/allow-course/{courseId}/{id}")
-    public String allowCourse(
-            @PathVariable("courseId") Long courseIds,
-            @PathVariable("id") Long id
-    ){
-        adminServices.allowCourse(id,courseIds);
-        return "redirect:/admin/course-allow/"+id;
-    }
-
     /* End of Mapping */
 
 
@@ -164,7 +139,6 @@ public class AdminController {
     public String getAssignments(Model model){
         model.addAttribute("assignments", adminServices.getAllAssignment());
         model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
-        model.addAttribute("courses", adminServices.getListOfCourses());
         return ConstantPages.ADMIN_ASSIGNMENT_PAGE;
     }
 
@@ -172,14 +146,15 @@ public class AdminController {
     public String addAssignment(Model model){
         AssignDto assignDto = new AssignDto();
         model.addAttribute("assign",assignDto);
-        model.addAttribute("courses", adminServices.getListOfCourses());
         model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_ADD_ASSIGNMENT;
     }
 
     @PostMapping("/add-assignment")
-    public String postAssignment(@ModelAttribute("assign") AssignDto assignDto){
-        if(adminServices.addAssignment(assignDto)) return "redirect:/admin/assignments";
+    public String postAssignment(@ModelAttribute("assign") AssignDto assignDto,
+                                 @RequestParam("file") MultipartFile file
+                                 ){
+        if(adminServices.addAssignment(assignDto, file)) return "redirect:/admin/assignments";
         return "redirect:/admin/add-assignment?error";
     }
 
@@ -196,10 +171,10 @@ public class AdminController {
     }
 
     @PostMapping("/assignment/save")
-    public String updateAssignment(AssignDto assignDto){
+    public String updateAssignment(AssignDto assignDto, MultipartFile file){
         if(assignDto.getId() == null)
             return "redirect:/admin/assignments?failed";
-        adminServices.updateAssignment(assignDto);
+        adminServices.updateAssignment(assignDto, file);
         return "redirect:/admin/assignments?success";
     }
 
@@ -259,22 +234,22 @@ public class AdminController {
     public String getUploads(Model model){
         model.addAttribute("uploads", adminServices.getUploads());
         model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
-        model.addAttribute("courses", adminServices.getListOfCourses());
         return ConstantPages.ADMIN_UPLOAD_PAGE;
     }
 
     @GetMapping("/add-upload")
     public String addUpload(Model model){
         UploadDto uploadDto = new UploadDto();
+
         model.addAttribute("uploadDto",uploadDto);
-        model.addAttribute("courses",adminServices.getListOfCourses());
         model.addAttribute("adminDisplay",adminServices.getDisplayDetails());
         return ConstantPages.ADMIN_ADD_UPLOAD;
     }
 
     @PostMapping("/add-upload")
-    public String uploadLink(@ModelAttribute("uploadDto") UploadDto uploadDto){
-        if(adminServices.addUpload(uploadDto)) return "redirect:/admin/uploads";
+    public String uploadLink(@ModelAttribute("uploadDto") UploadDto uploadDto,
+                             @RequestParam("file") MultipartFile file){
+        if(adminServices.addUpload(uploadDto, file)) return "redirect:/admin/uploads";
         return "redirect:/admin/add-upload?failed";
     }
 
@@ -291,11 +266,12 @@ public class AdminController {
     }
 
     @PostMapping("/upload/save")
-    public String updateUploadClass(UploadDto uploadDto){
+    public String updateUploadClass(UploadDto uploadDto,
+                                    @RequestParam("file") MultipartFile file){
         if(uploadDto.getId() == null)
             return "redirect:/admin/uploads?failed";
 
-        adminServices.updateUploadClass(uploadDto);
+        adminServices.updateUploadClass(uploadDto, file);
         return "redirect:/admin/uploads";
     }
 

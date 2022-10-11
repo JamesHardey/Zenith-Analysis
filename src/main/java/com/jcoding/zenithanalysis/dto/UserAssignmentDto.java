@@ -4,30 +4,21 @@ import com.jcoding.zenithanalysis.entity.Course;
 
 public class UserAssignmentDto {
 
-    private int index;
     private String title;
     private String details;
     private String uploadDate;
     private String submissionDate;
-    private String courseTitle;
+    private String documentUrl;
 
     public UserAssignmentDto() {
     }
 
-    public UserAssignmentDto(int index, String title, String details, String uploadDate, String submissionDate) {
-        this.index = index;
+    public UserAssignmentDto(String title, String details, String uploadDate, String submissionDate, String documentUrl) {
         this.title = title;
         this.details = details;
         this.uploadDate = uploadDate;
         this.submissionDate = submissionDate;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
+        this.documentUrl = documentUrl;
     }
 
     public String getTitle() {
@@ -46,14 +37,6 @@ public class UserAssignmentDto {
         this.details = details;
     }
 
-    public void setCourseTitle(Course course){
-        this.courseTitle = course.getCourseTitle();
-    }
-
-    public String getCourseTitle(){
-        return courseTitle;
-    }
-
     public String getUploadDate() {
         return uploadDate;
     }
@@ -68,5 +51,13 @@ public class UserAssignmentDto {
 
     public void setSubmissionDate(String submissionDate) {
         this.submissionDate = submissionDate;
+    }
+
+    public String getDocumentUrl() {
+        return documentUrl;
+    }
+
+    public void setDocumentUrl(String documentUrl) {
+        this.documentUrl = documentUrl;
     }
 }

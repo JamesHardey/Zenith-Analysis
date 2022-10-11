@@ -458,7 +458,7 @@ img{
 
 .courses-section .courses-content .list-item{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr ;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
 }
 

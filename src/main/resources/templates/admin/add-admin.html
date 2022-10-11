@@ -45,7 +45,7 @@
             <h2>ADD NEW ADMIN</h2>
             <form th:action="@{/admin/add-admin}" class="upload-form" method="post" th:object="${adminDto}">
                 <input type="password" name="password" id="password" th:field="*{adminPassword}" placeholder="Admin Password" required>
-                <input type="text" name="name" id="name" th:field="*{name}" placeholder="Admin Name" required>
+                <input type="text" name="name" id="name" th:field="*{name}" placeholder="New Admin Name" required>
                 <input type="email" name="email" id="email" th:field="*{email}" placeholder="New Admin Email" required>
                 <input type="password" name="newAdminPassword" id="newAdminPassword" th:field="*{password}" placeholder="New Admin Password" required>
                 <input type="submit" value="Add">

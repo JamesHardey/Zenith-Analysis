@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/")
@@ -30,6 +31,8 @@ public class AppController {
     @Autowired
     private AdminServices adminServices;
 
+    private final String TAG = this.getClass().getSimpleName();
+    private static final Logger LOGGER = Logger.getLogger(AppController.class.getPackageName());
 
     @GetMapping
     public String home(Authentication authentication, Model model){
@@ -42,10 +45,10 @@ public class AppController {
                     .equals("ADMIN"))?
                     "redirect:/admin":"redirect:/home";
         }
+
         model.addAttribute("latestEvent",appUserServices.getLatestEvents(1));
         return ConstantPages.HOME_PAGE;
     }
-
 
 
     @GetMapping("/enroll")
@@ -57,9 +60,8 @@ public class AppController {
     }
 
 
-
     @GetMapping("/about")
-    public String getAbout(Authentication authentication){
+    public String getAbout(){
         return ConstantPages.ABOUT_PAGE;
     }
 
@@ -70,10 +72,12 @@ public class AppController {
         if(authentication != null && authentication.isAuthenticated()){
             return "redirect:/home/contact-us";
         }
+
         ContactUsDto contactUsDto = new ContactUsDto();
         model.addAttribute("contactDetail",contactUsDto);
         return ConstantPages.CONTACT_PAGE;
     }
+
 
     @PostMapping("/contact-us")
     public String sendMessage(
@@ -82,7 +86,6 @@ public class AppController {
         appUserServices.contactAdmin(contactUsDto);
         return "redirect:/contact-us?sent";
     }
-
 
     @GetMapping("/events")
     public String getEventPage(Authentication authentication, Model model){
@@ -99,7 +102,6 @@ public class AppController {
         model.addAttribute("modelCards", eventCards.getContent());
         model.addAttribute("eventPages",eventCards.getTotalPages());
         model.addAttribute("currentActPage",pageNumber);
-        System.out.println("Pages "+eventCards.getTotalPages());
         return ConstantPages.EVENT_PAGE;
     }
 
@@ -110,7 +112,6 @@ public class AppController {
         if(authentication != null && authentication.isAuthenticated()){
             return "redirect:/home/courses";
         }
-        model.addAttribute("courses", appUserServices.getAllCourses());
         return ConstantPages.COURSE_PAGE;
     }
 
@@ -141,17 +142,28 @@ public class AppController {
 
         if(appUserServices.findIfExist(email)
                 && appUserServices.ifNotVerified(email)){
+            LOGGER.info("Email exist before and its yet to be verified :"+email);
             appUserServices.resendVerification(email);
+            LOGGER.info("Verification code sent to "+email);
             Long id = appUserServices.getUserByEmail(email).getId();
             return "redirect:/verify?id="+id;
         }
+
         if(appUserServices.findIfExist(email)){
+            LOGGER.info(email+": This email already exist");
             return "redirect:/register?error";
         }
+
         if(!(registerUser.getPassword().equals(registerUser.getConfirmPassword()))){
+            LOGGER.info(email+": Password combination incorrect");
             return "redirect:/register?password_error";
         }
+
         Long id = appUserServices.createUser(registerUser);
+
+        if(id == null || id == 0L) return "redirect:/register?incomplete";
+
+        LOGGER.info("User created "+registerUser);
         return "redirect:/verify?id="+id;
     }
 
@@ -160,6 +172,7 @@ public class AppController {
     @GetMapping("/verify")
     public String getVerificationPage(@Param("id")Long id, Model model){
         if(id == null){
+            LOGGER.info("Id is null");
             return "redirect:/error";
         }
         VerifyUser appUser = new VerifyUser();
@@ -175,8 +188,11 @@ public class AppController {
             @PathVariable("id") Long id){
         appUser.setId(id);
         if(appUserServices.verify(appUser)){
+            LOGGER.info("Confirmed user verification");
+            LOGGER.info("Redirect to Login");
             return "redirect:/login";
         }
+        LOGGER.info("Invalid verification ");
         return "redirect:/verify?id="+id+"&invalid";
     }
 
@@ -184,6 +200,7 @@ public class AppController {
     @GetMapping("/resend/{id}")
     public String verification(@PathVariable("id") Long id){
         appUserServices.resendVerification(id);
+        LOGGER.info("Resend verification code");
         return "redirect:/verify?id="+id;
     }
 
@@ -200,11 +217,19 @@ public class AppController {
     public String changePassword(
             @ModelAttribute("myEmail") EmailParser email
     ){
-        if(email == null || email.getEmail().isEmpty()) return "redirect:/forget-pass";
+        if(email == null || email.getEmail().isEmpty()) {
+            LOGGER.info("Email is null or empty");
+            return "redirect:/forget-pass";
+        }
         AppUser appUser = appUserServices.getUserByEmail(email.getEmail());
-        if(appUser == null) return "redirect:/forget-pass?invalid";
+        if(appUser == null) {
+            LOGGER.info("AppUser is null");
+            return "redirect:/forget-pass?invalid";
+        }
         Long id = appUser.getId();
+        LOGGER.info("Sending recovery password to "+email.getEmail()+"..............");
         appUserServices.sendRecoveryPassword(email.getEmail());
+        LOGGER.info("Sent Recovery password to "+email.getEmail());
         return "redirect:/change-pass?id="+id;
     }
 
@@ -222,7 +247,10 @@ public class AppController {
             @PathVariable("id") Long id,
             @ModelAttribute("passwordChange") PasswordChange passwordChange
     ){
-        if(id == null || passwordChange == null) return "redirect:/forget-pass";
+        if(id == null || passwordChange == null) {
+            LOGGER.info("Null value in password");
+            return "redirect:/forget-pass";
+        }
 
         if(appUserServices.verifyPassword(passwordChange,id))
             return "redirect:/login";
@@ -244,10 +272,5 @@ public class AppController {
         else return "redirect:/";
     }
 
-
-//    @GetMapping("/error")
-//    public String getErrorPage(){
-//        return "error";
-//    }
 
 }

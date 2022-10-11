@@ -11,6 +11,55 @@
     min-height: 600px;
 }
 
+
+
+table{
+    border-collapse: collapse;
+    width: 90%;
+    max-width: 100%;
+    margin: 10px auto;
+    overflow-x: auto;
+}
+
+
+th,td{
+    text-align: left;
+    padding: .4rem;
+}
+
+th{
+    font-size: 14px;
+}
+
+thead tr{
+    border-top: 1px solid #f0f0f0;
+    background-color: #0000ff;
+    color: #fff;
+
+}
+
+td{
+    font-size: 12px;
+}
+
+tbody tr:nth-child(odd){
+    background-color: #fff;
+}
+
+tbody tr:nth-child(even){
+    background-color: rgb(217, 220, 221);
+}
+
+.res-dwnl{
+    font-size: 9px;
+    padding: 4px 10px;
+    background-color:#8d8d8d;
+    color: #fff;
+    border-radius: 7px;
+}
+
+
+
 .aside-left {
     height: 100%;
     background: blue;
@@ -207,6 +256,43 @@
     height: 100px;
 }
 
+.dwn-btn {
+    width: fit-content;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.dwn-btn .p-attch{
+    font-weight: 500;
+    margin: 0;
+    color: rgb(107, 107, 107);
+    font-size: 14px;
+}
+
+.dwn-btn a{
+    margin-left: 10px;
+    display: flex;
+    font-size: 14px;
+    color: rgb(107, 107, 107);
+    padding: 5px 10px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+
+.dwn-btn a:hover{
+    color: #fff;
+    background-color: #0000ffDD;
+}
+
+
+.recent-assignment .dwn-btn{
+    margin-top: 20px;
+}
+
 .main .course-class .link-btn {
     margin: 10px 0 10px;
     transition: all 0.4s ease;
@@ -243,15 +329,16 @@
 
 
 .main .recent-assignment .ass .instr {
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin: 15px 0 5px;
     color: rgb(107, 107, 107);
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .main .recent-assignment .ass p {
-    font-size: 13px;
-    color: #000;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgb(31, 31, 31);
     font-weight: 400;
 }
 
@@ -285,6 +372,44 @@
     animation-duration: 3s;
 }
 
+.main .my-course .outline{
+    display: none;
+}
+
+.main .my-course .outline h3{
+    font-size: 24px;
+    padding: 0 15px 15px;
+}
+
+.main .my-course .outline ol{
+    margin-left: 30px;
+}
+
+.main .my-course .outline li{
+    list-style-type: initial;
+    line-height: 1.9em;
+    padding-left: 20px;
+}
+
+.main .my-course .outline p{
+    color: rgb(65, 65, 65);
+    font-size: 20px;
+}
+
+.main .my-course .outline.show{
+    display: block;
+}
+
+.main .my-course .presentation{
+    display: none;
+}
+
+.main .my-course .presentation.show{
+    display: block;
+}
+
+
+
 .main .linker {
     width: 100%;
     display: flex;
@@ -300,7 +425,9 @@
 }
 
 .main .courses-class .course-short-descriptin {
-    font-size: 13px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: rgb(31, 31, 31);
 }
 
 .main .linker ul li a {
@@ -327,16 +454,6 @@
     opacity: 1;
 }
 
-.main .my-course .my-course-item{
-    margin: 10px 0 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.main .my-course .my-course-item p{
-    color: rgb(78, 78, 78);
-}
 
 
 
@@ -446,12 +563,48 @@
 }
 
 
+.res-1{
+    margin: 10px 0 40px;
+}
+
+.res-1 p{
+    margin: 10px 0 20px;
+    font-size: 14px;
+}
+
+
+.resource-btn{
+    background-color: #0000ff;
+    padding: 8px 20px;
+    font-size: 13px;
+    color: #fff;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    width: 250px;
+    max-width: 90%;
+    transition: all 0.5s ease;
+}
+
+.resource-btn:hover {
+    box-shadow: 5px 5px rgba(0, 0, 255, alpha);
+    background-color: rgb(0, 0, 107);
+}
+
+
+
 
 
 @media (max-width: 1024px) {
 
     .main {
         grid-column: 1 / span 2;
+    }
+
+    .home-container{
+            min-height: 0;
     }
 
     .aside-left {
@@ -508,6 +661,10 @@
     .aside-right {
         grid-column: auto;
         width: 100%;
+    }
+
+    .aside-right {
+        z-index: 10;
     }
 
     .aside-left .courses .sub-menu {

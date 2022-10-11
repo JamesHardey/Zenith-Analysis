@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
@@ -29,31 +29,20 @@
                     <div class="courses">
 
                         <div id="btn-course">
-                            <p>Course</p>
+                            <p>Course Content</p>
                             <i class='bx bx-chevron-right arrow'></i>
                         </div>
 
                         <div class="sub-menu">
                             <ul>
                                 <li id="item-1">
-                                    Business Analysis
+                                    Outline
                                 </li>
                                 <li id="item-2">
-                                    Business Process Modelling Notation(BPMN)
-                                </li>
-                                <li id="item-3">
-                                    Scrum
-                                </li>
-                                <li id="item-4">
-                                    Presentation Guide
-                                </li>
-
-                                <li id="item-5">
-                                    Interviews Questions and Answers
+                                    Resources
                                 </li>
                             </ul>
                         </div>
-
                     </div>
 
                     <div class="activity">
@@ -61,16 +50,13 @@
                             <p>Activities</p>
                             <!-- <i class='bx bx-chevron-right'></i> -->
                         </div>
-
                     </div>
 
                     <div class="assignments">
-
                         <div id="btn-ass">
                             <P>Assignments</p>
                             <!-- <i class='bx bx-chevron-right'></i> -->
                         </div>
-
                     </div>
 
                 </aside>
@@ -78,9 +64,7 @@
 
                 <!-- Main Content of the Home page -->
                 <div class="main">
-
                     <div>
-
                         <!-- Display Course classess uploaded -->
                         <div class="courses-class active">
                             <div class="content">
@@ -88,10 +72,16 @@
                                 <p th:if="${noActivity}" style="margin-left: 20px">No Activities</p>
                                 <div class="course-class" th:each="upload: ${activities}">
                                     <h3 th:text="${upload.title}"></h3>
-                                    <p th:text="${upload.course.courseTitle}"></p>
-
-
+                                    <p>Module: [[${upload.module}]]</p>
                                     <p class="course-short-descriptin" th:text="${upload.message}"></p>
+
+                                    <div class="dwn-btn" th:if="${upload.documentURL != null}">
+                                        <h6 class="p-attch">Attached file : </h6>
+                                        <a th:href="@{'/upload/'+ ${upload.documentURL}}" download>File Name
+                                            <i class='bx bx-download'></i>
+                                        </a>
+                                    </div>
+
                                     <div Class="link-btn">
                                         <a th:href="@{${upload.url}}" target="_blank">Click here to access video</a>
                                     </div>
@@ -103,7 +93,7 @@
                                 <ul>
                                     <li class="link" th:each="i :${#numbers.sequence(1,totalPages)}"
                                         th:classappend="${i == currentActPage}? 'active': ''">
-                                        <a th:if="${totalPages > 0}" th:href="@{'/activities/' + ${i}}" th:text="${i}"></a>
+                                        <a th:if="${totalPages > 0}" th:href="@{'/home/activities/' + ${i}}" th:text="${i}"></a>
                                     </li>
                                 </ul>
                                 <div><i></i></div>
@@ -114,13 +104,23 @@
                         <div class="recent-assignment">
                             <h3 class="header">Assignments</h3>
                             <p th:if="${noAssignments}" style="margin-left: 20px">No Assignments</p>
+
                             <div class="ass" th:each="assign: ${coursesAssignments}">
-                                <h3 class="title-home" th:text="${assign.title}"></h3>
+                                <h3 class="title-home">[[${assign.title}]]</h3>
                                 <h6 class="instr">Instruction</h6>
-                                <p th:text="${assign.details}"></p>
+                                <p>[[${assign.details}]]</p>
+
+
+                                <div class="dwn-btn" th:if="${assign.documentUrl != null}">
+                                    <h6 class="p-attch">Attached file : </h6>
+                                    <a th:href="@{'/upload/'+ ${assign.documentUrl}}" download>File Name
+                                        <i class='bx bx-download'></i>
+                                    </a>
+                                </div>
+
                                 <div class="date">
-                                    <h6>Uploaded Date : <span th:text="${assign.uploadDate}"></span></h6>
-                                    <h6>Submission Date: <span th:text="${assign.submissionDate}"></span></h6>
+                                    <h6>Uploaded Date  : <span>[[${assign.uploadDate}]]</span></h6>
+                                    <h6>Submission Date: <span>[[${assign.submissionDate}]]</span></h6>
                                 </div>
                             </div>
 
@@ -130,7 +130,7 @@
                                 <ul>
                                     <li class="link" th:each="j :${#numbers.sequence(1,totalAssPage)}"
                                         th:classappend="${j == currentAssPage}? 'active': ''">
-                                        <a th:href="@{'/all-assignments/' + ${j}}"
+                                        <a th:href="@{'/home/all-assignments/' + ${j}}"
                                            th:text="${j}"></a>
                                     </li>
                                 </ul>
@@ -141,65 +141,105 @@
 
                         <!-- Display Course details -->
                         <div class="my-course">
-                            <div>
-                                <div class="my-course-item">
-                                    <h3>Introduction to Business Analysis</h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, quos!</p>
-                                </div>
 
-                                <div class="my-course-item">
-                                    <h3>Roles of Business Analysis</h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error iste laboriosam, amet fugiat culpa repellat!</p>
-                                </div>
+                            <div class="outline">
+                                <h3>Course Outline</h3>
+                                <ol>
+                                    <li><p>Introduction to Business Analysis</p></li>
+                                    <li><p>Roles of Business Analysis</p></li>
+                                    <li><p>Elicitation of Requirement</p></li>
+                                    <li><p>Analysis Technique</p></li>
+                                    <li><p>Business Process Modelling Notation(BPMN)</p></li>
+                                    <li><p>Stakeholder Analysis</p></li>
+                                    <li><p>System Context Diagram</p></li>
+                                    <li><p>Introduction to Scrum</p></li>
+                                    <li><p>Requirement Management</p></li>
+                                    <li><p>Presentation Guide</p></li>
+                                    <li><p>Interviews Questions & Answers</p></li>
+                                </ol>
+                            </div>
 
-                                <div class="my-course-item">
-                                    <h3>Elicitation of Requirement</h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error iste laboriosam, amet fugiat culpa repellat!</p>
-                                </div>
+                            <div class="presentation">
+                                <div>
+                                    <div class="res-1">
+                                        <h3>Resource</h3>
+                                        <p>Get resources like Presentation guide, Resume and Cover letter</p>
+                                        <div class="table-section">
+                                            <table class="tables">
+                                                <thead>
+                                                <tr>
+                                                    <th>S/N</th>
+                                                    <th>Resource Type</th>
+                                                    <th>Resource Name</th>
+                                                    <th>Download</th>
+                                                </tr>
+                                                </thead>
 
-                                <div class="my-course-item">
-                                    <h3>Analysis Technique</h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error iste laboriosam, amet fugiat culpa repellat!</p>
-                                </div>
+                                                <tbody>
+                                                <tr th:each="resource,iterator :${resources}">
+                                                    <td>[[${iterator.count}]]</td>
+                                                    <td>[[${resource.resourceType}]]</td>
+                                                    <td>[[${resource.title}]]</td>
+                                                    <td>
+                                                        <a th:href="@{'/upload/'+${resource.documentUrl}}" class="res-dwnl" download>
+                                                            Download
+                                                        </a>
+                                                    </td>
+                                                </tr>
 
-                                <div class="my-course-item">
-                                    <h3>Business Process Modelling Notation(BPMN)</h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error iste laboriosam, amet fugiat culpa repellat!</p>
-                                </div>
+                                                </tbody>
+                                            </table>
+                                        </div>
+<!--                                        <div class="row">
+                                            <div class="cv-sample">
+                                                <p th:if="${presentation.size() < 1}" style="margin: 10px;">No Presentation Guide Present</p>
+                                                <div class="btn-container" th:each="pres_res :${presentation}">
+                                                    <a th:href="@{'/upload/'+${pres_res.documentUrl}}"
+                                                       class="download-btn resource-btn" download>
+                                                        Download Presentation
+                                                        <i class='bx bx-download'></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                    </div>
 
-                                <div class="my-course-item">
-                                    <h3>Stakeholder Analysis</h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error iste laboriosam, amet fugiat culpa repellat!</p>
-                                </div>
 
-                                <div class="my-course-item">
-                                    <h3>System Context Diagram</h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error iste laboriosam, amet fugiat culpa repellat!</p>
-                                </div>
+                                   <!-- <div class="res-1">
+                                        <h3>Resume Samples</h3>
+                                        <div class="row">
+                                            <div class="cv-sample">
+                                                <div class="btn-container">
+                                                    <p th:if="${resumeFiles.size() < 1}" style="margin: 10px;">No Resume Present</p>
+                                                    <div class="btn-container" th:each="resume :${resumeFiles}">
+                                                        <a th:href="@{'/upload/'+${resume.documentUrl}}"
+                                                           class="download-btn resource-btn" download>
+                                                            Download Resume
+                                                            <i class='bx bx-download'></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
 
-                                <div class="my-course-item">
-                                    <h3>Introduction to Scrum</h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error iste laboriosam, amet fugiat culpa repellat!</p>
-                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <div class="my-course-item">
-                                    <h3>Requirement Management</h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error iste laboriosam, amet fugiat culpa repellat!</p>
-                                </div>
 
-                                <div class="my-course-item">
-                                    <h3>Presentation Guide</h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error iste laboriosam, amet fugiat culpa repellat!</p>
-                                </div>
-
-                                <div class="my-course-item">
-                                    <h3>Interviews Questions & Answers</h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error iste laboriosam, amet fugiat culpa repellat!</p>
-                                </div>
-
-                                <div class="my-course-item">
-                                    <h3>Requirement Management</h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error iste laboriosam, amet fugiat culpa repellat!</p>
+                                    <div class="res-1">
+                                        <h3>Cover-Letter Samples</h3>
+                                        <div class="row">
+                                            <div class="cover-letter-sample">
+                                                <p th:if="${coverLetters.size() < 1}" style="margin: 10px;">No Cover Letter Present</p>
+                                                <div class="btn-container" th:each="cv :${coverLetters}">
+                                                    <a th:href="@{'/upload/'+${cv.documentUrl}}"
+                                                       class="download-btn resource-btn" download>
+                                                        Download Cover Letter
+                                                        <i class='bx bx-download'></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
                                 </div>
                             </div>
 
@@ -227,13 +267,13 @@
                         </div>
                     </div>
 
-                    <div class="res-cl-sample">
+                    <!--<div class="res-cl-sample">
                         <p class="head">Resume/Cover Letter</p>
-                        
+
                         <div class="cv-sample">
                             <div class="btn-container">
                                 <a th:href="@{/upload/resume/resume.pdf}" class="download-btn" target="_blank">
-                                    Download Resume 
+                                    Download Resume
                                     <i class='bx bx-download'></i>
                                 </a>
                             </div>
@@ -242,12 +282,12 @@
                         <div class="cover-letter-sample">
                             <div class="btn-container">
                                 <a th:href="@{/upload/cover_letter/cover-letter.pdf}" class="download-btn" target="_blank">
-                                    Download Cover-Letter 
+                                    Download Cover-Letter
                                     <i class='bx bx-download'></i>
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </aside>
 
 
@@ -256,9 +296,10 @@
     </main>
 
     <div th:replace="common::footer"></div>
-    <script src="../js/script.js"></script>
-    <script src="../js/user.js"></script>
-    <script src="../js/dhome.js"></script>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/user.js"></script>
+    <script src="/js/dhome.js"></script>
 </body>
 
 </html>

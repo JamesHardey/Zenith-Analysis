@@ -19,21 +19,30 @@
 
     <div class="modal edit" id="edit-courses-modal">
         <div class="modal-content">
+
             <div class="modal-header">
-                <h4>Edit Module </h4>
+                <h4>Edit Resource </h4>
                 <button class="modal-close">X</button>
             </div>
-            <form th:action="@{/admin/course/save}" class="form" method="post" enctype="multipart/form-data">
+
+            <form th:action="@{/admin/resource/save}" class="form" method="post"
+                  enctype="multipart/form-data">
+
                 <input type="text" name="id" id="id" readonly>
-                <input type="text" name="title" id="title" placeholder="Title" required>
-                <input type="number" name="price" id="price" placeholder="Price" required>
-                <textarea name="details" id="details" cols="30" rows="10" minlength="70"
-                          maxlength="250" placeholder="Course Description" required></textarea>
-                <input type="file" name="file" id="file" accept="image/png, image/jpeg">
+
+                <select name="resourceType" id="resourceType">
+                    <option value="Presentation Guide">Presentation Guide</option>
+                    <option value="Resume">Resume</option>
+                    <option value="Cover Letter">Cover Letter</option>
+                </select>
+
+                <input type="text" name="title" id="title" placeholder="Name" required>
+                <input type="file" name="file" id="file" placeholder="Upload file">
                 <div class="modal-footer">
                     <button class="modal-close">Close</button>
                     <input type="submit" value="Save">
                 </div>
+
             </form>
         </div>
     </div>
@@ -47,26 +56,26 @@
                 <thead>
                     <tr>
                         <th>S/N</th>
-                        <th>Module Title</th>
-<!--                        <th>Price</th>-->
-                        <th>Participants</th>
+                        <th>Resource Type</th>
+                        <th>Name</th>
+                        <th>Upload Date</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="d_course,iterator: ${courses}">
+                    <tr th:each="res,iterator: ${resources}">
                         <td th:text="${iterator.count}"></td>
-                        <td th:text="${d_course.course}"></td>
-<!--                        <td th:text="${d_course.price}"></td>-->
-                        <td th:text="${d_course.numberOfStudents}"></td>
+                        <td th:text="${res.resourceType}"></td>
+                        <td th:text="${res.title}"></td>
+                        <td th:text="${res.uploadDate}"></td>
                         <td class="actions">
                             <div>
-                                <a th:href="@{/admin/course/delete/{id} (id=${d_course.id})}"
+                                <a th:href="@{/admin/resource/delete/{id} (id=${res.id})}"
                                    class="delete-btn action-btn">Delete</a>
                             </div>
 
                             <div>
-                                <a th:href="@{/admin/course/{id} (id=${d_course.id})}"
+                                <a th:href="@{/admin/resource/{id} (id=${res.id})}"
                                    class="allow-btn action-btn course-edit">Edit</a>
                             </div>
                         </td>
@@ -76,7 +85,7 @@
         </div>
 
         <div class="bottom-btn">
-            <a th:href="@{/admin/add-course}" class="btn add-course-btn">Add Module</a>
+            <a th:href="@{/admin/add-resource}" class="btn add-course-btn">Add Resource</a>
         </div>
 
     </div>

@@ -13,8 +13,7 @@ public class Uploads {
     private Long id;
     private String title;
     private String url;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Course course;
+    private String module;
     private String uploadDate;
     private String message;
     private String documentURL;
@@ -23,10 +22,10 @@ public class Uploads {
     public Uploads() {
     }
 
-    public Uploads(String title, String url, Course course, String uploadDate, String message) {
+    public Uploads(String title, String url, String module, String uploadDate, String message) {
         this.title = title;
         this.url = url;
-        this.course = course;
+        this.module = module;
         this.uploadDate = uploadDate;
         this.message = message;
     }
@@ -55,12 +54,12 @@ public class Uploads {
         this.url = url;
     }
 
-    public Course getCourse() {
-        return course;
+    public String getModule() {
+        return module;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setModule(String module) {
+        this.module = module;
     }
 
     public String getUploadDate() {

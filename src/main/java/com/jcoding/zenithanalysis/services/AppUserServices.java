@@ -2,7 +2,6 @@ package com.jcoding.zenithanalysis.services;
 
 import com.jcoding.zenithanalysis.dto.*;
 import com.jcoding.zenithanalysis.dto.contact.ContactUsDto;
-import com.jcoding.zenithanalysis.dto.course.CoursesDto;
 import com.jcoding.zenithanalysis.dto.event.EventCard;
 import com.jcoding.zenithanalysis.dto.event.EventsDto;
 import com.jcoding.zenithanalysis.dto.user.CustomAppUser;
@@ -11,10 +10,10 @@ import com.jcoding.zenithanalysis.dto.user.RegisterUser;
 import com.jcoding.zenithanalysis.dto.user.VerifyUser;
 import com.jcoding.zenithanalysis.entity.*;
 import com.jcoding.zenithanalysis.repository.*;
+import com.jcoding.zenithanalysis.utils.ZenithFileType;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -25,15 +24,11 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 import java.io.UnsupportedEncodingException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.*;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,9 +37,6 @@ public class AppUserServices{
 
     @Autowired
     private AppUserRepo appUserRepo;
-
-    @Autowired
-    private RegisterCourseRepo registerCourseRepo;
 
     @Autowired
     private CourseRepository courseRepository;
@@ -67,32 +59,25 @@ public class AppUserServices{
     @Autowired
     private ZenithEmailSenderServices zenithEmailSenderServices;
 
+    @Autowired
+    private ResourceRepo resourceRepo;
+
     @Value("${admin_email}")
     private String adminEmail;
 
+    private static final Logger LOGGER = Logger.getLogger(AppUserServices.class.getPackageName());
 
 
-//    public void sendAlertMessage(){
-//        try {
-//            zenithEmailSenderServices.sendEmail(
-//                    "My Good name",
-//                    "What are you up to",
-//                    ["jamesade646@gmail.com"]
-//            );
-//        } catch (MessagingException | UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-
-
+    /* Create new User with the RegisterUser Dto*/
     public Long createUser(RegisterUser registerUser){
         AppUser newStudent = new AppUser();
         if(!registerUser.getPassword().equals(registerUser.getConfirmPassword())){
+            LOGGER.info("Incorrect Password Combination");
             return 0L;
         }
         Optional<AppUser> student = appUserRepo.findByEmail(newStudent.getEmail());
         if(student.isPresent()){
+            LOGGER.info("User Email is Present Already - "+newStudent.getEmail());
             return 0L;
         }
         newStudent.setName(registerUser.getName());
@@ -103,18 +88,22 @@ public class AppUserServices{
         newStudent.setVerification(generateCode());
         newStudent.setEnabled(false);
         appUserRepo.save(newStudent);
-        String body = "This is your code "+newStudent.getVerification();
+
+        String body = "Welcome to Zenith Analysis \n" +
+                "\n" +
+                "Confirm with the code below \n" +
+                "\n" +
+            "This is your code "+newStudent.getVerification();
         try {
             zenithEmailSenderServices.sendEmail("Verification", body, List.of(newStudent.getEmail()));
         } catch (MessagingException | UnsupportedEncodingException e) {
-            e.printStackTrace();
+            LOGGER.info("Error in creating User");
+            LOGGER.info("Error in sending Message Due to Internet");
+            return 0L;
         }
-        System.out.println("Message Sent ");
+        LOGGER.info("Sent Message to "+newStudent.toString());
         return newStudent.getId();
     }
-
-
-
 
 
     private String generateCode(){
@@ -133,15 +122,6 @@ public class AppUserServices{
     }
 
 
-    public RegisterCourse createCourseRegistration(AppUser appUser, Course course){
-        RegisterCourse registerCourse = new RegisterCourse();
-        registerCourse.setUser(appUser);
-        registerCourse.setCourse(course);
-        registerCourse.setRegisteredDate(LocalDateTime.now().toString());
-        registerCourseRepo.save(registerCourse);
-        return registerCourse;
-    }
-
 
 
     public void resendVerification(Long id){
@@ -150,12 +130,17 @@ public class AppUserServices{
         AppUser user = student.get();
         user.setVerification(generateCode());
         appUserRepo.save(user);
-        String body = "This is your code "+user.getVerification();
+        String body = "Welcome to Zenith Analysis \n" +
+                "\n" +
+                "Confirm with the code below \n" +
+                "\n" +
+                "This is your code "+user.getVerification();
 
         try {
             zenithEmailSenderServices.sendEmail("Verification", body, List.of(user.getEmail()));
         } catch (MessagingException | UnsupportedEncodingException e) {
-            e.printStackTrace();
+            LOGGER.info("Error in resending verification to id");
+            LOGGER.info("Error in sending Message Due to Internet");
         }
     }
 
@@ -167,12 +152,18 @@ public class AppUserServices{
         AppUser user = student.get();
         user.setVerification(generateCode());
         appUserRepo.save(user);
-        String body = "This is your code "+user.getVerification();
+
+        String body = "Welcome to Zenith Analysis \n" +
+                "\n" +
+                "Confirm with the code below \n" +
+                "\n" +
+                "This is your code "+user.getVerification();
 
         try {
             zenithEmailSenderServices.sendEmail("Verification", body, List.of(email));
         } catch (MessagingException | UnsupportedEncodingException e) {
-            e.printStackTrace();
+            LOGGER.info("Error in resending verification to email");
+            LOGGER.info("Error in sending Message Due to Internet");
         }
     }
 
@@ -191,29 +182,6 @@ public class AppUserServices{
     }
 
 
-    /* This method return all the courses available or uploaded by the admin*/
-    public List<CoursesDto> getAllCourses(){
-        List<CoursesDto> courses = new ArrayList<>();
-        courseRepository.findAll()
-                .stream()
-                .forEach((course) -> {
-                    CoursesDto courseDto = new CoursesDto(course.getId(),
-                            course.getCourseTitle(),
-                            course.getCoursePrice(),
-                            course.getCourseDetails()
-                            );
-                    String coursePath = "default/image.jpg";
-                    if(course.getImageUrl() != null){
-                        String imagePath = "upload/"+course.getId()+"/"+course.getImageUrl();
-                        if(Files.exists(Paths.get(imagePath)))
-                            coursePath = course.getId()
-                                    +"/" +course.getImageUrl();
-                    }
-                    courseDto.setImageUrl(coursePath);
-                    courses.add(courseDto);
-                });
-        return courses;
-    }
 
 
 
@@ -232,70 +200,27 @@ public class AppUserServices{
 
 
 
-    /* Get registered courses by user */
-    public List<Course> getCourses(Authentication authentication){
-        CustomAppUser appUser = (CustomAppUser) authentication.getPrincipal();
-        List<RegisterCourse> registerCourseList=registerCourseRepo.findAllByUser(appUser.getUser());
-        if(registerCourseList == null || registerCourseList.isEmpty()) return List.of();
-
-        List<Course> courses = new ArrayList<>();
-
-        for(RegisterCourse registerCourse: registerCourseList){
-            courses.add(registerCourse.getCourse());
-        }
-        return courses;
-    }
-
-
-
-    public List<UserAssignmentDto> getAssignments(Authentication authentication){
-        CustomAppUser appUser = (CustomAppUser) authentication.getPrincipal();
-        Optional<AppUser> student = appUserRepo.findByEmail(appUser.getUser().getEmail());
-        if(student.isEmpty()) return null;
-        List<RegisterCourse> registerCourseList = registerCourseRepo.findAllByUser(appUser.getUser());
-
-        if(registerCourseList.size() < 1) return List.of();
-
-        List<UserAssignmentDto> assignmentList = new ArrayList<>();
-        int index = 0;
-        for(RegisterCourse registerCourse: registerCourseList){
-            List<Assignment> assignments = assignmentRepo.findAllByCourse(registerCourse.getCourse());
-            for(Assignment ass: assignments){
-                index++;
-                assignmentList.add(new UserAssignmentDto(
-                        index,ass.getTitle(),ass.getInstructions(),ass.getUploadDate(),ass.getSubmissionDate()
-                ));
-            }
-        }
-
-        return assignmentList;
-    }
-
-
 
     public Page<UserAssignmentDto> getAssignmentByPage(Authentication authentication, int pageNumber){
         CustomAppUser appUser = (CustomAppUser) authentication.getPrincipal();
         Optional<AppUser> student = appUserRepo.findByEmail(appUser.getUser().getEmail());
         if(student.isEmpty()) return null;
-        List<RegisterCourse> registerCourseList = registerCourseRepo.findAllByUser(appUser.getUser());
-
-        if(registerCourseList.size() < 1) return Page.empty();
 
         List<UserAssignmentDto> assignmentList = new ArrayList<>();
-        int index = 0;
-        for(RegisterCourse registerCourse: registerCourseList){
-            List<Assignment> assignments = assignmentRepo.findAllByCourse(registerCourse.getCourse());
-            for(Assignment ass: assignments){
-                index++;
-                assignmentList.add(new UserAssignmentDto(
-                        index,ass.getTitle(),
-                        ass.getInstructions(),
-                        ass.getUploadDate(),
-                        ass.getSubmissionDate()
-                ));
+        List<Assignment> assignments = assignmentRepo.findAll();
 
-            }
-        }
+        assignmentList = assignments.stream()
+                                    .map((ass) ->
+                                            new UserAssignmentDto(
+                                                    ass.getTitle(),
+                                                    ass.getInstructions(),
+                                                    ass.getUploadDate(),
+                                                    ass.getSubmissionDate(),
+                                                    ass.getDocumentURL()
+                                            ))
+                                    .collect(Collectors.toList());
+
+
 
         List<UserAssignmentDto> sortedByDate = assignmentList.stream()
                 .sorted((ass1, ass2) ->
@@ -323,16 +248,9 @@ public class AppUserServices{
     public Page<Uploads> getActivities(Authentication authentication, int pageNumber){
 
         CustomAppUser appUser = (CustomAppUser) authentication.getPrincipal();
-        List<RegisterCourse> registerCourseList=registerCourseRepo.findAllByUser(appUser.getUser());
-        if(registerCourseList == null || registerCourseList.isEmpty()) return Page.empty();
 
-        List<Uploads> uploadDtoList = new ArrayList<>();
+        List<Uploads> uploadDtoList = new ArrayList<>(uploadRepo.findAll());
 
-        for(RegisterCourse registerCourse: registerCourseList){
-            Course course = registerCourse.getCourse();
-            uploadDtoList.addAll(uploadRepo.findAllByCourse(course));
-        }
-        System.out.println(uploadDtoList.size());
         List<Uploads> sortedByDate = uploadDtoList.stream()
                 .sorted((upload1, upload2) ->
                      compareStringDates(
@@ -350,7 +268,20 @@ public class AppUserServices{
 
     }
 
-
+    public List<ResourceDto> getALLResources() {
+        List<Resource> resources = resourceRepo.findAll();
+        return resources.stream()
+                .map((res) ->
+                        new ResourceDto(
+                                res.getId(),
+                                res.getResourceType(),
+                                res.getTitle(),
+                                res.getDocumentUrl(),
+                                res.getUploadDate()
+                        )
+                )
+                .collect(Collectors.toList());
+    }
 
     private int compareStringDates(String date1String, String date2String){
         Date date1 = convertStringDateToDate(date1String);
@@ -359,14 +290,14 @@ public class AppUserServices{
     }
 
 
-
     /* Convert String Date into Date format for comparation*/
     private Date convertStringDateToDate(String date){
         try {
             return new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                     .parse(date);
         } catch (ParseException e) {
-            e.printStackTrace();
+            LOGGER.info("Error in parsing date for conversion");
+            LOGGER.info("Error in convert String date to date");
             return null;
         }
     }
@@ -390,7 +321,8 @@ public class AppUserServices{
             Date date = format_24.parse(time);
             time = new SimpleDateFormat("dd-MMM-yyyy").format(date);
         } catch (ParseException e) {
-            e.printStackTrace();
+            LOGGER.info("Error in parsing time for conversion");
+            LOGGER.info("Error in convert String time to string");
         }
         return time;
     }
@@ -436,7 +368,8 @@ public class AppUserServices{
         try {
             zenithEmailSenderServices.sendEmail(subject,body,List.of(adminEmail));
         } catch (MessagingException | UnsupportedEncodingException e) {
-            e.printStackTrace();
+            LOGGER.info("Error in contacting admin");
+            LOGGER.info("Error in sending Message Due to Internet");
         }
     }
 
@@ -476,13 +409,14 @@ public class AppUserServices{
         appUserRepo.save(user);
 
         String body = "This is your recovery password : <"+code+">\n" +
-                "/n" +
+                "\n" +
                 "";
         String subject = "Zenith-Analysis Password recovery";
         try {
             zenithEmailSenderServices.sendEmail(subject,body,List.of(email));
         } catch (MessagingException | UnsupportedEncodingException e) {
-            e.printStackTrace();
+            LOGGER.info("Error in sending recovery password");
+            LOGGER.info("Error in sending Message Due to Internet");
         }
     }
 
@@ -517,9 +451,29 @@ public class AppUserServices{
         try {
             zenithEmailSenderServices.sendEmail(subject,body,List.of(email));
         } catch (MessagingException | UnsupportedEncodingException e) {
-            e.printStackTrace();
+            LOGGER.info("Error in sending welcome message");
+            LOGGER.info("Error in sending Message Due to Internet");
         }
     }
 
+    public List<ResourceDto> getResource(ZenithFileType zenithFileType) {
+        String resourceType = "";
+
+        switch (zenithFileType){
+            case PRESENTATION: resourceType = "Presentation Guide"; break;
+            case COVER_LETTER: resourceType = "Cover Letter"; break;
+            case RESUME: resourceType= "Resume"; break;
+        }
+
+        return resourceRepo.findByResourceType(resourceType).stream()
+                .map((res) -> new ResourceDto(
+                        res.getId(),
+                        res.getResourceType(),
+                        res.getTitle(),
+                        res.getDocumentUrl(),
+                        res.getUploadDate()
+                ))
+                .collect(Collectors.toList());
+    }
 }
 

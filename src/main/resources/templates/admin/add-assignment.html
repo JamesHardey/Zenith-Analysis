@@ -39,20 +39,21 @@
                     </div>
                 </div>
             </div>
-
         </header>
+
         <div class="upload-section">
             <h2>ADD ASSIGNMENT</h2>
-            <form th:action="@{/admin/add-assignment}" class="upload-form" th:object="${assign}" method="post">
+            <form th:action="@{/admin/add-assignment}" class="upload-form" th:object="${assign}" method="post"
+                  enctype="multipart/form-data">
+
                 <input type="text" name="title" id="title" placeholder="Assignment Title" th:field="*{title}" required>
-                <select name="course" id="course" th:field="*{course}">
-                    <option th:each="d_course: ${courses}" th:value="${d_course.courseTitle}" th:text="${d_course.courseTitle}"></option>
-                </select>
+                <input type="text" name="module" id="module" placeholder="Module" th:field="*{module}" required>
 <!--                <input type="time" name="sub-time" id="sub-time" th:field="*{time}" required>-->
-                <input type="date" name="sub-date" id="sub-date" th:field="*{submissionDate}" required>
+                <input type="date" name="sub-date" id="sub-date" th:field="*{submissionDate}" placeholder="Submission Date" required>
                 <textarea name="" id="" cols="30" rows="10" placeholder="Instructions" th:field="*{details}" required></textarea>
-                <input type="file" name="file" id="file" th:field="*{documentURL}">
+                <input type="file" name="file" id="file">
                 <input type="submit" value="Add">
+
             </form>
             <div>
                 <p style="text-align: center; margin-top: 10px; color:gray; font-size: 13px;" th:if="${param.success}">You have successfully added an assignment</p>

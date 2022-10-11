@@ -12,8 +12,7 @@ public class Assignment {
     private Long id;
     private String title;
     private String instructions;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Course course;
+    private String module;
     private String uploadDate;
     private String submissionDate;
     private String documentURL;
@@ -21,10 +20,10 @@ public class Assignment {
     public Assignment() {
     }
 
-    public Assignment(String title, String instructions, Course course, String submissionDate) {
+    public Assignment(String title, String instructions, String module, String submissionDate) {
         this.title = title;
         this.instructions = instructions;
-        this.course = course;
+        this.module = module;
         this.uploadDate = LocalDate.now().toString();
         this.submissionDate = submissionDate;
     }
@@ -53,12 +52,12 @@ public class Assignment {
         this.instructions = instructions;
     }
 
-    public Course getCourse() {
-        return course;
+    public String getModule() {
+        return module;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setModule(String module) {
+        this.module = module;
     }
 
     public String getUploadDate() {

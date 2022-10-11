@@ -1,5 +1,6 @@
 package com.jcoding.zenithanalysis.controller;
 
+import com.jcoding.zenithanalysis.dto.ResourceDto;
 import com.jcoding.zenithanalysis.dto.UploadDto;
 import com.jcoding.zenithanalysis.dto.contact.ContactUsDto;
 import com.jcoding.zenithanalysis.dto.event.EventCard;
@@ -12,6 +13,7 @@ import com.jcoding.zenithanalysis.entity.Course;
 import com.jcoding.zenithanalysis.entity.Uploads;
 import com.jcoding.zenithanalysis.services.AppUserServices;
 import com.jcoding.zenithanalysis.utils.ConstantPages;
+import com.jcoding.zenithanalysis.utils.ZenithFileType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -47,20 +49,28 @@ public class UserController {
             String fullName = user.getUser().getName();
             Page<Uploads>  activities = appUserServices.getActivities(authentication,pageNumber);
             Page<UserAssignmentDto> assignment = appUserServices.getAssignmentByPage(authentication,1);
+
+            List<ResourceDto> resources = appUserServices.getALLResources();
+
+            model.addAttribute("resources", resources);
+
             model.addAttribute("name", fullName);
             model.addAttribute("currentAssPage", 1);
             model.addAttribute("currentActPage", pageNumber);
-            model.addAttribute("coursesAssignments",assignment.getContent());
+
             model.addAttribute("events",appUserServices.getLatestEvents(2));
+
             model.addAttribute("noActivity",activities.getContent().size() < 1);
             model.addAttribute("noAssignments",assignment.getContent().size() < 1);
+
+            model.addAttribute("coursesAssignments",assignment.getContent());
             model.addAttribute("activities", activities.getContent());
-            model.addAttribute("isEmpty",(assignment.isEmpty()));
+            /*model.addAttribute("isEmpty",(assignment.isEmpty()));*/
+
             model.addAttribute("totalPages", activities.getTotalPages());
             model.addAttribute("totalAssPage", assignment.getTotalPages());
             return ConstantPages.USER_NEW_HOME_PAGE;
         }
-
         return "redirect:/home/approval";
     }
 
@@ -76,35 +86,27 @@ public class UserController {
             String fullName = user.getUser().getName();
             Page<Uploads>  activities = appUserServices.getActivities(authentication,1);
             Page<UserAssignmentDto> assignment = appUserServices.getAssignmentByPage(authentication,pageNumber);
+
+            List<ResourceDto> resources = appUserServices.getALLResources();
+
+            model.addAttribute("resources", resources);
+
             model.addAttribute("name", fullName);
+
             model.addAttribute("currentAssPage", pageNumber);
             model.addAttribute("currentActPage", 1);
+
             model.addAttribute("coursesAssignments",assignment.getContent());
             model.addAttribute("activities", activities.getContent());
-            model.addAttribute("isEmpty",(assignment.isEmpty()));
+
+            model.addAttribute("noActivity",activities.getContent().size() < 1);
+            model.addAttribute("noAssignments",assignment.getContent().size() < 1);
+
             model.addAttribute("totalPages", activities.getTotalPages());
             model.addAttribute("totalAssPage", assignment.getTotalPages());
             return ConstantPages.USER_NEW_HOME_PAGE;
         }
 
-        return "redirect:/home/approval";
-    }
-
-
-    @GetMapping("/users")
-    public String getUserHome(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
-        if(checkIfApproved(user.getUser())) {
-            List<Course> courses = appUserServices.getCourses(authentication);
-            List<UserAssignmentDto> assignment = appUserServices.getAssignments(authentication);
-            String fullName = user.getUser().getName();
-            model.addAttribute("",fullName);
-            model.addAttribute("",courses);
-            model.addAttribute("assignments", assignment);
-            model.addAttribute("isEmpty",(assignment.size() < 1));
-            return ConstantPages.USER_NEW_HOME_PAGE;
-        }
         return "redirect:/home/approval";
     }
 
@@ -119,19 +121,6 @@ public class UserController {
     }
     
 
-    @GetMapping("/assignment")
-    public String getAssignmentPage(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
-        if(!checkIfApproved(user.getUser())) {
-            return "redirect:/home/approval";
-        }
-        List<UserAssignmentDto> assignmentDtos = appUserServices.getAssignments(authentication);
-        boolean isEmpty = assignmentDtos.isEmpty();
-        model.addAttribute("isEmpty", isEmpty);
-        model.addAttribute("assignments",assignmentDtos);
-        return "redirect:/home";
-    }
 
 
     @GetMapping("/events")
@@ -156,7 +145,6 @@ public class UserController {
     public String getCourses(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomAppUser user = (CustomAppUser) authentication.getPrincipal();
-        model.addAttribute("courses", appUserServices.getAllCourses());
         return ConstantPages.USER_COURSE_PAGE;
     }
 

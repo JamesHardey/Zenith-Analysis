@@ -24,7 +24,7 @@
                 <div class="card">
                     <div>
                         <h1 th:text="${courseNumber}"></h1>
-                        <span>Modules</span>
+                        <span>Courses</span>
                     </div>
                 </div>
                 <div class="card">
@@ -78,22 +78,22 @@
 
                 <div class="courses-table">
                     <div class="card-header">
-                        <h2>Modules</h2>
-                        <a th:href="@{/admin/courses}" class="btn">See all<span></span></a>
+                        <h2>Class Activities</h2>
+                        <a th:href="@{/admin/uploads}" class="btn">See all<span></span></a>
                     </div>
                     <table style="width: 100%;">
                         <thead>
                             <tr>
                                 <th >S/N</th>
-                                <th>Module</th>
-                                <th>No. of Applicants</th>
+                                <th>Class Title</th>
+                                <th>Upload Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="d_course: ${courses}">
-                            <td th:text="${d_course.index}"></td>
-                            <td th:text="${d_course.course}"></td>
-                            <td th:text="${d_course.numberOfStudents}">
+                        <tr th:each="upload, iterator: ${uploads}">
+                            <td th:text="${iterator.count}"></td>
+                            <td th:text="${upload.title}"></td>
+                            <td th:text="${upload.uploadDate}">
                             </td>
                         </tr>
                         </tbody>

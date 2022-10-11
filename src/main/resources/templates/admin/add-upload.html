@@ -44,14 +44,16 @@
 
         <div class="upload-section">
             <h2>UPLOAD CLASS VIDEO LINK</h2>
-            <form th:action="@{/admin/add-upload}" class="upload-form" th:object="${uploadDto}" method="post">
+            <form th:action="@{/admin/add-upload}" class="upload-form" th:object="${uploadDto}"
+                  method="post" enctype="multipart/form-data">
                 <input type="text" name="title" id="title" placeholder="Title" th:field="*{title}" required>
                 <input type="url" name="link" id="link" placeholder="Drive URL" th:field="*{url}" required>
-                <select name="course" id="course" th:field="*{course}">
+                <input type="text" name="module" id="module" placeholder="Module" th:field="*{module}" required>
+                <!--<select name="course" id="course" th:field="*{course}">
                     <option th:each="course: ${courses}"  th:value="${course.courseTitle}" th:text="${course.courseTitle}"></option>
-                </select>
+                </select>-->
                 <textarea name="" id="" cols="30" rows="10" th:field="*{message}" placeholder="Message"></textarea>
-                <input type="file" name="file" id="file" th:field="*{documentURL}">
+                <input type="file" name="file" id="file">
                 <input type="submit" value="Send">
             </form>
             <div>

@@ -2,15 +2,20 @@ package com.jcoding.zenithanalysis.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ZenithEmailSenderServices {
@@ -30,6 +35,35 @@ public class ZenithEmailSenderServices {
                     message.setTo(email);
                     mailSender.send(message);
                 }));
+
+    }
+
+    public void sendMailWithAttachment(String subject, String body, List<String> emails, String attachment)
+            throws MessagingException, UnsupportedEncodingException{
+
+        MimeMessage mimeMessage = new MimeMessage(mailSender.createMimeMessage());
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+
+        mimeMessageHelper.setFrom("no-reply@zenith-analysis.com");
+        mimeMessageHelper.setSubject(subject);
+        mimeMessageHelper.setText(body);
+        FileSystemResource fileSystemResource = new FileSystemResource(new File(attachment));
+        mimeMessageHelper.addAttachment(
+                Objects.requireNonNull(
+                    fileSystemResource.getFilename()
+                ),
+                fileSystemResource
+        );
+
+        emails.stream()
+            .forEach((email -> {
+                try {
+                    mimeMessageHelper.setTo(email);
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+                mailSender.send(mimeMessage);
+        }));
 
     }
 

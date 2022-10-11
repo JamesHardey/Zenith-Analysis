@@ -42,7 +42,7 @@ $(document).ready(function(){
             $.get(href,function(ass,status){
                 $('#edit-assignment-modal .form #id').val(ass.id);
                 $('#edit-assignment-modal .form #title').val(ass.title);
-                $('#edit-assignment-modal .form #course').val(ass.course);
+                $('#edit-assignment-modal .form #module').val(ass.module);
                 $('#edit-assignment-modal .form #time').val(ass.time);
                  $('#edit-assignment-modal .form #date').val(ass.submissionDate);
                 $('#edit-assignment-modal .form #details').val(ass.details);
@@ -60,8 +60,8 @@ $(document).ready(function(){
         $.get(href,function(course,status){
             $('#edit-courses-modal .form #id').val(course.id);
             $('#edit-courses-modal .form #title').val(course.title);
-            $('#edit-courses-modal .form #price').val(course.price);
-            $('#edit-courses-modal .form #details').val(course.details);
+            $('#edit-courses-modal .form #resourceType').val(course.resourceType);
+
         });
 
         $('#edit-courses-modal').toggleClass('show');

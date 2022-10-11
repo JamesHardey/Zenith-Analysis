@@ -21,15 +21,15 @@
                 <h4>Edit Assignment</h4>
                 <button class="modal-close">X</button>
             </div>
-            <form th:action="@{/admin/assignment/save}" class="form" method="post" >
+            <form th:action="@{/admin/assignment/save}" class="form" method="post"
+                  enctype="multipart/form-data">
                 <input type="text" name="id" id="id" readonly>
                 <input type="text" name="title" id="title" placeholder="Assignment Title" required>
-                <select name="course" id="course">
-                    <option th:each="d_course: ${courses}" th:value="${d_course.courseTitle}" th:text="${d_course.courseTitle}"></option>
-                </select>
+                <input type="text" name="module" id="module" placeholder="Module" required>
                 <!--<input type="time" name="time" id="time" required>-->
                 <input type="date" name="submissionDate" id="date" placeholder="Submission-Date" required>
                 <textarea name="details" id="details" cols="30" rows="10" placeholder="Instructions" required></textarea>
+                <input type="file" name="file" id="file">
                 <div class="modal-footer">
                     <button class="modal-close">Close</button>
                     <input type="submit" value="Save">
@@ -61,7 +61,7 @@
                 <tr th:each="assignment,iterator: ${assignments}">
                     <td th:text="${iterator.count}"></td>
                     <td th:text="${assignment.title}"></td>
-                    <td th:text="${assignment.course}"></td>
+                    <td th:text="${assignment.module}"></td>
                     <td th:text="${assignment.uploadDate}"></td>
                     <td th:text="${assignment.submissionDate}"></td>
 

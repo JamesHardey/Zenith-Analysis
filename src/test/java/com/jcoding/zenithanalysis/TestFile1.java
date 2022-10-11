@@ -13,14 +13,9 @@ public class TestFile1 {
         String location = Paths.get(path).toUri().toString();
         System.out.println(location);*/
 
-        Path path = Paths.get("upload/2");
-        try {
-            System.out.println(path);
-            Files.createDirectory(path);
-            System.out.println(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Path path = Paths.get("./upload/as").toAbsolutePath();
+        System.out.println(Files.exists(path));
+        System.out.println(path);
 
     }
 }

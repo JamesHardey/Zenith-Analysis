@@ -9,7 +9,7 @@ public class UploadDto {
     private Long id;
     private String title;
     private String url;
-    private String course;
+    private String module;
     private String uploadDate;
     private String message;
     private String documentURL;
@@ -17,12 +17,12 @@ public class UploadDto {
     public UploadDto() {
     }
 
-    public UploadDto(int index,Long id, String title, String url, String course, String uploadDate, String message) {
+    public UploadDto(int index,Long id, String title, String url, String module, String uploadDate, String message) {
         this.index = index;
         this.id = id;
         this.title = title;
         this.url = url;
-        this.course = course;
+        this.module = module;
         this.uploadDate = uploadDate;
         this.message = message;
     }
@@ -51,12 +51,12 @@ public class UploadDto {
         this.url = url;
     }
 
-    public String getCourse() {
-        return course;
+    public String getModule() {
+        return module;
     }
 
-    public void setCourse(String course) {
-        this.course = course;
+    public void setModule(String module) {
+        this.module = module;
     }
 
     public String getUploadDate() {

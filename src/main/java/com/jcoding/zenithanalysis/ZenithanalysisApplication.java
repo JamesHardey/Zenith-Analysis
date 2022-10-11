@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.logging.Logger;
+
 @SpringBootApplication
 public class ZenithanalysisApplication implements CommandLineRunner {
 
@@ -24,6 +26,7 @@ public class ZenithanalysisApplication implements CommandLineRunner {
 	@Autowired
 	RolesRepo rolesRepo;
 
+
 	public static void main(String[] args) {
 		SpringApplication.run(ZenithanalysisApplication.class, args);
 	}
@@ -33,7 +36,7 @@ public class ZenithanalysisApplication implements CommandLineRunner {
 
 //		Roles userRole = new Roles("USER");
 //		Roles adminRole = new Roles("ADMIN");
-
+//
 //		userRole = rolesRepo.save(userRole);
 //		adminRole = rolesRepo.save(adminRole);
 
@@ -68,27 +71,6 @@ public class ZenithanalysisApplication implements CommandLineRunner {
 //		king = appUserServices.createUser(new RegisterUser(king.getName(), king.getEmail(), king.getPassword(), king.getPassword()));
 //
 //
-//		RegisterCourse registerCourse1 = new RegisterCourse(gabriel,course1, LocalDate.now().toString());
-//		RegisterCourse registerCourse2 = new RegisterCourse(paul,course1, LocalDate.now().toString());
-//		RegisterCourse registerCourse3 = new RegisterCourse(john,course1, LocalDate.now().toString());
-//		RegisterCourse registerCourse4 = new RegisterCourse(racky,course1, LocalDate.now().toString());
-//		RegisterCourse registerCourse5 = new RegisterCourse(king,course1, LocalDate.now().toString());
-//		RegisterCourse registerCourse6 = new RegisterCourse(gabriel,course2, LocalDate.now().toString());
-//		RegisterCourse registerCourse7 = new RegisterCourse(paul,course2, LocalDate.now().toString());
-//		RegisterCourse registerCourse8 = new RegisterCourse(john,course2, LocalDate.now().toString());
-//		RegisterCourse registerCourse9 = new RegisterCourse(gabriel,course3, LocalDate.now().toString());
-//		RegisterCourse registerCourse10 = new RegisterCourse(racky,course3, LocalDate.now().toString());
-//
-//		adminServices.addCourseRegister(registerCourse1);
-//		adminServices.addCourseRegister(registerCourse2);
-//		adminServices.addCourseRegister(registerCourse3);
-//		adminServices.addCourseRegister(registerCourse4);
-//		adminServices.addCourseRegister(registerCourse5);
-//		adminServices.addCourseRegister(registerCourse6);
-//		adminServices.addCourseRegister(registerCourse7);
-//		adminServices.addCourseRegister(registerCourse8);
-//		adminServices.addCourseRegister(registerCourse9);
-//		adminServices.addCourseRegister(registerCourse10);
 
 	}
 
