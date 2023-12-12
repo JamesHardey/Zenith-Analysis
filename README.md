@@ -64,7 +64,9 @@ Zenith Analysis is a web application developed using Java, Thymeleaf, jQuery, HT
 ![Screenshot 2](/screenshots/Zenith-Analysis-Traiining.png)
 
 ## Mobile View
-![Screenshot 3](/screenshots/Zenith-Analysis-Traiining2.png)
+
+[//]: # (![Screenshot 3]&#40;/screenshots/Zenith-Analysis-Traiining2.png&#41;)
+
 
 [//]: # (## Contributing)
 
